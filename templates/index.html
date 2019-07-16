@@ -1,1 +1,112 @@
-hello
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="statics/style.css">
+    <title>Resource.rs - 旨在提供一站式的 Rust 学习资源</title>
+</head>
+
+<body>
+<img class="bg" src="statics/rust.png" alt="rust logo background">
+<section class="content">
+    <h1>Resource.rs</h1>
+    <p class="description">旨在提供一站式的 Rust 学习资源</p>
+
+    <section class="part">
+        <h2>Getting started</h2>
+        <p class="description">跟随这几个链接，你可以的到一个比较完善的 Rust 编写环境。</p>
+        <nav>
+            <li><a href="https://rustup.rs/">Rustup</a> 官网指定唯一推荐 Rust 安装方式</li>
+            <li><a href="https://www.rust-lang.org/">Rust Language</a> Rust 语言官网</li>
+        </nav>
+        <section class="part">
+            <h3>IDEs</h3>
+            <p class="description">目前 Rust 的 IDE 还不算十分完善，但是还是有几个选择可以满足日常开发使用的。更多的选择可以查看 <a href="https://areweideyet.com/">Are
+                we IDE yet</a>。 新入门的小伙伴可以考虑使用 Clion 为主编辑器</p>
+            <nav>
+                <li>Clion / IDEA + <a href="https://intellij-rust.github.io/">IntelliJ-Rust 插件</a><br />这个编辑器组合适合于日常开发就使用
+                    Jetbrains 全家桶的小伙伴。代码补全和提示完全独立于 RLS。同时还提供了勉强可用的「宏展开」等功能。Clion 默认支持了 LLDB，可以做到免配置调试 Rust，IDEA
+                    暂不支持。</li>
+                <li>VS Code + <a href="https://marketplace.visualstudio.com/items?itemName=rust-lang.rust">Rust(rls)
+                    插件</a> <br>该组合建立在 RLS 的基础上，编辑器的功能由 Rust 开发组提供。但是由于 RLS 目前处于半抛弃状态，<a href="https://github.com/rust-analyzer/rust-analyzer">rust-analyzer(下一代
+                    RLS)</a> 也还没有完善。</li>
+            </nav>
+        </section>
+        <section class="part">
+            <h3>Links</h3>
+            <p class="description">那些日常开发中会经常使用的网站</p>
+            <nav>
+                <li><a href="https://doc.rust-lang.org/std/">Standard Library API Reference</a> 标准库文档</li>
+                <li><a href="https://docs.rs/">Docs.rs</a> 查看第三方库的文档索引</li>
+                <li><a href="https://crates.io/">Crates.io - Rust Package Registry</a> Rust 第三方库仓库</li>
+                <li><a href="https://lib.rs/">Lib.rs - Find quality Rust libraries and applications.</a> 一个提供了不同领域下优质 crate
+                    的索引。当你需要查看某个领域比较流行的 crate 时，可以阅读。</li>
+            </nav>
+        </section>
+    </section>
+
+    <section class="part">
+        <h2>Books</h2>
+        <p class="description">那些 Rust 相关的书籍</p>
+        <nav>
+            <li>「The Rust Programming Language」 (<a href="https://doc.rust-lang.org/book/#the-rust-programming-language">English</a>/
+                <a href="https://kaisery.github.io/trpl-zh-cn/foreword.html">中文版</a>)<br>这是由官方提供的面向全体 Rust
+                人员的教程，简称「TRPL」。非常适合入门的小伙伴阅读，因为该书系统得提供了 Rust 的特点和设计思想。该书也可以当作 Cookbook，在碰到问题是反复查看。</li>
+            <li>「Rust by Example」(<a href="https://doc.rust-lang.org/rust-by-example/">English</a>)<br>该书在设计上很像
+                TRPL，但是提供了很多适合用于实践的例子，以体验 Rust 的设计思想。该书同样适合于入门，但是原理和内容不及 TRPL 丰富，但是通过项目驱动可以得到较多的练习过程。</li>
+            <li>「The Little Book of Rust Macros」/「宏小本」(<a href="https://danielkeep.github.io/tlborm/book/index.html">English</a>/<a
+                    href="http://blog.luxko.site/tlborm-chinese/book/index.html">中文版</a>)<br>开发者们都说 Rust
+                的宏是卫生宏，比CPP的宏如何优秀如何好用。那么这本小册子就从源头讲解了 Rust 的整个宏系统，但是由于编写时间过早并没有讲解过程宏。</li>
+            <li>「Asynchronous Programming in Rust」/「Rust 中的异步编程」(<a href="https://rust-lang.github.io/async-book/">English</a>)<br>鉴于
+                Future 和 async/awiat 语法的基本实现完成，Rust 中新一代的异步系统已经达成了 MVP 的目标，官方便开始逐步编写和完善该书。该书阐述了 Future 的生态和实现，比较详细地描述了
+                executor 和 waker 的工作机制。<b>建议用到异步特性的使用者必读</b></li>
+            <li>「Rust Cookbook」(<a href="https://rust-lang-nursery.github.io/rust-cookbook/intro.html">English</a>)<br> Rust Cookbook一本覆盖面很全，例子不是特别多的 cookbook，但是提供了很多常见编程内容的例子和 DEMO，内容包括了算法、CLI编程、解压缩、并发、加解密、数据结构、数据库调用、日期与时间、DEBUG、版本控制、链接C库、编码与解码、文件系统、内存管理、TCP/IP、操作系统操作、数学运算、文本处理、爬虫、URL处理、MIME、HTTP客户端调用 等。</li>
+        </nav>
+    </section>
+    <section class="part">
+        <h2>推荐阅读</h2>
+
+        <section class="part">
+            <h3>RFCs</h3>
+            <p class="description">通过阅读重要的 RFC，可以了解 Rust 的设计理念和发展路线。这里只提供了在 Rust 生涯中比较重要的 RFC，经可能提供译文，全量的内容可以阅读官方<a href="https://github.com/rust-lang/rfcs">RFC
+                repo</a> / <a href="https://rust-lang.github.io/rfcs/introduction.html">The
+                Rust RFC Book</a></p>
+            <nav>
+                <li>RFC 2592 / Futures</li>
+                <li>RFC 1522 / Conservative Impl Trait</li>
+                <li>RFC 2349 / Pin</li>
+            </nav>
+        </section>
+
+        <section class="part">
+            <h3>Actix-web 实现的授权微服务应用</h3>
+            <p class="description">一份比较完善的 actix-web 实践教程，提供了一份比较容易上手的 actix 写法，同事体验 actor 的强劲性能。不过可能需要读者自己鉴别 acitx-web 0.7
+                和 1.0 的区别。</p>
+            <nav>
+                <li><a href="https://gill.net.in/posts/auth-microservice-rust-actix-web-diesel-complete-tutorial-part-1/">AUTH
+                    WEB MICROSERVICE WITH RUST USING ACTIX-WEB - COMPLETE TUTORIAL PART 1</a></li>
+                <li><a href="https://gill.net.in/posts/auth-microservice-rust-actix-web-diesel-complete-tutorial-part-2/">AUTH
+                    WEB MICROSERVICE WITH RUST USING ACTIX-WEB - COMPLETE TUTORIAL PART 2</a></li>
+                <li><a href="https://gill.net.in/posts/auth-microservice-rust-actix-web-diesel-complete-tutorial-part-3/">AUTH
+                    WEB MICROSERVICE WITH RUST USING ACTIX-WEB - COMPLETE TUTORIAL PART 3</a></li>
+                <li><a href="https://gill.net.in/posts/auth-microservice-rust-actix-web1.0-diesel-complete-tutorial/">AUTH
+                    WEB MICROSERVICE WITH RUST USING ACTIX-WEB 1.0 - COMPLETE TUTORIAL</a></li>
+            </nav>
+        </section>
+    </section>
+</section>
+</body>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-68997851-3"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-68997851-3');
+</script>
+
+</html>

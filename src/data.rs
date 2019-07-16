@@ -16,6 +16,8 @@ impl AppData {
     }
 
     pub fn render(&self, template_name: &str, data: &Context) -> String {
-        self.tera.render(template_name, data).expect(&format!("cannot render template {}", template_name))
+        self.tera
+            .render(template_name, data)
+            .expect(&format!("cannot render template {}", template_name))
     }
 }
