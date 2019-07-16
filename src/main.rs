@@ -68,10 +68,10 @@ fn main() {
             ))
             .service(routers::routes())
     })
-        .bind(("0.0.0.0", 8000))
-        .unwrap()
-        .system_exit()
-        .start();
+    .bind(("0.0.0.0", 8000))
+    .unwrap()
+    .system_exit()
+    .start();
 
     sys.run().expect("wrong on actix system run")
 }

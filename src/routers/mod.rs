@@ -1,5 +1,8 @@
-use actix_web::{Scope, web};
+use actix_web::{web, Scope};
+use crate::routers::index::index_page;
+
+mod index;
 
 pub fn routes() -> Scope {
-    web::scope("/")
+    web::scope("/").service(index_page)
 }
