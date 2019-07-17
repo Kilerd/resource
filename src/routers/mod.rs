@@ -1,8 +1,9 @@
-use crate::routers::index::index_page;
+use crate::routers::{blog::show_blogs, index::index_page};
 use actix_files::Files;
 use actix_web::{web, HttpResponse, Scope};
 use serde::{Deserialize, Serialize};
 
+mod blog;
 mod index;
 
 #[derive(Deserialize, Serialize)]
@@ -69,5 +70,6 @@ impl AppResponder {
 pub fn routes() -> Scope {
     web::scope("/")
         .service(index_page)
+        .service(show_blogs)
         .service(Files::new("/statics", "./templates/resources/"))
 }
