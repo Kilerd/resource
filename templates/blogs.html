@@ -18,7 +18,7 @@
     <section class="part">
         <nav>
             {% for blog in blogs %}
-            <li><a href="{{ blog.link }}">{{ blog.title }}</a></li>
+            <li><a href="{{ blog.link }}">{{ blog.title }}</a> / {{ blog.description }}</li>
             {% endfor %}
         </nav>
     </section>
