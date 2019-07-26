@@ -1,6 +1,7 @@
 use crate::routers::{
     blog::{add_a_new_blogs, show_blogs},
     index::index_page,
+    post::show_posts,
 };
 use actix_files::Files;
 use actix_web::{web, HttpResponse, Scope};
@@ -8,6 +9,7 @@ use serde::{Deserialize, Serialize};
 
 mod blog;
 mod index;
+mod post;
 
 #[derive(Deserialize, Serialize)]
 pub struct JsonResponse<T> {
@@ -78,5 +80,6 @@ pub fn routes() -> Scope {
                 .service(show_blogs)
                 .service(add_a_new_blogs),
         )
+        .service(web::scope("/posts").service(show_posts))
         .service(Files::new("/statics", "./templates/resources/"))
 }
