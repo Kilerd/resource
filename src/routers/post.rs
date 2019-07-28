@@ -1,6 +1,9 @@
 use crate::{
     data::AppData,
-    models::blog::{self, Blog},
+    models::{
+        blog::{self, Blog},
+        post::Post,
+    },
     routers::AppResponder,
 };
 use actix_web::{
@@ -12,8 +15,8 @@ use tera::Context;
 
 #[get("")]
 pub fn show_posts(data: Data<AppData>) -> impl Responder {
-    //    let blogs = Blog::get_all_confirmed_blogs(&data.postgres());
+    let posts = Post::get_all_posts(&data.postgres());
     let mut context = Context::new();
-    //    context.insert("post", &blogs);
+    context.insert("posts", &posts);
     AppResponder::html(data.render("posts.html", &context))
 }

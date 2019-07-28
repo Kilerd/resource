@@ -1,3 +1,4 @@
+#![feature(async_await, await_macro)]
 extern crate openssl;
 
 #[macro_use]
@@ -36,14 +37,20 @@ embed_migrations!();
 
 lazy_static! {
     static ref RANDOM_TOKEN_KEY: Vec<u8> = (0..32).map(|_| rand::random::<u8>()).collect();
-}
+    static ref TELEGRAM_WHITE_LSIT: Vec<i32> = std::env::var("TELEGRAM_WHITE_LIST")
+        .unwrap_or(String::from(""))
+        .split(",")
+        .map(|s| s.parse::<i32>().expect("cannot format as i32"))
+        .collect();
 
+}
 fn main() {
     dotenv().ok();
     let sys = actix::System::new("resource");
     pretty_env_logger::init();
-    let database_url = std::env::var("DATABASE_URL").expect("database_url must be set");
-    info!("starting resource app");
+    let database_url =
+        std::env::var("DATABASE_URL").expect("DATABASE_URL: database url must be set");
+    info!("starting resource app on binding on 8000 port");
     let data = AppData {
         pool: database_pool_establish(&database_url),
         tera: Arc::new(compile_templates!("templates/**/*.html")),

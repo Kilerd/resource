@@ -11,3 +11,19 @@ table! {
         create_at -> Timestamptz,
     }
 }
+
+table! {
+    post (id) {
+        id -> Int4,
+        title -> Text,
+        link -> Text,
+        description -> Nullable<Text>,
+        create_at -> Timestamptz,
+        from_blog -> Nullable<Int4>,
+        creator -> Text,
+    }
+}
+
+joinable!(post -> blog (from_blog));
+
+allow_tables_to_appear_in_same_query!(blog, post,);

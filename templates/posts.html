@@ -12,25 +12,29 @@
 <body>
 <img class="bg" src="statics/rust.png" alt="rust logo background">
 <section class="content">
-    <h1>Resource.rs / Post</h1>
-    <p class="description">latest post</p>
+    <h1>Resource.rs / Posts</h1>
+    <p class="description">尽可能持续为您提供最新最靠谱的 Rust 相关文章</p>
 
     <section class="part">
         <section class="post-daily">
-            <h3>今天 <span>2019-07-26</span></h3>
+            {% for post_and_blog in posts %}
             <section class="post">
-                <div><span>14:20</span> <a href="https://www.steadylearner.com/blog/read/How-to-use-Rust-Yew">How to use Rust Yew</a></div>
-                <p class="description">该文教你用Yew的函数和组件来模块化代码。</p>
+                <div><span>{{ post_and_blog.0.create_at | date(format="%B %d, %Y") }}</span> <a href="{{ post_and_blog.0.link }}">{{ post_and_blog.0.title }}</a></div>
+                {% if post_and_blog.0.description %}
+                <p class="description">{{ post_and_blog.0.description }}</p>
+                {% endif %}
             </section>
+            {% endfor %}
+
         </section>
 
-        <section class="post-daily">
-            <h3>2天前 <span>2019-07-24</span></h3>
-            <section class="post">
-                <div><span>14:20</span> <a href="https://www.steadylearner.com/blog/read/How-to-use-Rust-Yew">How to use Rust Yew</a></div>
-                <p class="description">该文教你用Yew的函数和组件来模块化代码。</p>
-            </section>
-        </section>
+        <!--        <section class="post-daily">-->
+        <!--            <h3>2天前 <span>2019-07-24</span></h3>-->
+        <!--            <section class="post">-->
+        <!--                <div><span>14:20</span> <a href="https://www.steadylearner.com/blog/read/How-to-use-Rust-Yew">How to use Rust Yew</a></div>-->
+        <!--                <p class="description">该文教你用Yew的函数和组件来模块化代码。</p>-->
+        <!--            </section>-->
+        <!--        </section>-->
 
 
     </section>
