@@ -1,4 +1,3 @@
-#![feature(async_await, await_macro)]
 extern crate openssl;
 
 #[macro_use]
