@@ -1,28 +1,29 @@
 :root {
-	font-family: PingFangSC-Regular, Microsoft Yahei UI, Noto Sans CJK SC DemiLight, sans-serif;
-	font-size: 20px;
-	/*text-align: center;*/
-	background-color: white;
-	background-repeat: no-repeat;
-	color: #202020;
-	line-height: 1.6;
-	font-weight: 300;
-	overflow-x: hidden;
+    font-family: PingFangSC-Regular, Microsoft Yahei UI, Noto Sans CJK SC DemiLight, sans-serif;
+    font-size: 20px;
+    /*text-align: center;*/
+    background-color: white;
+    background-repeat: no-repeat;
+    color: #202020;
+    line-height: 1.6;
+    font-weight: 300;
+    overflow-x: hidden;
 }
 
 body {
     position: relative;
-    margin:0;
-    overflow-x: hidden; 
+    margin: 0;
+    overflow-x: hidden;
 }
+
 .bg {
-	position: absolute;
-	top: -128px;
-	right: -128px;
-	opacity: 0.25;
-	z-index: -2;
-	-webkit-transform: rotate(35deg);
-	transform: rotate(35deg);
+    position: absolute;
+    top: -128px;
+    right: -128px;
+    opacity: 0.15;
+    z-index: -2;
+    -webkit-transform: rotate(35deg);
+    transform: rotate(35deg);
 }
 
 .content {
@@ -32,8 +33,14 @@ body {
 }
 
 @media screen and (max-width: 50rem) {
-	:root { font-size: 20px; line-height: 1.5; }
-	body { padding: 1rem 1.5rem; }
+    :root {
+        font-size: 20px;
+        line-height: 1.5;
+    }
+
+    body {
+        padding: 1rem 1.5rem;
+    }
 }
 
 @media screen and (max-width: 35em) {
@@ -43,7 +50,11 @@ body {
         top: -64px;
         right: -64px;
     }
-    :root { font-size: 16px; }
+
+    :root {
+        font-size: 16px;
+    }
+
     .content {
         padding: 1rem 0.5rem;
     }
@@ -52,13 +63,24 @@ body {
 a {
     color: #3873ad;
     text-decoration: none;
-    padding: 0 2px; 
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
+    padding: 0 2px;
+}
 
-  li {
-      padding: .25rem;
-  }
+a:hover {
+    text-decoration: underline;
+}
+
+li {
+    padding: .25rem;
+}
+
+section.post-daily > h3 > span {
+    font-size: .75rem;
+    color: #999;
+}
+
+p.description {
+    margin: 0;
+    padding: 0;
+    font-size: .85rem;
+}
