@@ -29,6 +29,8 @@ COPY --from=builder /app/resource/target/x86_64-unknown-linux-musl/release/resou
 EXPOSE 8000
 
 ENV DATABASE_URL postgres://root@postgres/resource
+ENV TELEGRAM_BOT_SECRET_KEY TELEGRAM_BOT_SECRET_KEY
+ENV TELEGRAM_WHITE_LIST TELEGRAM_WHITE_LIST
 
 WORKDIR /application
 
