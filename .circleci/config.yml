@@ -34,7 +34,7 @@ jobs:
           name: Push to registry
           command: |
             docker login registry.kilerd.me -u ${REGISTERY_USERNAME} -p ${REGISTERY_PASSWORD}
-            docker tag app registry.kilerd.me/${REGISTERY_REPO_NAME}
+            docker tag app registry.kilerd.me/${REGISTERY_REPO_NAME}:latest
             docker push registry.kilerd.me/${REGISTERY_REPO_NAME}
   deploy:
     machine:
