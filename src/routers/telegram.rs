@@ -52,11 +52,14 @@ pub fn telegram_web_hook(update: Json<Update>, data: Data<AppData>) -> impl Resp
                         creator: creator.clone(),
                     };
                     let option = Post::insert(new_post, &data.postgres());
-
-                    let msg = if option.is_some() { "Successfully added" } else { "Fail to add" };
+                    let msg = if let Some(post) = option {
+                        format!("Successfully added as Post {}", post.id)
+                    }else {
+                        String::from("Fail to add")
+                    };
                     let send_message_payload = SendMessage {
                         chat_id: message.chat.id.to_string(),
-                        text: String::from(msg),
+                        text: msg,
                         parse_mod: None,
                         disable_web_page_preview: None,
                         disable_notification: None,
