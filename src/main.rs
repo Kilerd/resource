@@ -41,7 +41,6 @@ lazy_static! {
         .split(",")
         .map(|s| s.parse::<i32>().expect("cannot format as i32"))
         .collect();
-
 }
 fn main() {
     dotenv().ok();

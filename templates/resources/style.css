@@ -84,3 +84,12 @@ p.description {
     padding: 0;
     font-size: .85rem;
 }
+
+section.post {
+    padding: .35rem 0;
+}
+
+section.post div.title span {
+    font-size: .75rem;
+    color: #999;
+}

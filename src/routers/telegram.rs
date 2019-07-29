@@ -54,7 +54,7 @@ pub fn telegram_web_hook(update: Json<Update>, data: Data<AppData>) -> impl Resp
                     let option = Post::insert(new_post, &data.postgres());
                     let msg = if let Some(post) = option {
                         format!("Successfully added as Post {}", post.id)
-                    }else {
+                    } else {
                         String::from("Fail to add")
                     };
                     let send_message_payload = SendMessage {
@@ -82,7 +82,7 @@ pub fn telegram_web_hook(update: Json<Update>, data: Data<AppData>) -> impl Resp
                     });
                 }
             };
-        }else {
+        } else {
             let send_message_payload = SendMessage {
                 chat_id: message.chat.id.to_string(),
                 text: format!("you are not in the white list"),
@@ -98,10 +98,11 @@ pub fn telegram_web_hook(update: Json<Update>, data: Data<AppData>) -> impl Resp
                     .post(
                         format!(
                             "https://api.telegram.org/bot{}/sendMessage",
-                            std::env::var("TELEGRAM_BOT_SECRET_KEY")
-                                .expect("need to set TELEGRAM_BOT_SECRET_KEY as environment variable")
+                            std::env::var("TELEGRAM_BOT_SECRET_KEY").expect(
+                                "need to set TELEGRAM_BOT_SECRET_KEY as environment variable"
+                            )
                         )
-                            .as_str(),
+                        .as_str(),
                     )
                     .json(&send_message_payload)
                     .send();
