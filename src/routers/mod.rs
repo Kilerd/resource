@@ -83,11 +83,11 @@ pub fn routes() -> Scope {
         )
         .service(web::scope("/posts").service(show_posts))
         .service(
-            web::scope(&dbg!(format!(
+            web::scope(&format!(
                 "/telegram/{}",
                 std::env::var("TELEGRAM_BOT_SECRET_KEY")
                     .expect("TELEGRAM_BOT_SECRET_KEY: telegram bot secret key must be set")
-            )))
+            ))
             .service(telegram::telegram_web_hook),
         )
         .service(Files::new("/statics", "./templates/resources/"))

@@ -5,7 +5,7 @@ WORKDIR /app
 RUN USER=root cargo new resource
 WORKDIR /app/resource
 
-COPY Cargo.toml Cargo.lock telegram_typing_bot ./
+COPY Cargo.toml Cargo.lock ./
 
 RUN echo 'fn main() { println!("Dummy") }' > ./src/main.rs
 

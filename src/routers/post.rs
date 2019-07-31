@@ -26,7 +26,6 @@ pub fn show_posts(data: Data<AppData>) -> impl Responder {
     let mut post_iter: Vec<(&NaiveDate, &Vec<(Post, Option<Blog>)>)> =
         posts_group_by_day.iter().collect();
     let mut context = Context::new();
-    dbg!(&post_iter);
     context.insert("posts", &post_iter);
     AppResponder::html(data.render("posts.html", &context))
 }
