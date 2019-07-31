@@ -15,13 +15,14 @@ pub struct Blog {
     pub last_update_at: NaiveDateTime,
     pub last_rust_post_update_at: NaiveDateTime,
     pub create_at: NaiveDateTime,
+    pub initialized: bool,
 }
 
 impl Blog {
     pub fn get_all_confirmed_blogs(pg: &PgConnection) -> Vec<Blog> {
         use crate::schema::blog;
         blog::table
-            .filter(blog::confirmed.eq(true))
+            .filter(blog::confirmed.eq(true).and(blog::initialized.eq(true)))
             .order(blog::create_at.desc())
             .load::<Blog>(pg)
             .expect("cannot read blog list")
@@ -68,7 +69,7 @@ pub mod sql {
         pub fn new(new_blog_input: NewBlogInput) -> NewBlog {
             NewBlog {
                 link: new_blog_input.link,
-                confirmed: false,
+                confirmed: true,
             }
         }
     }

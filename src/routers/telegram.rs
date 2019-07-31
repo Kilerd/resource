@@ -18,6 +18,9 @@ use telegram_typing_bot::{
     methods::{basic::SendMessage, update::Update},
     typing::{ParseMode, User},
 };
+use crate::models::blog::Blog;
+use crate::models::blog::form::NewBlogInput;
+use crate::models::blog::sql::NewBlog;
 
 #[post("")]
 pub fn telegram_web_hook(update: Json<Update>, data: Data<AppData>) -> impl Responder {
@@ -60,6 +63,26 @@ pub fn telegram_web_hook(update: Json<Update>, data: Data<AppData>) -> impl Resp
                     let send_message_payload = SendMessage {
                         chat_id: message.chat.id.to_string(),
                         text: msg,
+                        parse_mod: None,
+                        disable_web_page_preview: None,
+                        disable_notification: None,
+                        reply_to_message_id: Some(message.message_id),
+                        reply_markup: None,
+                    };
+                    data.bot.do_send(send_message_payload);
+                }
+            };
+
+            if text.starts_with(r"/blog"){
+                let re = Regex::new(r"/blog\s+([^\s]+)(\s*->\s*([^\s]+))?").unwrap();
+                for cap in re.captures_iter(text.as_ref()) {
+                    let url = &cap[1];
+                    let rss = cap.get(3).map(|m| m.as_str().to_string());
+                    let ret = Blog::new_blog(NewBlogInput{ link: url.to_string() }, &data.postgres());
+                    info!("adding blog: {}", url);
+                    let send_message_payload = SendMessage {
+                        chat_id: message.chat.id.to_string(),
+                        text: "Successfully add blog".to_string(),
                         parse_mod: None,
                         disable_web_page_preview: None,
                         disable_notification: None,

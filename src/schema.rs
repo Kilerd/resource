@@ -9,6 +9,7 @@ table! {
         last_update_at -> Timestamptz,
         last_rust_post_update_at -> Timestamptz,
         create_at -> Timestamptz,
+        initialized -> Bool,
     }
 }
 
@@ -26,4 +27,7 @@ table! {
 
 joinable!(post -> blog (from_blog));
 
-allow_tables_to_appear_in_same_query!(blog, post,);
+allow_tables_to_appear_in_same_query!(
+    blog,
+    post,
+);
