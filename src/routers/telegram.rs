@@ -66,20 +66,7 @@ pub fn telegram_web_hook(update: Json<Update>, data: Data<AppData>) -> impl Resp
                         reply_to_message_id: Some(message.message_id),
                         reply_markup: None,
                     };
-                    std::thread::spawn(move || {
-                        info!("sending response");
-                        let result = reqwest::Client::new()
-                            .post(
-                                format!(
-                                    "https://api.telegram.org/bot{}/sendMessage",
-                                    std::env::var("TELEGRAM_BOT_SECRET_KEY")
-                                        .expect("need to set TELEGRAM_BOT_SECRET_KEY as environment variable")
-                                )
-                                    .as_str(),
-                            )
-                            .json(&send_message_payload)
-                            .send();
-                    });
+                    data.bot.do_send(send_message_payload);
                 }
             };
         } else {
@@ -92,21 +79,7 @@ pub fn telegram_web_hook(update: Json<Update>, data: Data<AppData>) -> impl Resp
                 reply_to_message_id: Some(message.message_id),
                 reply_markup: None,
             };
-            std::thread::spawn(move || {
-                info!("sending response");
-                let result = reqwest::Client::new()
-                    .post(
-                        format!(
-                            "https://api.telegram.org/bot{}/sendMessage",
-                            std::env::var("TELEGRAM_BOT_SECRET_KEY").expect(
-                                "need to set TELEGRAM_BOT_SECRET_KEY as environment variable"
-                            )
-                        )
-                        .as_str(),
-                    )
-                    .json(&send_message_payload)
-                    .send();
-            });
+            data.bot.do_send(send_message_payload);
         };
     };
     "True"

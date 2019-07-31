@@ -21,7 +21,7 @@ diesel_migrations = "1.4.0"
 tera = "0.11.20"
 pulldown-cmark = { version = "0.5.3", default-features = false }
 
-chrono = { version = "0.4.7", features = ["serde"] }
+chrono = { version = "0.4", features = ["serde"] }
 rust-crypto = "0.2.36"
 
 http = "0.1.18"
@@ -40,7 +40,15 @@ actix = "0.8.3"
 jsonwebtoken = "6.0.1"
 actix-cors = "0.1.0"
 actix-identity = "0.1.0"
-telegram_typing_bot = { git = "https://github.com/Kilerd/telegram_typing_bot" }
 regex = "1.2.0"
+telegram_typing_bot = { path = "telegram_typing_bot" }
 futures-util = "0.2.1"
 reqwest = "0.9.19"
+
+[workspace]
+members = [
+   "telegram_typing_bot"
+]
+
+[patch.crates-io]
+telegram_typing_bot = { path = "telegram_typing_bot" }

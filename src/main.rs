@@ -19,6 +19,7 @@ use actix_web::{
 };
 
 use actix_cors::Cors;
+use telegram_typing_bot::bot::Bot;
 use tera::compile_templates;
 use time::Duration;
 
@@ -26,12 +27,14 @@ use dotenv::dotenv;
 use lazy_static::lazy_static;
 
 use crate::{data::AppData, pg_pool::database_pool_establish};
+use actix::SyncArbiter;
 
 mod data;
 mod models;
 mod pg_pool;
 mod routers;
 mod schema;
+
 embed_migrations!();
 
 lazy_static! {
@@ -49,9 +52,11 @@ fn main() {
     let database_url =
         std::env::var("DATABASE_URL").expect("DATABASE_URL: database url must be set");
     info!("starting resource app on binding on 8000 port");
+    let bot_addr = SyncArbiter::start(1, move || Bot::new());
     let data = AppData {
         pool: database_pool_establish(&database_url),
         tera: Arc::new(compile_templates!("templates/**/*.html")),
+        bot: bot_addr,
     };
 
     embedded_migrations::run(&data.pool.get().expect("cannot get connection"))

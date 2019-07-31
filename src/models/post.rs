@@ -1,5 +1,5 @@
 use crate::models::blog::{sql::NewBlog, Blog};
-use chrono::{DateTime, NaiveDateTime};
+use chrono::{DateTime, Local, NaiveDateTime, Utc};
 use crypto::util::fixed_time_eq;
 use diesel::{prelude::*, PgConnection};
 use serde::Serialize;
@@ -12,7 +12,7 @@ pub struct Post {
     pub title: String,
     pub link: String,
     pub description: Option<String>,
-    pub create_at: NaiveDateTime,
+    pub create_at: DateTime<Utc>,
     pub from_blog: Option<i32>,
     pub creator: String,
 }
