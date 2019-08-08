@@ -5,7 +5,7 @@ use crate::{
 };
 use actix_web::{
     get, post,
-    web::{Data, Form, Json},
+    web::{Data, Json},
     Responder,
 };
 use tera::Context;

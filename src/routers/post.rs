@@ -1,18 +1,11 @@
 use crate::{
     data::AppData,
-    models::{
-        blog::{self, Blog},
-        post::Post,
-    },
+    models::{blog::Blog, post::Post},
     routers::AppResponder,
 };
-use actix_web::{
-    get, post,
-    web::{Data, Form, Json},
-    Responder,
-};
-use chrono::{Date, NaiveDate, NaiveDateTime, Utc};
-use std::collections::{BTreeMap, HashMap};
+use actix_web::{get, web::Data, Responder};
+use chrono::NaiveDate;
+use std::collections::BTreeMap;
 use tera::Context;
 
 #[get("")]

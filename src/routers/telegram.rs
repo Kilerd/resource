@@ -1,26 +1,18 @@
 use crate::{
     data::AppData,
-    models::post::{sql::NewPost, Post},
+    models::{
+        blog::{form::NewBlogInput, Blog},
+        post::{sql::NewPost, Post},
+    },
     TELEGRAM_WHITE_LSIT,
 };
 use actix_web::{
-    client::Client,
     post,
-    test::block_on,
-    web::{block, Data, Json},
+    web::{Data, Json},
     Responder,
 };
-use futures_util::future::FutureExt;
 use regex::Regex;
-use telegram_typing_bot::{
-    bot::Bot,
-    error::ApiResult,
-    methods::{basic::SendMessage, update::Update},
-    typing::{ParseMode, User},
-};
-use crate::models::blog::Blog;
-use crate::models::blog::form::NewBlogInput;
-use crate::models::blog::sql::NewBlog;
+use telegram_typing_bot::methods::{basic::SendMessage, update::Update};
 
 #[post("")]
 pub fn telegram_web_hook(update: Json<Update>, data: Data<AppData>) -> impl Responder {
@@ -73,12 +65,17 @@ pub fn telegram_web_hook(update: Json<Update>, data: Data<AppData>) -> impl Resp
                 }
             };
 
-            if text.starts_with(r"/blog"){
+            if text.starts_with(r"/blog") {
                 let re = Regex::new(r"/blog\s+([^\s]+)(\s*->\s*([^\s]+))?").unwrap();
                 for cap in re.captures_iter(text.as_ref()) {
                     let url = &cap[1];
                     let rss = cap.get(3).map(|m| m.as_str().to_string());
-                    let ret = Blog::new_blog(NewBlogInput{ link: url.to_string() }, &data.postgres());
+                    let ret = Blog::new_blog(
+                        NewBlogInput {
+                            link: url.to_string(),
+                        },
+                        &data.postgres(),
+                    );
                     info!("adding blog: {}", url);
                     let send_message_payload = SendMessage {
                         chat_id: message.chat.id.to_string(),

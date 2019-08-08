@@ -1,6 +1,5 @@
 use crate::models::blog::sql::NewBlog;
-use chrono::{DateTime, NaiveDateTime};
-use crypto::util::fixed_time_eq;
+use chrono::NaiveDateTime;
 use diesel::{prelude::*, PgConnection};
 use serde::Serialize;
 
@@ -34,7 +33,7 @@ impl Blog {
             .filter(blog::link.eq(&new_blog.link))
             .load::<Blog>(pg)
             .expect("cannot load blogs list");
-        if fetched_blogs.len() == 0 {
+        if fetched_blogs.is_empty() {
             diesel::insert_into(blog::table)
                 .values(NewBlog::new(new_blog))
                 .execute(pg)

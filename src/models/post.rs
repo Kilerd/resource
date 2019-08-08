@@ -1,9 +1,7 @@
-use crate::models::blog::{sql::NewBlog, Blog};
-use chrono::{DateTime, Local, NaiveDateTime, Utc};
-use crypto::util::fixed_time_eq;
+use crate::models::blog::Blog;
+use chrono::{DateTime, Utc};
 use diesel::{prelude::*, PgConnection};
 use serde::Serialize;
-use telegram_typing_bot::typing::User;
 
 #[derive(Queryable, Debug, Serialize)]
 //#[belongs_to(User)]

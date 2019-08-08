@@ -27,7 +27,4 @@ table! {
 
 joinable!(post -> blog (from_blog));
 
-allow_tables_to_appear_in_same_query!(
-    blog,
-    post,
-);
+allow_tables_to_appear_in_same_query!(blog, post,);
