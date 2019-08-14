@@ -1,46 +1,5 @@
-[package]
-name = "resource"
-version = "0.1.0"
-authors = ["Kilerd <blove694@gmail.com>"]
-edition = "2018"
-
-[dependencies]
-dotenv = "0.14.1"
-lazy_static = "1.3.0"
-openssl = "0.10.24"
-
-# serde
-serde = "1.0.98"
-serde_derive = "1.0.98"
-
-r2d2 = "0.8.5"
-diesel = { version = "1.4.2", features = ["postgres", "r2d2", "chrono"] }
-diesel_derives = "1.4.0"
-diesel_migrations = "1.4.0"
-
-tera = "0.11.20"
-pulldown-cmark = { version = "0.5.3", default-features = false }
-
-chrono = { version = "0.4.7", features = ["serde"] }
-rust-crypto = "0.2.36"
-
-http = "0.1.18"
-actix-web= "1.0.5"
-actix-files = "0.1.4"
-futures = "0.1.28"
-
-# log
-log = "0.4.8"
-pretty_env_logger = "0.3.0"
-
-time = "0.1.42"
-rand = "0.7.0"
-rss = "1.8.0"
-actix = "0.8.3"
-jsonwebtoken = "6.0.1"
-actix-cors = "0.1.0"
-actix-identity = "0.1.0"
-regex = "1.2.1"
-telegram_typing_bot = { git = "https://github.com/Kilerd/telegram_typing_bot" }
-futures-util = "0.2.1"
-reqwest="=0.9.19"
+[workspace]
+members = [
+    "client",
+    "server"
+]

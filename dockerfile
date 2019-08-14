@@ -13,9 +13,9 @@ RUN cargo build --release
 
 RUN rm -r target/x86_64-unknown-linux-musl/release/.fingerprint/resource-*
 
-COPY src src/
-COPY migrations migrations/
-COPY templates templates/
+COPY server/src src/
+COPY server/migrations migrations/
+COPY server/templates templates/
 
 RUN cargo build --release --frozen --bin resource
 
