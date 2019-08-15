@@ -14,7 +14,7 @@ RUN USER=root cargo new resource
 WORKDIR /app/resource
 
 COPY --from=rust /app/server/Cargo.toml ./
-COPY --from=rust /app/server/Cargo.lock ./
+COPY --from=rust /app/Cargo.lock ./
 
 RUN echo 'fn main() { println!("Dummy") }' > ./src/main.rs
 
