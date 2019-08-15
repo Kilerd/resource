@@ -1,21 +1,21 @@
 #[macro_use]
 extern crate seed;
-use seed::prelude::*;
 use crate::route::Route;
-use std::convert::TryInto;
 use crate::session::Session;
+use seed::prelude::*;
+use std::convert::TryInto;
 
+mod model;
 mod page;
 mod route;
 mod session;
-mod model;
 
 enum Model {
-//    Profile(page::profile::Model<'a>),
+    //    Profile(page::profile::Model<'a>),
     Home(page::home::Model),
     Posts(page::posts::Model),
+    About(page::about::Model),
 }
-
 
 impl Default for Model {
     fn default() -> Self {
@@ -23,18 +23,16 @@ impl Default for Model {
     }
 }
 
-
-
 enum Msg {
     RouteChanged(Option<Route>),
     HomeMsg(page::home::Msg),
-    PostsMsg(page::posts::Msg)
+    PostsMsg(page::posts::Msg),
+    About(page::about::Msg),
 }
-
 
 fn init(url: Url, orders: &mut impl Orders<Msg, GMsg>) -> Model {
     orders.send_msg(Msg::RouteChanged(url.try_into().ok()));
-//    Model::Redirect(Session::new(None))
+    //    Model::Redirect(Session::new(None))
     Model::Home(page::home::Model::default())
 }
 
@@ -69,24 +67,22 @@ fn update<'a>(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg, GMsg>) 
         }
         Msg::PostsMsg(module_msg) => {
             if let Model::Posts(module_model) = model {
-                page::posts::update(
-                    module_msg,
-                    module_model,
-                    &mut orders.proxy(Msg::PostsMsg),
-                );
+                page::posts::update(module_msg, module_model, &mut orders.proxy(Msg::PostsMsg));
+            }
+        }
+        Msg::About(module_msg) => {
+            if let Model::About(module_model) = model {
+                page::about::update(module_msg, module_model, &mut orders.proxy(Msg::About))
             }
         }
     }
 }
-
-
 
 fn change_model_by_route(
     route: Option<Route>,
     model: &mut Model,
     orders: &mut impl Orders<Msg, GMsg>,
 ) {
-
     let session = || Session::default();
     if let Some(route) = route {
         match route {
@@ -96,33 +92,30 @@ fn change_model_by_route(
                 *model = Model::Home(page::home::init(session(), &mut orders.proxy(Msg::HomeMsg)));
             }
             Route::Posts => {
-                *model = Model::Posts(
-                    page::posts::init(
-                        session(),
-                        &mut orders.proxy(Msg::PostsMsg),
-                    )
-                )
+                *model = Model::Posts(page::posts::init(
+                    session(),
+                    &mut orders.proxy(Msg::PostsMsg),
+                ))
+            }
+            Route::About => {
+                *model = Model::About(page::about::init(session(), &mut orders.proxy(Msg::About)))
             }
         }
     };
 }
 
-
-
 fn view(model: &Model) -> impl View<Msg> {
     match model {
         Model::Home(model) => page::home::view(model).map_message(Msg::HomeMsg),
-        Model::Posts(model) => page::posts::view(model).map_message(Msg::PostsMsg)
+        Model::Posts(model) => page::posts::view(model).map_message(Msg::PostsMsg),
+        Model::About(model) => page::about::view(model).map_message(Msg::About),
     }
 }
 
-
-
-
 #[wasm_bindgen(start)]
 pub fn render() {
-    seed::App::build(|_, _| Model::default(), update, view)
-//        .sink(sink)
+    seed::App::build(init, update, view)
+        //        .sink(sink)
         .routes(|url| Msg::RouteChanged(url.try_into().ok()))
         .finish()
         .run();

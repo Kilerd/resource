@@ -27,13 +27,13 @@ workspace = true
 description = "Build with wasm-pack"
 install_crate = { crate_name = "wasm-pack", binary = "wasm-pack", test_arg = "-V" }
 command = "wasm-pack"
-args = ["build", "--target", "web", "--out-name", "package", "--dev"]
+args = ["build", "--target", "web", "--out-name", "package","--out-dir","../server/templates/pkg/",  "--dev"]
 
 [tasks.create_wasm_release]
 description = "Build with wasm-pack"
 install_crate = { crate_name = "wasm-pack", binary = "wasm-pack", test_arg = "-V" }
 command = "wasm-pack"
-args = ["build", "--target", "web", "--out-name", "package", "--release"]
+args = ["build", "--target", "web", "--out-name", "package","--out-dir","../server/templates/pkg", "--release"]
 
 [tasks.all]
 workspace = true

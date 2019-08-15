@@ -14,3 +14,6 @@ web-sys = "0.3.25"
 serde = "1.0.98"
 chrono = { version = "0.4.7", features = ["serde"] }
 futures = "0.1.28"
+
+[profile.release]
+opt-level = 's'

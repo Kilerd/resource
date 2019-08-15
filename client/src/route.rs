@@ -1,8 +1,8 @@
-use std::borrow::Cow;
-use seed::prelude::*;
-use std::fmt;
-use std::convert::TryFrom;
 use crate::GMsg;
+use seed::prelude::*;
+use std::borrow::Cow;
+use std::convert::TryFrom;
+use std::fmt;
 
 pub fn go_to<Ms: 'static>(route: Route, orders: &mut impl Orders<Ms, GMsg>) {
     seed::push_route(route.clone());
@@ -15,7 +15,8 @@ pub fn go_to<Ms: 'static>(route: Route, orders: &mut impl Orders<Ms, GMsg>) {
 pub enum Route {
     Home,
     Root,
-    Posts
+    Posts,
+    About,
 }
 
 impl<'a> Route {
@@ -23,7 +24,8 @@ impl<'a> Route {
         use Route::*;
         match self {
             Home | Root => vec![],
-            Posts => vec!["posts"]
+            Posts => vec!["posts"],
+            About => vec!["about"],
         }
     }
 }
@@ -49,8 +51,9 @@ impl<'a> TryFrom<seed::Url> for Route {
         match path.next().as_ref().map(String::as_str) {
             None | Some("") => Some(Route::Home),
             Some("posts") => Some(Route::Posts),
+            Some("about") => Some(Route::About),
             _ => None,
         }
-            .ok_or(())
+        .ok_or(())
     }
 }
