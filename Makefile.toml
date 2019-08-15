@@ -1,0 +1,62 @@
+[env]
+# all workspace members can use this Makefile
+CARGO_MAKE_EXTEND_WORKSPACE_MAKEFILE = "true"
+PORT = "8000"
+
+[config]
+default_to_workspace = true
+# ---- BUILD & CREATE WASMS ----
+
+#[tasks.client_build]
+#description = "Client Build"
+#workspace = true
+#command = "cargo"
+#args = ["make", "--makefile","client/Makefile.toml", "build"]
+#[tasks.client_build]
+#description = "Client Build"
+#workspace = true
+#env = { "CARGO_MAKE_MEMBER_TASK" = "client" }
+#run_task = "build"
+#
+#[tasks.client_create_wasm]
+#description = "Client Build"
+#workspace = true
+#env = { "CARGO_MAKE_MEMBER_TASK" = "client" }
+#run_task = "create_wasm"
+#
+#[tasks.server_build]
+#description = "Build"
+#workspace = false
+#command = "cargo"
+#args = ["build"]
+#
+#[tasks.run]
+#workspace = true
+#env = { "CARGO_MAKE_MEMBER_TASK" = "server" }
+#run_task = "server_run"
+
+#[tasks.build_release]
+#description = "Build, with the --release flag"
+#workspace = false
+#command = "cargo"
+#args = ["build", "--release"]
+
+[tasks.move_pkg_file]
+description = "copy pkg folder to server side"
+workspace = true
+command = "cp"
+args = ["-R","pkg/package.js", "../server/templates/pkg"]
+
+[tasks.watch_all]
+description = "Build, create wasms, and watch/recompile files for changes"
+workspace = true
+dependencies = ["client_build", "client_create_wasm", "server_run"]
+watch = { ignore_patterns=["templates/pkg/*", "client/pkg/*"] }
+
+[tasks.watch_workspace]
+workspace = true
+description = "Build, create wasms, and watch/recompile files for changes"
+env = { "CARGO_MAKE_MEMBER_TASK" = "client" }
+run_task = "create_wasm"
+dependencies = ["build", "create_wasm"]
+watch = { ignore_pattern="client/pkg/*" }

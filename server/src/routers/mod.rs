@@ -3,7 +3,7 @@ use crate::routers::{
     index::index_page,
     post::show_posts,
 };
-use actix_files::Files;
+use actix_files::{Files, NamedFile};
 use actix_web::{web, HttpResponse, Scope};
 use serde::{Deserialize, Serialize};
 
@@ -75,20 +75,25 @@ impl AppResponder {
 
 pub fn routes() -> Scope {
     web::scope("/")
-        .service(index_page)
         .service(
-            web::scope("/blogs")
-                .service(show_blogs)
-                .service(add_a_new_blogs),
+            web::scope("/api")
+                .service(index_page)
+                .service(
+                    web::scope("/blogs")
+                        .service(show_blogs)
+                        .service(add_a_new_blogs),
+                )
+                .service(web::scope("/posts").service(show_posts))
+                .service(
+                    web::scope(&format!(
+                        "/telegram/{}",
+                        std::env::var("TELEGRAM_BOT_SECRET_KEY")
+                            .expect("TELEGRAM_BOT_SECRET_KEY: telegram bot secret key must be set")
+                    ))
+                    .service(telegram::telegram_web_hook),
+                ),
         )
-        .service(web::scope("/posts").service(show_posts))
-        .service(
-            web::scope(&format!(
-                "/telegram/{}",
-                std::env::var("TELEGRAM_BOT_SECRET_KEY")
-                    .expect("TELEGRAM_BOT_SECRET_KEY: telegram bot secret key must be set")
-            ))
-            .service(telegram::telegram_web_hook),
-        )
-        .service(Files::new("/statics", "./templates/resources/"))
+        .service(Files::new("/public", "./templates/public"))
+        .service(Files::new("/pkg", "./templates/pkg"))
+        .default_service(web::get().to(|| NamedFile::open("./templates/index.html")))
 }
