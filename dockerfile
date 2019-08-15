@@ -13,8 +13,8 @@ WORKDIR /app
 RUN USER=root cargo new resource
 WORKDIR /app/resource
 
-COPY --from=builder /app/server/Cargo.toml ./
-COPY --from=builder /app/server/Cargo.lock ./
+COPY --from=rust /app/server/Cargo.toml ./
+COPY --from=rust /app/server/Cargo.lock ./
 
 RUN echo 'fn main() { println!("Dummy") }' > ./src/main.rs
 
@@ -22,9 +22,9 @@ RUN cargo build --release
 
 RUN rm -r target/x86_64-unknown-linux-musl/release/.fingerprint/resource-*
 
-COPY --from=builder /app/server/src src/
-COPY --from=builder /app/server/migrations migrations/
-COPY --from=builder /app/server/templates templates/
+COPY --from=rust /app/server/src src/
+COPY --from=rust /app/server/migrations migrations/
+COPY --from=rust /app/server/templates templates/
 
 RUN cargo build --release --frozen --bin resource
 
