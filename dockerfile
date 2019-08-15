@@ -1,3 +1,11 @@
+FROM rust:latest as rust
+RUN rustup target add wasm32-unknown-unknown
+RUN cargo install --force --version 0.21.0 cargo-make
+WORKDIR /app
+COPY . /app
+WORKDIR /app/client
+RUN cargo make all_release
+
 FROM clux/muslrust:stable as builder
 
 WORKDIR /app
@@ -5,7 +13,8 @@ WORKDIR /app
 RUN USER=root cargo new resource
 WORKDIR /app/resource
 
-COPY Cargo.toml Cargo.lock ./
+COPY --from=builder /app/server/Cargo.toml ./
+COPY --from=builder /app/server/Cargo.lock ./
 
 RUN echo 'fn main() { println!("Dummy") }' > ./src/main.rs
 
@@ -13,9 +22,9 @@ RUN cargo build --release
 
 RUN rm -r target/x86_64-unknown-linux-musl/release/.fingerprint/resource-*
 
-COPY server/src src/
-COPY server/migrations migrations/
-COPY server/templates templates/
+COPY --from=builder /app/server/src src/
+COPY --from=builder /app/server/migrations migrations/
+COPY --from=builder /app/server/templates templates/
 
 RUN cargo build --release --frozen --bin resource
 
