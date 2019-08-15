@@ -58,5 +58,5 @@ workspace = true
 description = "Build, create wasms, and watch/recompile files for changes"
 env = { "CARGO_MAKE_MEMBER_TASK" = "client" }
 run_task = "create_wasm"
-dependencies = ["build", "create_wasm", "move_pkg_file"]
+dependencies = ["build", "create_wasm"]
 watch = { ignore_pattern="client/pkg/*" }
