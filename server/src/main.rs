@@ -40,6 +40,8 @@ lazy_static! {
         .split(',')
         .map(|s| s.parse::<i32>().expect("cannot format as i32"))
         .collect();
+    static ref TELEGRAM_RELEASE_CHANNEL: String =
+        std::env::var("TELEGRAM_RELEASE_CHANNEL").expect("TELEGRAM_RELEASE_CHANNEL must be set");
 }
 fn main() {
     dotenv().ok();
