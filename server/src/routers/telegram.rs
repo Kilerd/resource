@@ -4,7 +4,7 @@ use crate::{
         blog::{form::NewBlogInput, Blog},
         post::{sql::NewPost, Post},
     },
-    TELEGRAM_WHITE_LSIT,
+    TELEGRAM_RELEASE_CHANNEL, TELEGRAM_WHITE_LSIT,
 };
 use actix_web::{
     post,
@@ -33,7 +33,7 @@ pub fn telegram_web_hook(update: Json<Update>, data: Data<AppData>) -> impl Resp
                 );
                 let re = Regex::new(r"\[(.+)\]\(([^)]+)\)(\{([^}]*)\})?").unwrap();
                 for cap in re.captures_iter(text.as_ref()) {
-                    //                dbg!(cap);
+                    dbg!(&cap);
                     let title = &cap[1];
                     let link = &cap[2];
                     let description = cap.get(4).map(|m| m.as_str().to_string());
@@ -48,14 +48,32 @@ pub fn telegram_web_hook(update: Json<Update>, data: Data<AppData>) -> impl Resp
                     };
                     let option = Post::insert(new_post, &data.postgres());
                     let msg = if let Some(post) = option {
-                        format!("Successfully added as Post\nID: {}\nTitle: {}\nURL: {}\nDescription: {}", post.id, post.title, post.link, post.description.unwrap_or("".to_string()))
+                        let channel_msg = format!(
+                            "[{}]({})\n{}",
+                            post.title,
+                            post.link,
+                            post.description.as_ref().unwrap_or(&"".to_string())
+                        );
+                        debug!("{}", &channel_msg);
+                        let send_message_payload = SendMessage {
+                            chat_id: TELEGRAM_RELEASE_CHANNEL.to_string(),
+                            text: channel_msg,
+                            parse_mode: Some("Markdown".to_string()),
+                            disable_web_page_preview: Some(true),
+                            disable_notification: None,
+                            reply_to_message_id: None,
+                            reply_markup: None,
+                        };
+                        data.bot.do_send(send_message_payload);
+
+                        format!("Successfully added as Post\nID: {}\nTitle: {}\nURL: {}\nDescription: {}", post.id, post.title, post.link, post.description.as_ref().unwrap_or(&"".to_string()))
                     } else {
                         String::from("Fail to add")
                     };
                     let send_message_payload = SendMessage {
                         chat_id: message.chat.id.to_string(),
                         text: msg,
-                        parse_mod: None,
+                        parse_mode: None,
                         disable_web_page_preview: Some(true),
                         disable_notification: None,
                         reply_to_message_id: Some(message.message_id),
@@ -80,7 +98,7 @@ pub fn telegram_web_hook(update: Json<Update>, data: Data<AppData>) -> impl Resp
                     let send_message_payload = SendMessage {
                         chat_id: message.chat.id.to_string(),
                         text: "Successfully add blog".to_string(),
-                        parse_mod: None,
+                        parse_mode: None,
                         disable_web_page_preview: None,
                         disable_notification: None,
                         reply_to_message_id: Some(message.message_id),
@@ -93,7 +111,7 @@ pub fn telegram_web_hook(update: Json<Update>, data: Data<AppData>) -> impl Resp
             let send_message_payload = SendMessage {
                 chat_id: message.chat.id.to_string(),
                 text: format!("you are not in the white list"),
-                parse_mod: None,
+                parse_mode: None,
                 disable_web_page_preview: None,
                 disable_notification: None,
                 reply_to_message_id: Some(message.message_id),
