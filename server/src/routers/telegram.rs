@@ -31,7 +31,7 @@ pub fn telegram_web_hook(update: Json<Update>, data: Data<AppData>) -> impl Resp
                     "adding post data from {} with text {}",
                     message_user_id, text
                 );
-                let re = Regex::new(r"\[(.+)\]\((.+)\)(\{(.*)\})?").unwrap();
+                let re = Regex::new(r"\[(.+)\]\(([^)]+)\)(\{([^}]*)\})?").unwrap();
                 for cap in re.captures_iter(text.as_ref()) {
                     //                dbg!(cap);
                     let title = &cap[1];
@@ -48,7 +48,7 @@ pub fn telegram_web_hook(update: Json<Update>, data: Data<AppData>) -> impl Resp
                     };
                     let option = Post::insert(new_post, &data.postgres());
                     let msg = if let Some(post) = option {
-                        format!("Successfully added as Post {}", post.id)
+                        format!("Successfully added as Post\nID: {}\nTitle: {}\nURL: {}\nDescription: {}", post.id, post.title, post.link, post.description.unwrap_or("".to_string()))
                     } else {
                         String::from("Fail to add")
                     };
@@ -56,7 +56,7 @@ pub fn telegram_web_hook(update: Json<Update>, data: Data<AppData>) -> impl Resp
                         chat_id: message.chat.id.to_string(),
                         text: msg,
                         parse_mod: None,
-                        disable_web_page_preview: None,
+                        disable_web_page_preview: Some(true),
                         disable_notification: None,
                         reply_to_message_id: Some(message.message_id),
                         reply_markup: None,
