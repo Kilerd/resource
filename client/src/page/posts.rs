@@ -26,7 +26,7 @@ impl Model {
 }
 
 fn request_posts() -> impl Future<Item = Msg, Error = Msg> {
-    Request::new("http://localhost:8000/api/posts")
+    Request::new("https://www.resource.rs/api/posts")
         .method(Method::Get)
         .fetch_json(Msg::FetchedPostsData)
 }
