@@ -10,6 +10,7 @@ use serde::{Deserialize, Serialize};
 mod blog;
 mod index;
 mod post;
+mod rss;
 mod telegram;
 
 #[derive(Deserialize, Serialize)]
@@ -93,6 +94,7 @@ pub fn routes() -> Scope {
                     .service(telegram::telegram_web_hook),
                 ),
         )
+        .service(rss::rss_for_latest_posts)
         .service(Files::new("/public", "./templates/public"))
         .service(Files::new("/pkg", "./templates/pkg"))
         .default_service(web::get().to(|| NamedFile::open("./templates/index.html")))
