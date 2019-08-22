@@ -12,12 +12,14 @@ use actix_web::{
     Responder,
 };
 use regex::Regex;
-use telegram_typing_bot::methods::{basic::SendMessage, update::Update};
+use telegram_typing_bot::method::SendMessage;
+use telegram_typing_bot::typing::UpdateMessage;
+use telegram_typing_bot::typing::{ParseMode, Update};
 
 #[post("")]
 pub fn telegram_web_hook(update: Json<Update>, data: Data<AppData>) -> impl Responder {
     //    dbg!(update);
-    if let Some(message) = &update.message {
+    if let UpdateMessage::Message(message) = &update.message {
         let (message_user_id, creator) = message
             .from
             .as_ref()
@@ -54,32 +56,19 @@ pub fn telegram_web_hook(update: Json<Update>, data: Data<AppData>) -> impl Resp
                             post.link,
                             post.description.as_ref().unwrap_or(&"".to_string())
                         );
-                        debug!("{}", &channel_msg);
-                        let send_message_payload = SendMessage {
-                            chat_id: TELEGRAM_RELEASE_CHANNEL.to_string(),
-                            text: channel_msg,
-                            parse_mode: Some("Markdown".to_string()),
-                            disable_web_page_preview: Some(true),
-                            disable_notification: None,
-                            reply_to_message_id: None,
-                            reply_markup: None,
-                        };
-                        data.bot.do_send(send_message_payload);
+
+                        data.bot.do_send(
+                            SendMessage::new(TELEGRAM_RELEASE_CHANNEL.as_str(), channel_msg)
+                                .parse_mode(ParseMode::Markdown),
+                        );
 
                         format!("Successfully added as Post\nID: {}\nTitle: {}\nURL: {}\nDescription: {}", post.id, post.title, post.link, post.description.as_ref().unwrap_or(&"".to_string()))
                     } else {
                         String::from("Fail to add")
                     };
-                    let send_message_payload = SendMessage {
-                        chat_id: message.chat.id.to_string(),
-                        text: msg,
-                        parse_mode: None,
-                        disable_web_page_preview: Some(true),
-                        disable_notification: None,
-                        reply_to_message_id: Some(message.message_id),
-                        reply_markup: None,
-                    };
-                    data.bot.do_send(send_message_payload);
+
+                    data.bot
+                        .do_send(SendMessage::new(message.chat.id.to_string(), msg));
                 }
             };
 
@@ -95,30 +84,19 @@ pub fn telegram_web_hook(update: Json<Update>, data: Data<AppData>) -> impl Resp
                         &data.postgres(),
                     );
                     info!("adding blog: {}", url);
-                    let send_message_payload = SendMessage {
-                        chat_id: message.chat.id.to_string(),
-                        text: "Successfully add blog".to_string(),
-                        parse_mode: None,
-                        disable_web_page_preview: None,
-                        disable_notification: None,
-                        reply_to_message_id: Some(message.message_id),
-                        reply_markup: None,
-                    };
-                    data.bot.do_send(send_message_payload);
+
+                    let mut msg =
+                        SendMessage::new(message.chat.id.to_string(), "Successfully add blog");
+                    msg.reply_to_message_id = Some(message.message_id);
+                    data.bot.do_send(msg);
                 }
             };
         } else {
-            let send_message_payload = SendMessage {
-                chat_id: message.chat.id.to_string(),
-                text: format!("you are not in the white list"),
-                parse_mode: None,
-                disable_web_page_preview: None,
-                disable_notification: None,
-                reply_to_message_id: Some(message.message_id),
-                reply_markup: None,
-            };
-            data.bot.do_send(send_message_payload);
+            let mut msg =
+                SendMessage::new(message.chat.id.to_string(), "you are not in the white list");
+            msg.reply_to_message_id = Some(message.message_id);
+            data.bot.do_send(msg);
         };
-    };
+    }
     "True"
 }

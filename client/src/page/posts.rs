@@ -63,9 +63,9 @@ pub fn posts_render(posts: Vec<Post>) -> Vec<Node<Msg>> {
                                 a![attrs! {At::Href => post.link}, post.title]
                             ],
                             if post.description.is_some() {
-                                p![class!["description"], post.description.clone().unwrap()]
+                                md![&post.description.clone().unwrap()]
                             } else {
-                                empty![]
+                                vec![empty![]]
                             }
                         ]
                     })
