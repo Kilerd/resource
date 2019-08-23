@@ -14,7 +14,7 @@ use actix::SyncArbiter;
 use actix_cors::Cors;
 use actix_identity::{CookieIdentityPolicy, IdentityService};
 use actix_web::{
-    middleware::{Logger, NormalizePath},
+    middleware::{Compress, Logger, NormalizePath},
     web::{FormConfig, JsonConfig},
     App, HttpServer,
 };
@@ -67,6 +67,7 @@ fn main() {
             .data(FormConfig::default().limit(256_000))
             .wrap(Logger::default())
             .wrap(Cors::default())
+            .wrap(Compress::default())
             .wrap(NormalizePath)
             .wrap(IdentityService::new(
                 CookieIdentityPolicy::new(&RANDOM_TOKEN_KEY)
