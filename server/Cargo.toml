@@ -25,7 +25,7 @@ chrono = { version = "0.4.7", features = ["serde"] }
 rust-crypto = "0.2.36"
 
 http = "0.1.18"
-actix-web= "1.0.5"
+actix-web= "1.0.6"
 actix-files = "0.1.4"
 futures = "0.1.28"
 
