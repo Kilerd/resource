@@ -27,7 +27,7 @@ rust-crypto = "0.2.36"
 http = "0.1.18"
 actix-web= "1.0.5"
 actix-files = "0.1.4"
-futures = "0.1.28"
+futures = "0.1.29"
 
 # log
 log = "0.4.8"
