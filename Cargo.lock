@@ -2340,7 +2340,7 @@ dependencies = [
 [[package]]
 name = "telegram_typing_bot"
 version = "0.1.0"
-source = "git+https://github.com/Kilerd/telegram_typing_bot#22d53cf5894a752b63d748996fcd3d899d814b7d"
+source = "git+https://github.com/Kilerd/telegram_typing_bot#80df5675a75fafb8ab776e4831cbe813df5775b7"
 dependencies = [
  "actix 0.8.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "reqwest 0.9.20 (registry+https://github.com/rust-lang/crates.io-index)",
