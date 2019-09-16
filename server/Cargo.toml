@@ -11,7 +11,7 @@ openssl = "0.10.24"
 
 # serde
 serde = "1.0.100"
-serde_derive = "1.0.100"
+serde_derive = "1.0.101"
 
 r2d2 = "0.8.5"
 diesel = { version = "1.4.2", features = ["postgres", "r2d2", "chrono"] }
