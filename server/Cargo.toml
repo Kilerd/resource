@@ -34,7 +34,7 @@ log = "0.4.8"
 pretty_env_logger = "0.3.1"
 
 time = "0.1.42"
-rand = "0.7.0"
+rand = "0.7.2"
 rss = "1.8.0"
 actix = "0.8.3"
 jsonwebtoken = "6.0.1"
