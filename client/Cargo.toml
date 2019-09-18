@@ -14,7 +14,7 @@ web-sys = "0.3.27"
 serde = "1.0.100"
 chrono = { version = "0.4.9", features = ["serde"] }
 futures = "0.1.29"
-strum = "0.15.0"
+strum = "0.16.0"
 strum_macros = "0.15.0"
 
 [profile.release]
