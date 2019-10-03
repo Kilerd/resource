@@ -7,7 +7,7 @@ edition = "2018"
 [dependencies]
 dotenv = "0.14.1"
 lazy_static = "1.4.0"
-openssl = "0.10.24"
+openssl = "0.10.25"
 
 # serde
 serde = "1.0.100"
