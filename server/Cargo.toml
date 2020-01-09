@@ -24,7 +24,7 @@ pulldown-cmark = { version = "0.6.0", default-features = false }
 chrono = { version = "0.4.9", features = ["serde"] }
 rust-crypto = "0.2.36"
 
-http = "0.1.18"
+http = "0.2.0"
 actix-web= "1.0.7"
 actix-files = "0.1.4"
 futures = "0.1.29"
