@@ -1,15 +1,12 @@
 use crate::pg_pool::{ManagedPgConn, Pool};
-use actix::Addr;
 use r2d2::PooledConnection;
 use std::sync::Arc;
-use telegram_typing_bot::bot::Bot;
 use tera::{Context, Tera};
 
 #[derive(Clone)]
 pub struct AppData {
     pub pool: Pool,
     pub tera: Arc<Tera>,
-    pub bot: Addr<Bot>,
 }
 
 impl AppData {
