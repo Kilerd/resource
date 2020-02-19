@@ -1,24 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
+
 <head>
-    <meta charset="utf-8" />
-    <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-
-    <meta name="description" content="" />
-
-    <link rel="icon" type="image/png" href="/public/favicon.png" />
-    <link rel="stylesheet" href="/public/style.css">
-
-    <title>RESOURCE.RS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet/less" type="text/css" href="/statics/style.less" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
+    <title>Resource.rs - 旨在提供一站式的 Rust 学习资源</title>
 </head>
-<body id="app">
-<script type="module">
-    // https://rustwasm.github.io/docs/wasm-bindgen/examples/without-a-bundler.html
-    import init from '/pkg/package.js';
-    init('/pkg/package_bg.wasm');
-</script>
+
+<body>
+
+<header>
+        <h1>Resource.RS<sup>ALPHA</sup></h1>
+        <nav>
+            <a class="normal" href="/"><span>首页</span></a>
+            <a class="normal" href="/"><span>专题系列</span></a>
+            <a class="normal" href="/about"><span>关于我们</span></a>
+            <a class="normal" href="https://github.com/Kilerd/resource.rs" target="_blank"><span>GitHub</span></a>
+        </nav>
+    </header>
+        <main class="body">
+            <section class="main">
+                <section class="part">
+                    <section class="head">最新文章</section>
+                    <section class="content">
+
+                    </section>
+                </section>
+        <section class="part">
+            <section class="head">{{ data.toturial.title }}</section>
+            <section class="content">
+                <ol class="ordered">
+                    {% for item in data.toturial.items %}
+                    <li><a class="normal" href="{{ item.link }}"><span>{{ item.title }}</span></a></li>
+                    {% endfor %}
+                </ol>
+            </section>
+        </section>
+
+        <section class="part">
+            <section class="head">{{ data.link.title }}</section>
+            <section class="content">
+                <nav class="inline">
+                    {% for item in data.link.items %}
+                    <a class="normal" href="{{ item.link }}"
+                       title="{{ item.description }}"><span>{{ item.name }}</span></a>
+                    {% endfor %}
+                </nav>
+            </section>
+        </section>
+
+        <section class="part">
+            <section class="head">{{ data.book.title }}</section>
+            <section class="content">
+                {% for item in data.book.items %}
+                <div class="book">
+                    <div class="title">{{ item.title }}</div>
+                    <div class="description han-init-context">
+                        {{ item.description | safe }}
+                    </div>
+                    <div class="meta">
+                        {% for version in item.version %}
+                        <a href="{{ version.link }}" target="_blank">GO TO {{ version.name }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                {% endfor %}
+            </section>
+        </section>
+
+    </section>
+    <section class="side">
+        <!-- <section class="part">
+            <section class="head">最新文章</section>
+            <section class="content">
+                <div class="timed-link">
+                    <span class="time">01/01</span>
+                    <a  class="normal" href=""><span>去你丫的 Dark Mode</span></a>
+                </div>
+                <div class="timed-link">
+                    <span class="time">01/01</span>
+                    <a class="normal" href=""><span>180° 第十九期 • 汉仪西文字体设计师张暄</span></a>
+                </div>
+                <div class="timed-link">
+                    <span class="time">01/01</span>
+                    <a class="normal" href=""><span>2019 年度线下活动上海站</span></a>
+                </div>
+                <div class="timed-link">
+                    <span class="time">01/01</span>
+                    <a class="normal" href=""><span>滤镜这门生意</span></a>
+                </div>
+            </section>
+        </section> -->
+
+        <!-- <section class="part">
+            <section class="head">Reddit 流行</section>
+            <section class="content">
+                <div class="reddit-link">
+                    <span class="mark">155</span>
+                    <a class="normal" href=""><span>Lyon 0.15.0 - A new tessellator</span></a>
+                </div>
+                <div class="reddit-link">
+                    <span class="mark">121</span>
+                    <a class="normal" href=""><span>Show /r/rust: DumbNet, Artificial Neural Networks without a Heap. [no_std]</span></a>
+                </div>
+                <div class="reddit-link">
+                    <span class="mark">363</span>
+                    <a class="normal" href=""><span>actix-web v2.0 released</span></a>
+                </div>
+            </section>
+        </section>
+        <section class="part">
+            <section class="head">系列专题</section>
+            <section class="content">
+                <div class="reddit-link">
+                    <span class="mark">155</span>
+                    <a class="normal" href=""><span>Lyon 0.15.0 - A new tessellator</span></a>
+                </div>
+                <div class="reddit-link">
+                    <span class="mark">121</span>
+                    <a class="normal" href=""><span>Show /r/rust: DumbNet, Artificial Neural Networks without a Heap. [no_std]</span></a>
+                </div>
+                <div class="reddit-link">
+                    <span class="mark">363</span>
+                    <a class="normal" href=""><span>actix-web v2.0 released</span></a>
+                </div>
+            </section>
+        </section> -->
+    </section>
+</main>
+<footer>
+    <p class="point"></p>
+    <p><a href="https://github.com/Kilerd/resource.rs" class="normal"><span>我们期待你的加入...</span></a></p>
+</footer>
+
 </body>
 </html>

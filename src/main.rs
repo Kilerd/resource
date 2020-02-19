@@ -8,17 +8,19 @@ extern crate diesel_migrations;
 extern crate log;
 extern crate openssl;
 
-use std::sync::Arc;
+use std::sync::{Arc, Mutex};
 use actix_cors::Cors;
 use actix_web::{App, HttpServer, middleware::{Logger, NormalizePath}, web::{FormConfig, JsonConfig}};
 use tera::{Tera};
 use once_cell::sync::Lazy;
 use dotenv::dotenv;
 use crate::{data::AppData, pg_pool::database_pool_establish};
+use crate::data::Data;
 
 mod data;
 mod pg_pool;
 mod schema;
+mod router;
 
 embed_migrations!();
 
@@ -36,9 +38,14 @@ async fn main() {
 
     let database_url = std::env::var("DATABASE_URL").expect("database_url must be set");
 
+
     let data = AppData {
         pool: database_pool_establish(&database_url),
         tera: Arc::new(Tera::new("templates/**/*.html").unwrap()),
+        data: Arc::new(Data {
+            index: toml::from_str(include_str!("../data/index.toml")).unwrap()
+        }),
+        pages: Arc::new(Mutex::new(Default::default()))
     };
 
     embedded_migrations::run(&data.pool.get().expect("cannot get connection"))
@@ -54,6 +61,7 @@ async fn main() {
             .wrap(Logger::default())
             .wrap(Cors::default())
             .wrap(NormalizePath {})
+            .configure(router::routes)
     })
         .bind(("0.0.0.0", 8000))
         .unwrap()
