@@ -5,8 +5,8 @@ WORKDIR /app
 RUN USER=root cargo new resource
 WORKDIR /app/resource
 COPY Cargo.toml Cargo.lock ./
-# RUN cargo build --release
-# RUN rm -r target/x86_64-unknown-linux-musl/release/.fingerprint/resource-*
+RUN cargo build --release
+RUN rm -r target/x86_64-unknown-linux-musl/release/.fingerprint/resource-*
 
 COPY src src/
 COPY migrations migrations/
