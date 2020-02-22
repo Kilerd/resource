@@ -5,26 +5,29 @@ use tera::{Context, Tera};
 use serde::{Serialize, Deserialize};
 use std::collections::HashMap;
 use pulldown_cmark::Options;
+use std::ops::Deref;
 
 #[derive(Serialize, Deserialize)]
-pub struct Page{
-    pub title: String,
-    pub content: String
+pub struct MarkdownContent(String);
+
+impl Deref for MarkdownContent {
+    type Target = String;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
 }
 
-impl Page {
+impl MarkdownContent {
     pub fn new(content: impl Into<String>) -> Self {
-        let page = content.into();
+        let content = content.into();
 
         let mut html_output = String::new();
         let options = Options::all();
-        let parser = pulldown_cmark::Parser::new_ext(&page, options);
+        let parser = pulldown_cmark::Parser::new_ext(&content, options);
         pulldown_cmark::html::push_html(&mut html_output, parser);
 
-        Page {
-            title: "".to_string(),
-            content: html_output
-        }
+        MarkdownContent(html_output)
 
     }
 }
@@ -39,7 +42,7 @@ pub struct AppData {
     pub pool: Pool,
     pub tera: Arc<Tera>,
     pub data: Arc<Data>,
-    pub pages: Arc<Mutex<HashMap<String,Page>>>
+    pub pages: Arc<Mutex<HashMap<String,MarkdownContent>>>
 }
 
 impl AppData {

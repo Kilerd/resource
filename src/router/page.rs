@@ -1,7 +1,7 @@
 use actix_web::Responder;
 use actix_web::{get};
 use crate::router::AppResponder;
-use crate::data::{AppData, Page};
+use crate::data::{AppData, MarkdownContent};
 use actix_web::web::{Data, Path};
 use tera::Context;
 
@@ -28,8 +28,8 @@ pub async fn get_article_by_url(
         match result {
             Ok(content) => {
                 info!("load page data: {}", &buf.to_str().unwrap());
-                let page = Page::new(content);
-                pages.insert(url.clone(), page);
+                let content = MarkdownContent::new(content);
+                pages.insert(url.clone(), content);
             }
             Err(_) => {
                 error!("cannot find page: {}", &buf.to_str().unwrap());

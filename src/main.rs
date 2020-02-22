@@ -16,11 +16,13 @@ use once_cell::sync::Lazy;
 use dotenv::dotenv;
 use crate::{data::AppData, pg_pool::database_pool_establish};
 use crate::data::Data;
+use futures::future::abortable;
 
 mod data;
 mod pg_pool;
 mod schema;
 mod router;
+mod model;
 
 embed_migrations!();
 
@@ -51,6 +53,9 @@ async fn main() {
     embedded_migrations::run(&data.pool.get().expect("cannot get connection"))
         .expect("panic on embedded database migration");
 
+    let (fut, handler) = abortable(router::reddit::looping_fetch(data.clone()));
+    tokio::spawn(fut);
+
     info!("resource is listening on 0.0.0.0:8000");
     HttpServer::new(move || {
         App::new()
@@ -67,5 +72,9 @@ async fn main() {
         .unwrap()
         .run()
         .await
-        .unwrap()
+        .unwrap();
+
+    info!("application exit");
+    handler.abort();
+
 }

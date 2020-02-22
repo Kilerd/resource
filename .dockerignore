@@ -1,10 +1,1 @@
 target
-server/target/release
-server/target/debug
-server/target/x86_64-unknown-linux-musl/debug
-server/target/x86_64-unknown-linux-musl/release/.fingerprint
-server/target/x86_64-unknown-linux-musl/release/build
-server/target/x86_64-unknown-linux-musl/release/deps
-server/target/x86_64-unknown-linux-musl/release/examples
-server/target/x86_64-unknown-linux-musl/release/incremental
-server/target/x86_64-unknown-linux-musl/release/native

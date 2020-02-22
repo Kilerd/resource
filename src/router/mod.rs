@@ -2,8 +2,9 @@ use actix_web::middleware::NormalizePath;
 use actix_web::{web, HttpResponse};
 use serde::{Serialize, Deserialize};
 
-mod api;
-mod page;
+pub mod api;
+pub mod page;
+pub mod reddit;
 
 #[derive(Deserialize, Serialize)]
 pub struct JsonResponse<T> {
@@ -55,6 +56,7 @@ pub fn routes(cfg: &mut web::ServiceConfig) {
             "./templates/statics/",
         ))
         .service(page::index)
+        .service(reddit::reddit_rending)
         .service(page::get_article_by_url)
     ;
 }
