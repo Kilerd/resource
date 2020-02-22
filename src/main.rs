@@ -1,4 +1,3 @@
-#[rustfmt::skip]
 extern crate openssl;
 
 #[macro_use]

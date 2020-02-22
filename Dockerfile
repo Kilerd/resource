@@ -5,15 +5,15 @@ WORKDIR /app
 RUN USER=root cargo new resource
 WORKDIR /app/resource
 COPY Cargo.toml Cargo.lock ./
-RUN cargo build --release
-RUN rm -r target/x86_64-unknown-linux-musl/release/.fingerprint/resource-*
+# RUN cargo build --release
+# RUN rm -r target/x86_64-unknown-linux-musl/release/.fingerprint/resource-*
 
 COPY src src/
 COPY migrations migrations/
 COPY templates templates/
 COPY page page/
 COPY data data/
-RUN cargo build --release --frozen --bin resource
+RUN cargo build --release --bin resource
 
 FROM alpine:latest
 
