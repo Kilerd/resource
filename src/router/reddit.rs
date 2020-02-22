@@ -273,17 +273,16 @@ pub struct ResizedIcon {
     pub height: i64,
 }
 
-#[cfg(debug_assertions)]
-pub async fn a() -> Result<Root, ()> {
-    let result = std::fs::read_to_string("reddit.json");
-    Ok(serde_json::from_str::<Root>(&result.unwrap()).unwrap())
-}
+//#[cfg(debug_assertions)]
+//pub async fn a() -> Result<Root, ()> {
+//    let result = std::fs::read_to_string("reddit.json");
+//    Ok(serde_json::from_str::<Root>(&result.unwrap()).unwrap())
+//}
 
-#[cfg(not(debug_assertions))]
 pub async fn a() -> Result<Root, ()> {
     let result = surf::get("https://www.reddit.com/r/rust/.json").await;
     match result {
-        Ok(res) => {
+        Ok(mut res) => {
             let result1 = res.body_json::<Root>().await;
             match result1 {
                 Ok(res) => {
@@ -302,7 +301,7 @@ pub async fn a() -> Result<Root, ()> {
 }
 
 pub async fn looping_fetch(data: AppData) {
-    let mut interval = tokio::time::interval_at(Instant::now() + Duration::from_secs(60), Duration::from_secs(60));
+    let mut interval = tokio::time::interval_at(Instant::now() + Duration::from_secs(60*10), Duration::from_secs(60*10));
     loop {
         interval.tick().await;
         let root = a().await;
