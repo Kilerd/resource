@@ -15,4 +15,8 @@ jobs:
       - name: Run tests
         run: cargo test --verbose
       - name: Docker build
-        run: docker build .
+        run: docker build --tag $DOCKER_REPO:$GITHUB_SHA .
+      - name: docker login
+        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      - name: docker push image
+        run: docker push $DOCKER_REPO:$GITHUB_SHA
