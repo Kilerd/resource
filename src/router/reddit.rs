@@ -274,38 +274,66 @@ pub struct ResizedIcon {
 }
 
 #[cfg(debug_assertions)]
-pub async fn a() -> Root {
+pub async fn a() -> Result<Root, ()> {
     let result = std::fs::read_to_string("reddit.json");
-    serde_json::from_str::<Root>(&result.unwrap()).unwrap()
+    Ok(serde_json::from_str::<Root>(&result.unwrap()).unwrap())
 }
 
 #[cfg(not(debug_assertions))]
-pub async fn a() -> Root {}
+pub async fn a() -> Result<Root, ()> {
+    let result = surf::get("https://www.reddit.com/r/rust/.json").await;
+    match result {
+        Ok(res) => {
+            let result1 = res.body_json::<Root>().await;
+            match result1 {
+                Ok(res) => {
+                    return Ok(res);
+                }
+                Err(e) => {
+                    error!("cannot serde reddit response as Root: {}", e);
+                }
+            }
+        }
+        Err(e) => {
+            error!("cannot fetch reddit rending: {}", e);
+        }
+    }
+    Err(())
+}
 
 pub async fn looping_fetch(data: AppData) {
     let mut interval = tokio::time::interval_at(Instant::now() + Duration::from_secs(60), Duration::from_secs(60));
     loop {
         interval.tick().await;
         let root = a().await;
-        root.data.children.into_iter().rev().map(|c| {
-            (c.data.id, c.data.score, c.data.title, c.data.selftext, c.data.author, c.data.permalink, c.data.url)
-        }).for_each(|(id, score, title, selftext, author, permalink, url)| {
-            let reddit = Reddit {
-                id,
-                score,
-                title,
-                selftext: if selftext.eq("") { None } else { Some(selftext) },
-                author,
-                permalink,
-                url,
-            };
-            let result = diesel::insert_into(crate::schema::reddits::table)
-                .values(&reddit)
-                .on_conflict(crate::schema::reddits::id)
-                .do_update()
-                .set(&reddit)
-                .execute(&data.postgres());
-        });
+        if let Ok(root) = root {
+            root.data.children
+                .into_iter()
+                .rev()
+                .map(|c| {
+                    (c.data.id, c.data.score, c.data.title, c.data.selftext, c.data.author, c.data.permalink, c.data.url)
+                })
+                .filter(|c| {
+                    c.1 >= 50
+                })
+                .for_each(|(id, score, title, selftext, author, permalink, url)| {
+                    let reddit = Reddit {
+                        id,
+                        score,
+                        title,
+                        selftext: if selftext.eq("") { None } else { Some(selftext) },
+                        author,
+                        permalink,
+                        url,
+                    };
+                    let result = diesel::insert_into(crate::schema::reddits::table)
+                        .values(&reddit)
+                        .on_conflict(crate::schema::reddits::id)
+                        .do_update()
+                        .set(&reddit)
+                        .execute(&data.postgres());
+                });
+        }
     }
 }
 
