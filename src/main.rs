@@ -1,3 +1,6 @@
+#[rustfmt::skip]
+extern crate openssl;
+
 #[macro_use]
 extern crate diesel;
 #[macro_use]
@@ -6,7 +9,6 @@ extern crate diesel_derives;
 extern crate diesel_migrations;
 #[macro_use]
 extern crate log;
-extern crate openssl;
 
 use std::sync::{Arc, Mutex};
 use actix_cors::Cors;
