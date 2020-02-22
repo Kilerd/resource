@@ -1,0 +1,20 @@
+name: Master deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Update Rust Stable
+        run: rustup update stable
+      - name: Run tests
+        run: cargo test --verbose
+      - name: Docker build
+        run: docker build .
