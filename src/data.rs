@@ -54,6 +54,6 @@ impl AppData {
     pub fn render(&self, template_name: &str, data: &Context) -> String {
         self.tera
             .render(template_name, data)
-            .unwrap_or_else(|_| panic!("cannot render template {}", template_name))
+            .unwrap_or_else(|e| panic!("cannot render template {}, error: {}", template_name, e))
     }
 }

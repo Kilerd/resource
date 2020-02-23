@@ -1,14 +1,16 @@
 use std::default::Default;
 
 use actix_web::{get, Responder, web};
-use diesel::RunQueryDsl;
+use diesel::{RunQueryDsl, QueryDsl};
 use serde::{Deserialize, Serialize};
 use tera::Context;
 use tokio::time::{Duration, Instant};
+use diesel::prelude::*;
 
 use crate::data::AppData;
 use crate::model::reddit::Reddit;
 use crate::router::AppResponder;
+use chrono::{DateTime, Utc};
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -316,6 +318,7 @@ pub async fn looping_fetch(data: AppData) {
                     c.1 >= 50
                 })
                 .for_each(|(id, score, title, selftext, author, permalink, url)| {
+                    info!("reddit rending insert or update: id: {}, title:{}",&id, &title);
                     let reddit = Reddit {
                         id,
                         score,
@@ -324,6 +327,8 @@ pub async fn looping_fetch(data: AppData) {
                         author,
                         permalink,
                         url,
+                        create_time: Utc::now(),
+                        telegram_message_id: None,
                     };
                     let result = diesel::insert_into(crate::schema::reddits::table)
                         .values(&reddit)
@@ -339,5 +344,9 @@ pub async fn looping_fetch(data: AppData) {
 
 #[get("/reddit")]
 pub async fn reddit_rending(data: web::Data<AppData>) -> impl Responder {
-    AppResponder::html(data.render("reddit.html", &Context::new()))
+    let x = crate::schema::reddits::table.order(crate::schema::reddits::create_time.desc()).load::<Reddit>(&data.postgres()).expect("cannot load reddit rending");
+    let mut context = Context::new();
+    context.insert("reddits", &x);
+
+    AppResponder::html(data.render("reddit.html", &context))
 }

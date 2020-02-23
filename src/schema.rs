@@ -7,5 +7,7 @@ table! {
         author -> Text,
         permalink -> Text,
         url -> Text,
+        create_time -> Timestamptz,
+        telegram_message_id -> Nullable<Text>,
     }
 }

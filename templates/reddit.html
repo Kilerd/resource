@@ -22,11 +22,16 @@
     </nav>
 </header>
 <main class="body">
-    <section class="article">
-        <section class="article-body yue">
-            1231
-        </section>
-    </section>
+    <div>
+        {% for reddit in reddits %}
+        <div> <h3>{{reddit.title}}</h3>
+            {% if reddit.selftext %}
+            <p>{{ reddit.selftext | truncate(length=120, end="...") }}</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
 </main>
 <footer>
     <p class="point"></p>
