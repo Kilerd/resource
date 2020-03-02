@@ -282,7 +282,9 @@ pub struct ResizedIcon {
 //}
 
 pub async fn a() -> Result<Root, ()> {
-    let result = surf::get("https://www.reddit.com/r/rust/.json").await;
+    let result = surf::get("https://www.reddit.com/r/rust/.json")
+        .set_header("User-Agent", "rust:resource:v0.1.0 (by /u/kilerd_chan)")
+        .await;
     match result {
         Ok(mut res) => {
             let body = res.body_string().await;
