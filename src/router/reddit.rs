@@ -291,7 +291,8 @@ pub async fn a() -> Result<Root, ()> {
                     return Ok(res);
                 }
                 Err(e) => {
-                    error!("cannot serde reddit response as Root: {}", e);
+                    let string = res.body_string().await.unwrap();
+                    error!("cannot serde reddit response as Root: {} with response: {}", e, string);
                 }
             }
         }
