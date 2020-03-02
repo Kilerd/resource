@@ -285,14 +285,21 @@ pub async fn a() -> Result<Root, ()> {
     let result = surf::get("https://www.reddit.com/r/rust/.json").await;
     match result {
         Ok(mut res) => {
-            let result1 = res.body_json::<Root>().await;
-            match result1 {
-                Ok(res) => {
-                    return Ok(res);
-                }
+            let body = res.body_string().await;
+            match body {
+                Ok(body_string) => {
+                    let root_result = serde_json::from_str::<Root>(&body_string);
+                    match root_result {
+                        Ok(root) => {
+                            return Ok(root);
+                        }
+                        Err(e) => {
+                            error!("cannot serde reddit response as Root: {} with response: {}", e, body_string);
+                        }
+                    }
+                },
                 Err(e) => {
-                    let string = res.body_string().await.unwrap();
-                    error!("cannot serde reddit response as Root: {} with response: {}", e, string);
+                    error!("fetching reddig json error: {}", e);
                 }
             }
         }
