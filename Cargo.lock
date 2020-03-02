@@ -2076,7 +2076,7 @@ dependencies = [
  "surf",
  "telegram_typing_bot",
  "tera",
- "time 0.2.6",
+ "time 0.2.7",
  "tokio",
  "toml",
 ]
@@ -2465,12 +2465,14 @@ dependencies = [
 
 [[package]]
 name = "time"
-version = "0.2.6"
+version = "0.2.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bcb8742444475438c500d017736dd7cf3d9c9dd1f0153cfa4af428692484e3ef"
+checksum = "3043ac959c44dccc548a57417876c8fe241502aed69d880efc91166c02717a93"
 dependencies = [
+ "libc",
  "rustversion",
  "time-macros",
+ "winapi 0.3.8",
 ]
 
 [[package]]
