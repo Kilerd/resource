@@ -1370,9 +1370,9 @@ dependencies = [
 
 [[package]]
 name = "jsonwebtoken"
-version = "7.0.1"
+version = "7.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7577c6272114f9a75da574d2497509d7a73c25cd005a2df35e4a1845a6522ea4"
+checksum = "d11f9e80a85927748a334df8e4f6782a04033517bb28f3863a563daad882da7f"
 dependencies = [
  "base64",
  "pem",
