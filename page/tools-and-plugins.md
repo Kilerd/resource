@@ -13,7 +13,7 @@ Cargo 作为 Rust 的包管理器，其强大的扩展能力让社区开发出�
  - [cargo-make](https://github.com/sagiegurari/cargo-make) 跟 makefile 类似的机制，当项目庞大，执行命令过多时，可以采用 cargo-make 管理。
  - [cargo-audit](https://github.com/RustSec/cargo-audit) 诊断项目依赖是否具有安全性问题
  - [cargo-bloat](https://github.com/RazrFalcon/cargo-bloat) 看看到底是什么导致程序的大小变大
- - [cargo-modules](https://github.com/regexident/cargo-modules) 显示项目依赖树形图，可以看到次级依赖
+ - [cargo-tree](https://github.com/sfackler/cargo-tree) 显示项目依赖树形图，可以看到次级依赖
 
 这里列出了部分最常用的插件，更加详细全面的内容可以前往[Third party cargo subcommands](https://github.com/rust-lang/cargo/wiki/Third-party-cargo-subcommands)
 
