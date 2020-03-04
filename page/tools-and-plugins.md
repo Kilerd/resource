@@ -1,5 +1,11 @@
 # 实用工具与插件
 
+- Rust 搜索插件([官网](https://rust-search-extension.now.sh/), [Install to Chrome](https://chrome.google.com/webstore/detail/rust-search-extension/ennpfpdlaclocpomkiablnmbppdnlhoh), [Install to FireFox](https://addons.mozilla.org/firefox/addon/rust-search-extension/)) 在浏览器中快速方便进行 Rust 相关内容搜索：
+  - 标准库文档
+  - Rust 内部属性(builtin attributes)
+  - Error Codes
+  - top 20K crates
+
 # awesome cargo
 Cargo 作为 Rust 的包管理器，其强大的扩展能力让社区开发出了一系列官方没有的，并且十分实用的插件：
  - [cargo-watch](https://github.com/passcod/cargo-watch) 监听项目的更改并执行命令，极其方便的一个命令，通常用来监听代码更改然后自动执行测试或者重启服务
@@ -14,6 +20,7 @@ Cargo 作为 Rust 的包管理器，其强大的扩展能力让社区开发出�
  - [cargo-audit](https://github.com/RustSec/cargo-audit) 诊断项目依赖是否具有安全性问题
  - [cargo-bloat](https://github.com/RazrFalcon/cargo-bloat) 看看到底是什么导致程序的大小变大
  - [cargo-tree](https://github.com/sfackler/cargo-tree) 显示项目依赖树形图，可以看到次级依赖
+ - [cargo-deps](https://github.com/m-cat/cargo-deps) 把项目的依赖图打印出图片的形式导出
 
 这里列出了部分最常用的插件，更加详细全面的内容可以前往[Third party cargo subcommands](https://github.com/rust-lang/cargo/wiki/Third-party-cargo-subcommands)
 
