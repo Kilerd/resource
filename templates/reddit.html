@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet/less" type="text/css" href="/statics/style.less" />
+    <link rel="stylesheet/less" type="text/css" href="/statics/icon.css" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
     <title>Resource.rs - 旨在提供一站式的 Rust 学习资源</title>
 </head>
@@ -13,25 +14,40 @@
 <body>
 
 <header>
-    <h1><sup>ALPHA</sup></h1>
     <nav>
+        <a href="/" class="logo"><img src="/statics/crab.svg" alt="logo"></a>
         <a class="normal" href="/"><span>首页</span></a>
         <a class="normal" href="/"><span>专题系列</span></a>
+        <a class="normal" href="/reddit"><span>REDDIT 趋势</span></a>
         <a class="normal" href="/about"><span>关于我们</span></a>
-        <a class="normal" href="https://github.com/Kilerd/resource.rs" target="_blank"><span>GitHub</span></a>
     </nav>
 </header>
 <main class="body">
-    <div>
-        {% for reddit in reddits %}
-        <div> <h3>{{reddit.title}}</h3>
-            {% if reddit.selftext %}
-            <p>{{ reddit.selftext | truncate(length=120, end="...") }}</p>
-            {% endif %}
-        </div>
-        {% endfor %}
-    </div>
+    <section class="reddit page">
+        <h2>Reddit Trending</h2>
+        <p class="description">实时更新 <a class="normal" href="https://www.reddit.com/r/rust/">/r/rust</a> 热门的话题</p>
+        <section class="topics">
+            {% for reddit in reddits %}
+            <section class="topic">
+                <section class="meta">
+                    <span>{{ reddit.score }} <i class="icon-shift"></i></span>
+                    <span>{{reddit.create_time | date(format="%Y-%m-%d")}}</span>
+                </section>
+                <section class="info">
+                    <section class="title">
+                        <a href="{{reddit.url}}">{{reddit.title}}</a>
+                    </section>
+                    {% if reddit.selftext %}
+                    <p class="description">
+                        {{ reddit.selftext | truncate(length=300, end="...") }}
+                    </p>
+                    {% endif %}
 
+                </section>
+            </section>
+            {% endfor %}
+        </section>
+    </section>
 </main>
 <footer>
     <p class="point"></p>
