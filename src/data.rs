@@ -6,28 +6,28 @@ use serde::{Serialize, Deserialize};
 use std::collections::HashMap;
 use pulldown_cmark::Options;
 use std::ops::Deref;
+use itertools::Itertools;
 
 #[derive(Serialize, Deserialize)]
-pub struct MarkdownContent(String);
-
-impl Deref for MarkdownContent {
-    type Target = String;
-
-    fn deref(&self) -> &Self::Target {
-        &self.0
-    }
+pub struct MarkdownContent{
+    title: String,
+    content: String
 }
 
 impl MarkdownContent {
     pub fn new(content: impl Into<String>) -> Self {
-        let content = content.into();
+        let raw_content = content.into();
+        let mut lines = raw_content.lines();
+        let title_line = lines.next().unwrap_or_default();
+        let title = String::from(&title_line[2..]);
 
+        let content = lines.join("\n");
         let mut html_output = String::new();
         let options = Options::all();
         let parser = pulldown_cmark::Parser::new_ext(&content, options);
         pulldown_cmark::html::push_html(&mut html_output, parser);
 
-        MarkdownContent(html_output)
+        MarkdownContent{ title, content:html_output }
 
     }
 }

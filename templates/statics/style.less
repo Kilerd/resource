@@ -256,6 +256,10 @@ div.reddit-link {
   }
 }
 
+section.article {
+  min-height: 70vh;
+}
+
 section.reddit {
   section.topics {
     section.topic {
@@ -271,6 +275,7 @@ section.reddit {
       section.info {
         section.title {
           font-weight: bold;
+
           a {
             color: @darken-rust;
             text-decoration: none;
@@ -278,6 +283,7 @@ section.reddit {
             &:hover {
               color: darken(@darken-rust, 20%);
             }
+
             &:visited {
               color: @main-black;
             }
