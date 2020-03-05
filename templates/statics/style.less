@@ -144,6 +144,7 @@ ol.ordered {
 }
 
 nav.inline {
+  margin: 10px 0;
   a {
     &:not(:first-child) {
       &:before {
@@ -159,14 +160,14 @@ div.book {
   padding: 1rem 0;
 
   div.title {
-    color: #333333;
+    color: @main-black;
     font-size: 1.25rem;
     margin-bottom: 0.15rem;
   }
 
-  div.desciption {
-    color: #444444;
-    font-size: 0.95rem;
+  div.description {
+    color: lighten(@main-black, 10%);
+    font-size: 0.9rem;
   }
 
   div.meta {
