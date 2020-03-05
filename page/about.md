@@ -3,4 +3,4 @@
 
 我们的内容均来自 Reddit 和那些 Rust 使用者的博客，如有侵权可联系 Telegram @kilerd 。
 
-当然了，我们的所有内容都是[开源](https://github.com/Kilerd/resource.rs)的，欢迎投稿和勘误。
+当然了，我们的所有内容都是[开源](https://github.com/Kilerd/resource)的，欢迎投稿和勘误。
