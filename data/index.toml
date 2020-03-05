@@ -48,7 +48,7 @@
 
 
 [book]
-    title = "各种教程和书籍"
+    title = "各种书籍"
 
     [[book.items]]
     title = "The Rust Programming Language"
