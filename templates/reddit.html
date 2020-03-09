@@ -17,7 +17,7 @@
                 </section>
                 {% if reddit.selftext %}
                 <p class="description">
-                    {{ reddit.selftext | truncate(length=300, end="...") }}
+                    {{ reddit.selftext | split(pat="\n") | first }}
                 </p>
                 {% endif %}
 

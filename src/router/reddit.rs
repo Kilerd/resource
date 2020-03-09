@@ -1,16 +1,21 @@
 use std::default::Default;
 
 use actix_web::{get, Responder, web};
-use diesel::{RunQueryDsl, QueryDsl};
+use chrono::{DateTime, Utc};
+use diesel::{QueryDsl, RunQueryDsl};
+use diesel::prelude::*;
 use serde::{Deserialize, Serialize};
+use telegram_typing_bot::method::send::SendMessage;
+use telegram_typing_bot::typing::{InlineKeyboardButton, ParseMode, InlineKeyboardMarkup};
+use telegram_typing_bot::typing::ReplyMarkup;
 use tera::Context;
 use tokio::time::{Duration, Instant};
-use diesel::prelude::*;
 
 use crate::data::AppData;
 use crate::model::reddit::Reddit;
 use crate::router::AppResponder;
-use chrono::{DateTime, Utc};
+use crate::TELEGRAM_RESOURCE_CHANNEL;
+
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -299,7 +304,7 @@ pub async fn a() -> Result<Root, ()> {
                             error!("cannot serde reddit response as Root: {} with response: {}", e, body_string);
                         }
                     }
-                },
+                }
                 Err(e) => {
                     error!("fetching reddig json error: {}", e);
                 }
@@ -312,8 +317,62 @@ pub async fn a() -> Result<Root, ()> {
     Err(())
 }
 
+async fn sending_topic_to_telegram_channel(data: AppData, topic: Reddit) -> () {
+    if topic.telegram_message_id.is_none() {
+        info!("sending new reddit topic to telegram channel: {}", &topic.title);
+        let mut message_payload = format!("\\[Reddit] *{}*", &topic.title);
+        if let Some(selftext) = &topic.selftext {
+            let first_line: String = selftext.lines().take(1).collect();
+            message_payload.push_str(&format!("\n\n{}", first_line));
+        }
+        let mut message = SendMessage::new(TELEGRAM_RESOURCE_CHANNEL.clone(), message_payload)
+            .disable_web_page_preview(true)
+            .parse_mode(ParseMode::Markdown);
+
+        let mut vec1 = vec![];
+        let reddit_link = format!("https://www.reddit.com{}", &topic.permalink);
+        if topic.url.ne(&reddit_link) {
+            vec1.push(InlineKeyboardButton {
+                text: "Original Link".to_string(),
+                url: Some(topic.url.clone()),
+                callback_data: None,
+                switch_inline_query: None,
+                switch_inline_query_current_chat: None,
+                callback_game: None,
+                pay: None,
+            });
+        }
+        vec1.push(InlineKeyboardButton {
+            text: "Reddit Comment".to_string(),
+            url: Some(reddit_link),
+            callback_data: None,
+            switch_inline_query: None,
+            switch_inline_query_current_chat: None,
+            callback_game: None,
+            pay: None,
+        });
+
+        message.reply_markup = Some(ReplyMarkup::InlineKeyboardMarkup(InlineKeyboardMarkup { inline_keyboard: vec![vec1] }));
+        println!("{}", serde_json::to_string(&message).unwrap());
+        let result1 = data.bot.request(message).await;
+        match result1 {
+            Ok(callback_message) => {
+                diesel::update(crate::schema::reddits::table)
+                    .filter(
+                        crate::schema::reddits::id.eq(&topic.id)
+                    )
+                    .set(crate::schema::reddits::telegram_message_id.eq(format!("{}", callback_message.message_id)))
+                    .execute(&data.postgres());
+            }
+            Err(e) => {
+                error!("error on sending redit topic to telegram channel: {}", e.description);
+            }
+        }
+    }
+}
+
 pub async fn looping_fetch(data: AppData) {
-    let mut interval = tokio::time::interval_at(Instant::now() + Duration::from_secs(60*10), Duration::from_secs(60*10));
+    let mut interval = tokio::time::interval_at(Instant::now() + Duration::from_secs(60), Duration::from_secs(60 * 10));
     loop {
         interval.tick().await;
         let root = a().await;
@@ -328,7 +387,6 @@ pub async fn looping_fetch(data: AppData) {
                     c.1 >= 50
                 })
                 .for_each(|(id, score, title, selftext, author, permalink, url)| {
-                    info!("reddit rending insert or update: id: {}, title:{}",&id, &title);
                     let reddit = Reddit {
                         id,
                         score,
@@ -345,7 +403,10 @@ pub async fn looping_fetch(data: AppData) {
                         .on_conflict(crate::schema::reddits::id)
                         .do_update()
                         .set(crate::schema::reddits::score.eq(score))
-                        .execute(&data.postgres());
+                        .get_result::<Reddit>(&data.postgres());
+                    if let Ok(topic) = result {
+                        tokio::spawn(sending_topic_to_telegram_channel(data.clone(), topic));
+                    }
                 });
         }
     }

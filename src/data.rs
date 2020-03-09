@@ -7,6 +7,7 @@ use std::collections::HashMap;
 use pulldown_cmark::Options;
 use std::ops::Deref;
 use itertools::Itertools;
+use telegram_typing_bot::bot::Bot;
 
 #[derive(Serialize, Deserialize)]
 pub struct MarkdownContent{
@@ -41,6 +42,7 @@ pub struct Data {
 pub struct AppData {
     pub pool: Pool,
     pub tera: Arc<Tera>,
+    pub bot: Arc<Bot>,
     pub data: Arc<Data>,
     pub pages: Arc<Mutex<HashMap<String,MarkdownContent>>>
 }
