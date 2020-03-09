@@ -25,6 +25,7 @@ mod pg_pool;
 mod schema;
 mod router;
 mod model;
+mod tera_register;
 
 embed_migrations!();
 
@@ -50,9 +51,12 @@ async fn main() {
 
     let bot = Bot::new();
 
+    let mut tera = Tera::new("templates/**/*.html").unwrap();
+    tera.register_filter("markdown", tera_register::markdown);
+
     let data = AppData {
         pool: database_pool_establish(&database_url),
-        tera: Arc::new(Tera::new("templates/**/*.html").unwrap()),
+        tera: Arc::new(tera),
         bot: Arc::new(bot),
         data: Arc::new(Data {
             index: toml::from_str(include_str!("../data/index.toml")).unwrap()

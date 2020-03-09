@@ -16,9 +16,9 @@
                     <a href="{{reddit.url}}" target="_blank">{{reddit.title}}</a>
                 </section>
                 {% if reddit.selftext %}
-                <p class="description">
-                    {{ reddit.selftext | split(pat="\n") | first }}
-                </p>
+                <section class="description yue">
+                    {{ reddit.selftext | split(pat="\n") | first | markdown | safe }}
+                </section>
                 {% endif %}
 
             </section>
