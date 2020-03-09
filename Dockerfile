@@ -30,5 +30,7 @@ ENV DATABASE_URL postgres://root@postgres/resource
 WORKDIR /application
 
 ENV RUST_LOG resource=INFO
+ENV TELEGRAM_BOT_SECRET_KEY MUST_SET
+ENV TELEGRAM_RESOURCE_CHANNEL MUST_SET
 
 CMD ["./resource"]
