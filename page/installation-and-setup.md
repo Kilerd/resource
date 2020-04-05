@@ -30,6 +30,12 @@ export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
 安装好 rustup 之后，nightly 版本的 Rust 安装就变得极其简单。只需运行 `rustup install nightly` 即可。以后的版本更新也可以通过 `rustup update` 完成。
 
 # IDE 的选择和配置
+
+> TIP: 若需要进行小规模代码演示，或者需要把问题代码复现并在社区、论坛上询问。建议使用 [Rust 官方的 Playground](https://play.rust-lang.org/)。
+> 
+> Rust Playground 可以进行线上执行代码、把代码编译成 MIR 与 汇编 等。可以方便不同的人员对于同一份代码进行分析。
+
+
 目前来说 Rust 的 IDE 支持度并不是很好，都是处于勉强能使用的阶段，以下会给出几个常见的 IDE 搭配和优劣：
 
 | IDE    | 语法高亮 | Snippets | 代码提示 | Lint | 代码格式化 | 跳转至定义 | 调试 | 文档提示 |
