@@ -11,7 +11,7 @@ Rust 官方提供了一个在各个平台都极其方便的安装工具 rustup�
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 ## 更换 rustup 国内源 (可选)
-对于国内用户，更换 rustup 源可以带来比较稳定的安装、更新体验。 这里推荐实用中科大 USTC 源
+对于国内用户，更换 rustup 源可以带来比较稳定的安装、更新体验。 这里推荐使用中科大 USTC 源
 
 设置环境变量 `RUSTUP_DIST_SERVER` (用于更新 toolchain)
 ```shell
