@@ -6,7 +6,7 @@ edition = "2018"
 
 [dependencies]
 dotenv = "0.15.0"
-openssl = "0.10.28"
+openssl = "0.10.29"
 
 # serde
 serde = "1.0.104"
