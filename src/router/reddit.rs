@@ -1,13 +1,13 @@
 use std::default::Default;
 
-use actix_web::{get, Responder, web};
+use actix_web::{get, web, Responder};
 use chrono::{DateTime, Utc};
-use diesel::{QueryDsl, RunQueryDsl};
 use diesel::prelude::*;
+use diesel::{QueryDsl, RunQueryDsl};
 use serde::{Deserialize, Serialize};
 use telegram_typing_bot::method::send::SendMessage;
-use telegram_typing_bot::typing::{InlineKeyboardButton, ParseMode, InlineKeyboardMarkup};
 use telegram_typing_bot::typing::ReplyMarkup;
+use telegram_typing_bot::typing::{InlineKeyboardButton, InlineKeyboardMarkup, ParseMode};
 use tera::Context;
 use tokio::time::{Duration, Instant};
 
@@ -15,7 +15,6 @@ use crate::data::AppData;
 use crate::model::reddit::Reddit;
 use crate::router::AppResponder;
 use crate::TELEGRAM_RESOURCE_CHANNEL;
-
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -301,7 +300,10 @@ pub async fn a() -> Result<Root, ()> {
                             return Ok(root);
                         }
                         Err(e) => {
-                            error!("cannot serde reddit response as Root: {} with response: {}", e, body_string);
+                            error!(
+                                "cannot serde reddit response as Root: {} with response: {}",
+                                e, body_string
+                            );
                         }
                     }
                 }
@@ -319,29 +321,25 @@ pub async fn a() -> Result<Root, ()> {
 
 async fn sending_topic_to_telegram_channel(data: AppData, topic: Reddit) -> () {
     if topic.telegram_message_id.is_none() {
-        info!("sending new reddit topic to telegram channel: {}", &topic.title);
+        info!(
+            "sending new reddit topic to telegram channel: {}",
+            &topic.title
+        );
         let mut message_payload = format!("\\[Reddit] *{}*", &topic.title);
         if let Some(selftext) = &topic.selftext {
             let first_line: String = selftext.lines().take(1).collect();
             message_payload.push_str(&format!("\n\n{}", first_line));
         }
+        let reddit_link = format!("https://www.reddit.com{}", &topic.permalink);
+        if topic.url.ne(&reddit_link) {
+            message_payload.push_str(&format!("\n\n{}", &topic.url));
+        }
         let mut message = SendMessage::new(TELEGRAM_RESOURCE_CHANNEL.clone(), message_payload)
-            .disable_web_page_preview(true)
+            .disable_web_page_preview(false)
             .parse_mode(ParseMode::Markdown);
 
         let mut vec1 = vec![];
-        let reddit_link = format!("https://www.reddit.com{}", &topic.permalink);
-        if topic.url.ne(&reddit_link) {
-            vec1.push(InlineKeyboardButton {
-                text: "Original Link".to_string(),
-                url: Some(topic.url.clone()),
-                callback_data: None,
-                switch_inline_query: None,
-                switch_inline_query_current_chat: None,
-                callback_game: None,
-                pay: None,
-            });
-        }
+
         vec1.push(InlineKeyboardButton {
             text: "Reddit Comment".to_string(),
             url: Some(reddit_link),
@@ -352,46 +350,66 @@ async fn sending_topic_to_telegram_channel(data: AppData, topic: Reddit) -> () {
             pay: None,
         });
 
-        message.reply_markup = Some(ReplyMarkup::InlineKeyboardMarkup(InlineKeyboardMarkup { inline_keyboard: vec![vec1] }));
+        message.reply_markup = Some(ReplyMarkup::InlineKeyboardMarkup(InlineKeyboardMarkup {
+            inline_keyboard: vec![vec1],
+        }));
         println!("{}", serde_json::to_string(&message).unwrap());
         let result1 = data.bot.request(message).await;
         match result1 {
             Ok(callback_message) => {
                 diesel::update(crate::schema::reddits::table)
-                    .filter(
-                        crate::schema::reddits::id.eq(&topic.id)
+                    .filter(crate::schema::reddits::id.eq(&topic.id))
+                    .set(
+                        crate::schema::reddits::telegram_message_id
+                            .eq(format!("{}", callback_message.message_id)),
                     )
-                    .set(crate::schema::reddits::telegram_message_id.eq(format!("{}", callback_message.message_id)))
                     .execute(&data.postgres());
             }
             Err(e) => {
-                error!("error on sending redit topic to telegram channel: {}", e.description);
+                error!(
+                    "error on sending redit topic to telegram channel: {}",
+                    e.description
+                );
             }
         }
     }
 }
 
 pub async fn looping_fetch(data: AppData) {
-    let mut interval = tokio::time::interval_at(Instant::now() + Duration::from_secs(60), Duration::from_secs(60 * 10));
+    let mut interval = tokio::time::interval_at(
+        Instant::now() + Duration::from_secs(60),
+        Duration::from_secs(60 * 10),
+    );
     loop {
         interval.tick().await;
         let root = a().await;
         if let Ok(root) = root {
-            root.data.children
+            root.data
+                .children
                 .into_iter()
                 .rev()
                 .map(|c| {
-                    (c.data.id, c.data.score, c.data.title, c.data.selftext, c.data.author, c.data.permalink, c.data.url)
+                    (
+                        c.data.id,
+                        c.data.score,
+                        c.data.title,
+                        c.data.selftext,
+                        c.data.author,
+                        c.data.permalink,
+                        c.data.url,
+                    )
                 })
-                .filter(|c| {
-                    c.1 >= 50
-                })
+                .filter(|c| c.1 >= 50)
                 .for_each(|(id, score, title, selftext, author, permalink, url)| {
                     let reddit = Reddit {
                         id,
                         score,
                         title,
-                        selftext: if selftext.eq("") { None } else { Some(selftext) },
+                        selftext: if selftext.eq("") {
+                            None
+                        } else {
+                            Some(selftext)
+                        },
                         author,
                         permalink,
                         url,
@@ -411,7 +429,6 @@ pub async fn looping_fetch(data: AppData) {
         }
     }
 }
-
 
 #[get("/reddit")]
 pub async fn reddit_rending(data: web::Data<AppData>) -> impl Responder {
