@@ -21,7 +21,7 @@ diesel_migrations = "1.4.0"
 
 # render
 tera = "1.2.0"
-pulldown-cmark = { version = "0.7.0", default-features = false }
+pulldown-cmark = { version = "0.7.2", default-features = false }
 
 chrono = { version = "0.4.11", features = ["serde"] }
 rust-crypto = "0.2.36"
