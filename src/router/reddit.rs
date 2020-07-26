@@ -325,10 +325,14 @@ async fn sending_topic_to_telegram_channel(data: AppData, topic: Reddit) -> () {
             "sending new reddit topic to telegram channel: {}",
             &topic.title
         );
-        let mut message_payload = format!("\\[Reddit] *{}*", &topic.title);
+        let mut message_payload = format!("\\[Reddit] *{}*\n", &topic.title);
         if let Some(selftext) = &topic.selftext {
-            let first_line: String = selftext.lines().take(1).collect();
-            message_payload.push_str(&format!("\n\n{}", first_line));
+            let mut lines = selftext.lines().into_iter().peekable();
+            while lines.peek().is_some() && message_payload.len() < 350 {
+                if let Some(content) = lines.next() {
+                    message_payload.push_str(&format!("\n{}", content));
+                }
+            }
         }
         let reddit_link = format!("https://www.reddit.com{}", &topic.permalink);
         if topic.url.ne(&reddit_link) {
@@ -353,7 +357,7 @@ async fn sending_topic_to_telegram_channel(data: AppData, topic: Reddit) -> () {
         message.reply_markup = Some(ReplyMarkup::InlineKeyboardMarkup(InlineKeyboardMarkup {
             inline_keyboard: vec![vec1],
         }));
-        println!("{}", serde_json::to_string(&message).unwrap());
+        dbg!(&message);
         let result1 = data.bot.request(message).await;
         match result1 {
             Ok(callback_message) => {
@@ -429,6 +433,19 @@ pub async fn looping_fetch(data: AppData) {
         }
     }
 }
+
+
+#[get("/trending")]
+pub async fn reddit_rending_api(data: web::Data<AppData>) -> impl Responder {
+    let x = crate::schema::reddits::table
+        .order(crate::schema::reddits::create_time.desc())
+        .limit(50)
+        .load::<Reddit>(&data.postgres())
+        .expect("cannot load reddit rending");
+
+    AppResponder::json(x)
+}
+
 
 #[get("/reddit")]
 pub async fn reddit_rending(data: web::Data<AppData>) -> impl Responder {

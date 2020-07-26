@@ -57,6 +57,7 @@ pub fn routes(cfg: &mut web::ServiceConfig) {
         ))
         .service(page::index)
         .service(reddit::reddit_rending)
+        .service(reddit::reddit_rending_api)
         .service(page::get_article_by_url)
     ;
 }
