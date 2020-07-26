@@ -357,7 +357,6 @@ async fn sending_topic_to_telegram_channel(data: AppData, topic: Reddit) -> () {
         message.reply_markup = Some(ReplyMarkup::InlineKeyboardMarkup(InlineKeyboardMarkup {
             inline_keyboard: vec![vec1],
         }));
-        dbg!(&message);
         let result1 = data.bot.request(message).await;
         match result1 {
             Ok(callback_message) => {
