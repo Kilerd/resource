@@ -1,0 +1,14 @@
+[site]
+title = ""
+subtitle = ""
+description = ""
+keywords = []
+author = ""
+email = ""
+utc_offset = 800
+theme = "resource"
+domain = ""
+domain_root = ""
+default_template = "page.html"
+
+[extra]

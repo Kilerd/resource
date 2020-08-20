@@ -3,3 +3,4 @@ target/
 .idea
 .env
 server/target/
+frontend/public
