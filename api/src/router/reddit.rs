@@ -327,7 +327,7 @@ async fn sending_topic_to_telegram_channel(data: AppData, topic: Reddit) -> () {
         );
         let mut message_payload = format!("\\[Reddit] *{}*\n", &topic.title);
         if let Some(selftext) = &topic.selftext {
-            let mut lines = selftext.lines().into_iter().peekable();
+            let mut lines = selftext.lines().peekable();
             while lines.peek().is_some() && message_payload.len() < 350 {
                 if let Some(content) = lines.next() {
                     message_payload.push_str(&format!("\n{}", content));
