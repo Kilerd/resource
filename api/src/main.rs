@@ -28,7 +28,6 @@ mod model;
 mod pg_pool;
 mod router;
 mod schema;
-mod tera_register;
 
 embed_migrations!();
 
@@ -52,8 +51,7 @@ async fn main() {
 
     let bot = Bot::new();
 
-    let mut tera = Tera::new("templates/**/*.html").unwrap();
-    tera.register_filter("markdown", tera_register::markdown);
+    let tera = Tera::new("templates/**/*.html").unwrap();
 
     let data = AppData {
         pool: database_pool_establish(&DATABASE_URL),
