@@ -9,10 +9,10 @@
     <!--                    </section>-->
     <!--                </section>-->
     <section class="part">
-        <section class="head">{{ data.toturial.title }}</section>
+        <section class="head">{{ page.data.toturial.title }}</section>
         <section class="content">
             <ol class="ordered">
-                {% for item in data.toturial.items %}
+                {% for item in page.data.toturial.items %}
                 <li><a class="normal" href="{{ item.link }}"><span>{{ item.title }}</span></a></li>
                 {% endfor %}
             </ol>
@@ -20,10 +20,10 @@
     </section>
 
     <section class="part">
-        <section class="head">{{ data.link.title }}</section>
+        <section class="head">{{ page.data.link.title }}</section>
         <section class="content">
             <nav class="inline">
-                {% for item in data.link.items %}
+                {% for item in page.data.link.items %}
                 <a class="normal" href="{{ item.link }}"
                    title="{{ item.description }}"><span>{{ item.name }}</span></a>
                 {% endfor %}
@@ -32,9 +32,9 @@
     </section>
 
     <section class="part">
-        <section class="head">{{ data.book.title }}</section>
+        <section class="head">{{ page.data.book.title }}</section>
         <section class="content">
-            {% for item in data.book.items %}
+            {% for item in page.data.book.items %}
             <div class="book">
                 <div class="title">{{ item.title }}</div>
                 <div class="description han-init-context">

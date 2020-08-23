@@ -1,4 +1,9 @@
-# 安装 Rust 及 IDE 的选择
+ - title = 安装 Rust 及 IDE 的选择
+ - url = installation-and-setup
+ - datetime = 2020-08-20T23:15:47.187706+08:00
+ - template = page.html
+ - draw = false
+
 
 # 安装 Rust
 Rust 官方提供了一个在各个平台都极其方便的安装工具 rustup，它提供了以下功能：

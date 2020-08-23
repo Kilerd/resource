@@ -1,4 +1,9 @@
-# 各种教程和文章
+ - title = 各种教程和文章
+ - url = tutorials
+ - datetime = 2020-08-20T23:16:59.646761+08:00
+ - template = page.html
+ - draw = false
+
 如果你有相关的教程和文章希望推荐给他人，可以往[这里](https://github.com/Kilerd/resource/blob/master/page/tutorials.md)提出PR。
 # Rustlings
 一份 JetBrains 根据 [github/rust-lang/rustlings](https://github.com/rust-lang/rustlings) 制作的 Rust 习题，提供了基于知识点的练习题，形式十分相似与 [Rust by Example](https://doc.rust-lang.org/rust-by-example/index.html):
