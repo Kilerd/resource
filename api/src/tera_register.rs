@@ -2,7 +2,7 @@ use serde_json::Value;
 use std::collections::HashMap;
 use pulldown_cmark::Options;
 
-pub fn markdown(content: &Value, args: &HashMap<String, Value>) -> tera::Result<Value> {
+pub fn markdown(content: &Value, _args: &HashMap<String, Value>) -> tera::Result<Value> {
     match content {
         Value::String(raw_content) => {
             let mut html_output = String::new();

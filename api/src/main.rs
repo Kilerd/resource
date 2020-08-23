@@ -19,7 +19,7 @@ use actix_web::{
 use dotenv::dotenv;
 use futures::future::abortable;
 use once_cell::sync::Lazy;
-use std::sync::{Arc, Mutex};
+use std::sync::Arc;
 use telegram_typing_bot::bot::Bot;
 use tera::Tera;
 
@@ -37,13 +37,9 @@ static TOKEN_KEY: Lazy<Vec<u8>> = Lazy::new(|| {
         .map(|token| Vec::from(token.as_bytes()))
         .unwrap_or_else(|_| (0..32).into_iter().map(|_| rand::random::<u8>()).collect())
 });
-static TELEGRAM_BOT_SECRET_KEY: Lazy<String> = Lazy::new(|| {
-    std::env::var("TELEGRAM_BOT_SECRET_KEY").expect("TELEGRAM_BOT_SECRET_KEY must be set")
-});
 static TELEGRAM_RESOURCE_CHANNEL: Lazy<String> = Lazy::new(|| {
     std::env::var("TELEGRAM_RESOURCE_CHANNEL").expect("TELEGRAM_RESOURCE_CHANNEL must be set")
 });
-
 static DATABASE_URL: Lazy<String> =
     Lazy::new(|| std::env::var("DATABASE_URL").expect("DATABASE_URL must be set"));
 
