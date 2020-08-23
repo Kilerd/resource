@@ -21,7 +21,6 @@ use futures::future::abortable;
 use once_cell::sync::Lazy;
 use std::sync::Arc;
 use telegram_typing_bot::bot::Bot;
-use tera::Tera;
 
 mod data;
 mod model;
@@ -51,11 +50,8 @@ async fn main() {
 
     let bot = Bot::new();
 
-    let tera = Tera::new("templates/**/*.html").unwrap();
-
     let data = AppData {
         pool: database_pool_establish(&DATABASE_URL),
-        tera: Arc::new(tera),
         bot: Arc::new(bot),
     };
 

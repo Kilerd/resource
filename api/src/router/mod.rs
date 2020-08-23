@@ -1,7 +1,6 @@
 use actix_web::{web, HttpResponse};
 use serde::{Deserialize, Serialize};
 
-pub mod api;
 pub mod reddit;
 
 #[derive(Deserialize, Serialize)]
