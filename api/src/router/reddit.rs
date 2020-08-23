@@ -433,7 +433,6 @@ pub async fn looping_fetch(data: AppData) {
     }
 }
 
-
 #[get("/trending")]
 pub async fn reddit_rending_api(data: web::Data<AppData>) -> impl Responder {
     let x = crate::schema::reddits::table
@@ -443,18 +442,4 @@ pub async fn reddit_rending_api(data: web::Data<AppData>) -> impl Responder {
         .expect("cannot load reddit rending");
 
     AppResponder::json(x)
-}
-
-
-#[get("/reddit")]
-pub async fn reddit_rending(data: web::Data<AppData>) -> impl Responder {
-    let x = crate::schema::reddits::table
-        .order(crate::schema::reddits::create_time.desc())
-        .limit(50)
-        .load::<Reddit>(&data.postgres())
-        .expect("cannot load reddit rending");
-    let mut context = Context::new();
-    context.insert("reddits", &x);
-
-    AppResponder::html(data.render("reddit.html", &context))
 }

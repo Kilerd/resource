@@ -1,15 +1,15 @@
 use actix_web::middleware::NormalizePath;
 use actix_web::{web, HttpResponse};
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 pub mod api;
-pub mod page;
 pub mod reddit;
 
 #[derive(Deserialize, Serialize)]
 pub struct JsonResponse<T> {
     data: T,
 }
+
 pub struct AppResponder;
 
 impl AppResponder {
@@ -50,14 +50,5 @@ impl AppResponder {
 }
 
 pub fn routes(cfg: &mut web::ServiceConfig) {
-    cfg
-        .service(actix_files::Files::new(
-            "/statics",
-            "./templates/statics/",
-        ))
-        .service(page::index)
-        .service(reddit::reddit_rending)
-        .service(reddit::reddit_rending_api)
-        .service(page::get_article_by_url)
-    ;
+    cfg.service(reddit::reddit_rending_api);
 }
