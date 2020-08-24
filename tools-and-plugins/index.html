@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet/less" type="text/css" href="/statics/style.less" />
+    <link rel="stylesheet/less" type="text/css" href="/statics/icon.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
+    <title>实用工具与插件 - Resource.rs - 旨在提供一站式的 Rust 学习资源</title>
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <a href="/" class="logo"><img src="/statics/crab.svg" alt="logo"></a>
+        <a class="normal" href="/"><span>首页</span></a>
+        <a class="normal" href="/tutorials"><span>教程</span></a>
+        <a class="normal" href="/reddit"><span>REDDIT 趋势</span></a>
+        <a class="normal" href="/about"><span>关于我们</span></a>
+    </nav>
+</header>
+<main class="body">
+    
+<section class="article">
+    <h1>实用工具与插件</h1>
+    <section class="article-body yue">
+        <ul>
+<li>Rust 搜索插件(<a href="https://rust-search-extension.now.sh/">官网</a>, <a href="https://chrome.google.com/webstore/detail/rust-search-extension/ennpfpdlaclocpomkiablnmbppdnlhoh">Install to Chrome</a>, <a href="https://addons.mozilla.org/firefox/addon/rust-search-extension/">Install to FireFox</a>) 在浏览器中快速方便进行 Rust 相关内容搜索：
+<ul>
+<li>标准库文档</li>
+<li>Rust 内部属性(builtin attributes)</li>
+<li>Error Codes</li>
+<li>top 20K crates</li>
+</ul>
+</li>
+</ul>
+<h1>awesome cargo</h1>
+<p>Cargo 作为 Rust 的包管理器，其强大的扩展能力让社区开发出了一系列官方没有的，并且十分实用的插件：</p>
+<ul>
+<li><a href="https://github.com/passcod/cargo-watch">cargo-watch</a> 监听项目的更改并执行命令，极其方便的一个命令，通常用来监听代码更改然后自动执行测试或者重启服务
+<ul>
+<li><code>cargo watch -x test</code></li>
+<li><code>cargo watch -x run</code></li>
+</ul>
+</li>
+<li><a href="https://github.com/killercup/cargo-edit">cargo-edit</a> 摆脱手动添加依赖的烦恼，其提供了新增、删除、更新依赖的一系列功能
+<ul>
+<li><code>cargo add</code> 添加依赖</li>
+<li><code>cargo rm</code> 删除依赖</li>
+<li><code>cargo upgrade</code> 更新依赖到最新的版本</li>
+</ul>
+</li>
+<li><a href="https://github.com/sunng87/cargo-release">cargo-release</a> 用于发布程序的版本，避免手动管理程序版本号，基于 semver 版本管理</li>
+<li><a href="https://github.com/sagiegurari/cargo-make">cargo-make</a> 跟 makefile 类似的机制，当项目庞大，执行命令过多时，可以采用 cargo-make 管理。</li>
+<li><a href="https://github.com/RustSec/cargo-audit">cargo-audit</a> 诊断项目依赖是否具有安全性问题</li>
+<li><a href="https://github.com/RazrFalcon/cargo-bloat">cargo-bloat</a> 看看到底是什么导致程序的大小变大</li>
+<li><a href="https://github.com/sfackler/cargo-tree">cargo-tree</a> 显示项目依赖树形图，可以看到次级依赖</li>
+<li><a href="https://github.com/m-cat/cargo-deps">cargo-deps</a> 把项目的依赖图打印出图片的形式导出</li>
+</ul>
+<p>这里列出了部分最常用的插件，更加详细全面的内容可以前往<a href="https://github.com/rust-lang/cargo/wiki/Third-party-cargo-subcommands">Third party cargo subcommands</a></p>
+<h1>其他工具</h1>
+<ul>
+<li><a href="https://upsuper.github.io/rust-cheatsheet/">Rust cheet sheet</a> 一份对于新手超级友好的 cheet， 可以查看到不同常用结构体的方法，以及相互转换的方式</li>
+<li><a href="https://lukaslueg.github.io/macro_railroad_wasm_demo/">Macro syntax diagram generator</a> 一个把 <code>macro_rules!()</code> 转换成可视图的在线工具，对于编写宏很有帮助 </li>
+<li><a href="https://transform.tools/json-to-rust-serde">JSON to struct</a> 如果需要把已有 JSON 转换成 struct 以序列化时(例如爬虫场景)，可以考虑实用这个工具意见生成 struct</li>
+</ul>
+
+    </section>
+</section>
+
+</main>
+<footer>
+    <p class="point"></p>
+    <p><a href="https://github.com/Kilerd/resource" class="normal"><span>我们期待你的加入...</span></a></p>
+</footer>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-68997851-3"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-68997851-3');
+</script>
+
+</body>
+<script src="/statics/prism.js" type="text/javascript"></script>
+</html>
