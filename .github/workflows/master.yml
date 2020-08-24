@@ -6,35 +6,43 @@ on:
       - master
 
 jobs:
-  test:
+  build-frontend:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Update Rust Stable
-        run: rustup update stable
-      - name: Run tests
-        run: cargo test --verbose
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Update Rust Stable
-        run: rustup update stable
-      - name: Docker build
-        run: docker build --tag ${{ secrets.DOCKER_REPO }}:$GITHUB_SHA .
-      - name: docker login
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-      - name: docker push image
-        run: docker push ${{ secrets.DOCKER_REPO }}:$GITHUB_SHA
-      - name: deploy to service
-        uses: appleboy/ssh-action@master
-        env:
-          GITHUB_SHA: $GITHUB_SHA
-        with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USERNAME }}
-          password: ${{ secrets.DEPLOY_PASSWORD }}
-          port: ${{ secrets.DEPLOY_PORT }}
-          envs: GITHUB_SHA
-          script: |
-            sh /root/update_resource.sh $GITHUB_SHA
+    - uses: actions/checkout@v1
+    - name: Install Staple
+      run: cargo install --git https://github.com/Kilerd/staple
+    - name: Build blog
+      run: staple build
+      with:
+        workdir: frontend
+    - name: Deploy site to frontend branch
+      uses: alex-page/blazing-fast-gh-pages-deploy@v1.1.0
+      with:
+        site-directory: frontend/public
+        deploy-branch: frontend
+        repo-token: ${{ secrets.FRONTEND_DEPLOY_TOKEN }}
+#  build:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v1
+#      - name: Update Rust Stable
+#        run: rustup update stable
+#      - name: Docker build
+#        run: docker build --tag ${{ secrets.DOCKER_REPO }}:$GITHUB_SHA .
+#      - name: docker login
+#        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+#      - name: docker push image
+#        run: docker push ${{ secrets.DOCKER_REPO }}:$GITHUB_SHA
+#      - name: deploy to service
+#        uses: appleboy/ssh-action@master
+#        env:
+#          GITHUB_SHA: $GITHUB_SHA
+#        with:
+#          host: ${{ secrets.DEPLOY_HOST }}
+#          username: ${{ secrets.DEPLOY_USERNAME }}
+#          password: ${{ secrets.DEPLOY_PASSWORD }}
+#          port: ${{ secrets.DEPLOY_PORT }}
+#          envs: GITHUB_SHA
+#          script: |
+#            sh /root/update_resource.sh $GITHUB_SHA
