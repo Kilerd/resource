@@ -14,8 +14,7 @@ jobs:
       run: cargo install --git https://github.com/Kilerd/staple
     - name: Build blog
       run: staple build
-      with:
-        workdir: frontend
+      working-directory: frontend
     - name: Deploy site to frontend branch
       uses: alex-page/blazing-fast-gh-pages-deploy@v1.1.0
       with:
