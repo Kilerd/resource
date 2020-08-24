@@ -1,0 +1,8 @@
+{
+    "name": "resource",
+    "version":2,
+    "alias": "resource.rs",
+    "github": {
+        "silent": true
+    }
+}
