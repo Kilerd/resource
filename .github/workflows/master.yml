@@ -11,7 +11,11 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Install Staple
-      run: cargo install --git https://github.com/Kilerd/staple
+      run: |
+        mkdir -p $GITHUB_WORKSPACE/bin
+        wget https://github.com/Kilerd/staple/releases/download/latest/staple-ubuntu.tar.gz
+        tar -xvf staple-ubuntu.tar.gz -C $GITHUB_WORKSPACE/bin
+        chmod -x $GITHUB_WORKSPACE/bin/staple
     - name: Build blog
       run: staple build
       working-directory: frontend
