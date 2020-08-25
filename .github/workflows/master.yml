@@ -21,7 +21,7 @@ jobs:
         tar -xvf staple-ubuntu.tar.gz -C $GITHUB_WORKSPACE/bin
         chmod -x $GITHUB_WORKSPACE/bin/staple
     - name: Build blog
-      run: staple build
+      run: $GITHUB_WORKSPACE/bin/staple build
       working-directory: frontend
     - name: Deploy site to frontend branch
       uses: alex-page/blazing-fast-gh-pages-deploy@v1.1.0
