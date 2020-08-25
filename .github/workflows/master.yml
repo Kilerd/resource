@@ -10,10 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+    - uses: dsaltares/fetch-gh-release-asset@master
+      with:
+        repo: "Kilerd/staple"
+        version: "latest"
+        file: "staple-ubuntu.tar.gz"
     - name: Install Staple
       run: |
         mkdir -p $GITHUB_WORKSPACE/bin
-        wget https://github.com/Kilerd/staple/releases/download/latest/staple-ubuntu.tar.gz
         tar -xvf staple-ubuntu.tar.gz -C $GITHUB_WORKSPACE/bin
         chmod -x $GITHUB_WORKSPACE/bin/staple
     - name: Build blog
