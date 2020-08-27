@@ -5,65 +5,336 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet/less" type="text/css" href="/statics/style.less" />
-    <link rel="stylesheet/less" type="text/css" href="/statics/icon.css" />
+    <link rel="stylesheet/less" type="text/css" href="/statics/style.less"/>
+    <link rel="stylesheet/less" type="text/css" href="/statics/icon.css"/>
     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
-    <title>各种教程和文章 - Resource.rs - 旨在提供一站式的 Rust 学习资源</title>
+    <title>首页 - Resource.rs - 旨在提供一站式的 Rust 学习资源</title>
 </head>
 
 <body>
 
 <header>
-    <nav>
-        <a href="/" class="logo"><img src="/statics/crab.svg" alt="logo"></a>
-        <a class="normal" href="/"><span>首页</span></a>
-        <a class="normal" href="/tutorials"><span>教程</span></a>
-        <a class="normal" href="/reddit"><span>REDDIT 趋势</span></a>
-        <a class="normal" href="/about"><span>关于我们</span></a>
-    </nav>
+    <section class="container">
+        <section class="header">
+            <nav class="left-nav">
+                <a href="https://www.resource.rs">RESOURCE</a>
+            </nav>
+            <nav class="right-nav">
+                <a href="/reddit"><span>Github</span></a>
+                <a href="/about"><span>关于我们</span></a>
+            </nav>
+        </section>
+    </section>
 </header>
 <main class="body">
+    <section class="container">
+
+        <section class="index">
+            <!--                <section class="part">-->
+            <!--                    <section class="head">最新文章</section>-->
+            <!--                    <section class="content">-->
+
+            <!--                    </section>-->
+            <!--                </section>-->
+            <section class="part">
+                <h2 class="head">新手入门</h2>
+                <section class="content">
+                    <ol class="simple-inline-list">
+
+                        <li><a class="normal" href="&#x2F;installation-and-setup"><span>安装 Rust 及 IDE 的选择</span></a></li>
+
+                        <li><a class="normal" href="&#x2F;tools-and-plugins"><span>实用工具与插件</span></a></li>
+
+                        <li><a class="normal" href="https:&#x2F;&#x2F;t.me&#x2F;rust_zh"><span>加入 Telegram 群组</span></a></li>
+
+                        <li><a class="normal" href="&#x2F;comunities"><span>其他社群和资源</span></a></li>
+
+                    </ol>
+                </section>
+            </section>
+
+            <section class="part">
+                <h2 class="head">日常开发中会经常使用的网站</h2>
+                <section class="content">
+                    <nav class="block-list">
+                        <a class="normal" href="https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;std&#x2F;"
+                           title="标准库文档"><span>Standard Library API Reference</span></a>
+
+                        <a class="normal" href="https:&#x2F;&#x2F;docs.rs&#x2F;"
+                           title="查看第三方库的文档索引"><span>Docs.rs</span></a>
+
+                        <a class="normal" href="https:&#x2F;&#x2F;crates.io&#x2F;"
+                           title="Rust 第三方库仓库"><span>Crates.io</span></a>
+
+                        <a class="normal" href="https:&#x2F;&#x2F;lib.rs&#x2F;"
+                           title="一个提供了不同领域下优质 crate 的索引。当你需要查看某个领域比较流行的 crate 时，可以阅读。"><span>Lib.rs</span></a>
+
+                        <a class="normal" href="https:&#x2F;&#x2F;upsuper.github.io&#x2F;rust-cheatsheet&#x2F;"
+                           title="一份由 @Upsuper 大佬实现的关于 Option、Result、Iterator 和 [u8] 的相关函数速查表，相当实用。"><span>Rust cheat sheet</span></a>
+
+                    </nav>
+                </section>
+            </section>
+
+            <section class="part">
+                <h2 class="head">各种书籍</h2>
+                <section class="content">
+                    <section class="book-list">
+                        <div class="book">
+                            <div class="title">The Rust Programming Language</div>
+                            <div class="description han-init-context">
+                                这是由官方提供的面向全体 Rust 人员的教程，简称「TRPL」。非常适合入门的小伙伴阅读，因为该书系统得提供了 Rust 的特点和设计思想。该书也可以当作 Cookbook，在碰到问题时反复查看。
+                            </div>
+                            <div class="meta">
     
-<section class="article">
-    <h1>各种教程和文章</h1>
-    <section class="article-body yue">
-        <p>如果你有相关的教程和文章希望推荐给他人，可以往<a href="https://github.com/Kilerd/resource/blob/master/page/tutorials.md">这里</a>提出PR。</p>
-<h1>Rustlings</h1>
-<p>一份 JetBrains 根据 <a href="https://github.com/rust-lang/rustlings">github/rust-lang/rustlings</a> 制作的 Rust 习题，提供了基于知识点的练习题，形式十分相似与 <a href="https://doc.rust-lang.org/rust-by-example/index.html">Rust by Example</a>:</p>
-<ul>
-<li>你可以下载 <a href="https://www.jetbrains.com/education/download/#section=idea">IDEA Edu</a> 进行练习</li>
-<li>你也可以在 Clion 或者 IDEA Ultimate 中下载 <a href="https://www.jetbrains.com/help/education/install-edutools-plugin.html?section=CLion">EduTools Plugin</a> 进行学习</li>
-</ul>
-<p>更加具体的指导可以查阅<a href="https://www.jetbrains.com/help/education/learner-start-guide.html?section=Rustlings">Learner Start Guide - JetBrains</a></p>
-<h1>Jon Gjengset 的 Youtube 频道</h1>
-<p>一位东半球很厉害的 Rust 开发者在 Youtube 上面讲解底层技术的实现和原理，每个视频都涉及到细节。更多他的视频可以点击<a href="https://www.youtube.com/channel/UC_iD0xppBwwsrM9DegC5cQQ/videos">这里跳转到 YouTube</a>。他的视频普遍比较长，通常都是复原了整个开发的过程，包括了 Debug 的阶段。</p>
-<ul>
-<li><a href="https://www.youtube.com/watch?v=jTpK-bNZiA4">Porting flamegraph to Rust — part 1</a></li>
-<li><a href="https://www.youtube.com/watch?v=Qy1tQesXc7k">Porting flamegraph to Rust — part 2</a></li>
-<li><a href="https://www.youtube.com/watch?v=9_3krAQtD2k">The What and How of Futures and async/await in Rust</a></li>
-<li><a href="https://www.youtube.com/watch?v=bzja9fQWzdA">Implementing TCP in Rust (part 1)</a></li>
-<li><a href="https://www.youtube.com/watch?v=OCpt1I0MWXE">Implementing TCP in Rust (part 2)</a></li>
-<li><a href="https://www.youtube.com/watch?v=8GE6ltLRJA4">Implementing TCP in Rust (part 3)</a></li>
-<li><a href="https://www.youtube.com/watch?v=geovSK3wMB8">Procedural Macros in Rust (part 1)</a></li>
-<li><a href="https://www.youtube.com/watch?v=KVWHT1TAirU">Procedural Macros in Rust (part 2)</a></li>
-</ul>
-<h1>Learn Rust the Dangerous Way</h1>
-<p>作者从 C 语言使用者的角度讲述了 Rust 的相关知识点</p>
-<blockquote>
-<p>LRtDW is a series of articles putting Rust features in context for low-level C programmers who maybe don't have a formal CS background — the sort of people who work on firmware, game engines, OS kernels, and the like. Basically, people like me.</p>
-</blockquote>
-<ul>
-<li><a href="http://cliffle.com/p/dangerust/0/">Why Learn Rust the Dangerous Way?</a> Introduction and ground rules.</li>
-<li><a href="http://cliffle.com/p/dangerust/1/">You can't write C in just any ol' language:</a> translating a grungy optimized C program into grungy optimized unsafe Rust.</li>
-<li><a href="http://cliffle.com/p/dangerust/2/">References available upon request:</a> how Rust references are different from pointers, how they are the same, and why we care.</li>
-<li><a href="http://cliffle.com/p/dangerust/3/">Measure what you optimize:</a> taking a hard look at an optimization based on uninitialized memory, and converting it to safe code that's just as fast.</li>
-<li><a href="http://cliffle.com/p/dangerust/4/">A more perfect union:</a> considering alternatives to pointer casting, and how to write safe wrappers for unsafe operations.</li>
-<li><a href="http://cliffle.com/p/dangerust/5/">Making safe things from unsafe parts:</a> finally converting most of the program to safe code, and making sure that the unsafe bits are safe-ish.</li>
-<li><a href="http://cliffle.com/p/dangerust/6/">Let the compiler do the work:</a> a bonus section that looks at how we'd write the program idiomatically in native Rust, and rely on auto-vectorization to make it fast.</li>
-</ul>
+                                <a href="https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;book&#x2F;#the-rust-programming-language" target="_blank">英文版</a>
+    
+                                <a href="https:&#x2F;&#x2F;kaisery.github.io&#x2F;trpl-zh-cn&#x2F;foreword.html" target="_blank">中文版</a>
+    
+                            </div>
+                        </div>
+    
+    
+                        <div class="book">
+                            <div class="title">Rust by Example</div>
+                            <div class="description han-init-context">
+                                该书在设计上很像 TRPL，但是提供了很多适合用于实践的例子，以体验 Rust 的设计思想。该书同样适合于入门，但是原理和内容不及 TRPL 丰富，但是通过项目驱动可以得到较多的练习过程。
+                            </div>
+                            <div class="meta">
+    
+                                <a href="https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;rust-by-example&#x2F;" target="_blank">英文版</a>
+    
+                            </div>
+                        </div>
+    
+    
+                        <div class="book">
+                            <div class="title">Rust 与 WASM<span>Rust 🦀 and WebAssembly</span></div>
+                            <div class="description han-init-context">
+                                官方出品的关于 WASM 的书籍
+                            </div>
+                            <div class="meta">
+    
+                                <a href="https:&#x2F;&#x2F;rustwasm.github.io&#x2F;book&#x2F;" target="_blank">英文版</a>
+    
+                            </div>
+                        </div>
+    
+    
+                        <div class="book">
+                            <div class="title">宏小本<span>The Little Book of Rust Macros</span></div>
+                            <div class="description han-init-context">
+                                开发者们都说 Rust 的宏是卫生宏，比CPP的宏如何优秀如何好用。那么这本小册子就从源头讲解了 Rust 的整个宏系统，但是由于编写时间过早并没有讲解过程宏。
+                            </div>
+                            <div class="meta">
+    
+                                <a href="https:&#x2F;&#x2F;danielkeep.github.io&#x2F;tlborm&#x2F;book&#x2F;index.html" target="_blank">英文版</a>
+    
+                                <a href="http:&#x2F;&#x2F;blog.luxko.site&#x2F;tlborm-chinese&#x2F;book&#x2F;index.html" target="_blank">中文版</a>
+    
+                            </div>
+                        </div>
+    
+    
+                        <div class="book">
+                            <div class="title">Rust 中的异步编程<span>Asynchronous Programming in Rust</span></div>
+                            <div class="description han-init-context">
+                                鉴于 Future 和 async/awiat 语法的基本实现完成，Rust 中新一代的异步系统已经达成了 MVP 的目标，官方便开始逐步编写和完善该书。该书阐述了 Future 的生态和实现，比较详细地描述了 executor 和 waker 的工作机制。
+                            </div>
+                            <div class="meta">
+    
+                                <a href="https:&#x2F;&#x2F;rust-lang.github.io&#x2F;async-book&#x2F;" target="_blank">英文版</a>
+    
+                                <a href="https:&#x2F;&#x2F;huangjj27.github.io&#x2F;async-book&#x2F;index.html" target="_blank">中文版</a>
+    
+                            </div>
+                        </div>
+    
+    
+                        <div class="book">
+                            <div class="title">Rust Cookbook</div>
+                            <div class="description han-init-context">
+                                Rust Cookbook一本覆盖面很全，例子不是特别多的 cookbook，但是提供了很多常见编程内容的例子和 DEMO，内容包括了算法、CLI编程、解压缩、并发、加解密、数据结构、数据库调用、日期与时间、DEBUG、版本控制、链接C库、编码与解码、文件系统、内存管理、TCP/IP、操作系统操作、数学运算、文本处理、爬虫、URL处理、MIME、HTTP客户端调用 等。
+                            </div>
+                            <div class="meta">
+    
+                                <a href="https:&#x2F;&#x2F;rust-lang-nursery.github.io&#x2F;rust-cookbook&#x2F;intro.html" target="_blank">英文版</a>
+    
+                            </div>
+                        </div>
+    
+    
+                        <div class="book">
+                            <div class="title">Rust死灵书 - Rust高级与非安全程序设计<span>The Rustonomicon</span></div>
+                            <div class="description han-init-context">
+                                当发现读完其他书都无法满足你时，可以阅读这本描述了 Rust 中 unsafe 及 HRTB 相关内容的书籍。<br>中文版已经相当 Outdated，建议阅读英文版。
+                            </div>
+                            <div class="meta">
+    
+                                <a href="https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;nomicon&#x2F;" target="_blank">英文版</a>
+    
+                                <a href="https:&#x2F;&#x2F;github.com&#x2F;tjxing&#x2F;rustonomicon_zh-CN" target="_blank">中文版</a>
+    
+                            </div>
+                        </div>
+                    </section>
+                    
+
+
+                </section>
+            </section>
+            
+            <section class="part">
+                <h2 class="head">模块一</h2>
+                <section class="content">
+                    <section class="part">
+                        <h3 class="head">模块一.子模块一</h3>
+                        <section class="content">
+                            <ol class="simple-inline-list">
+        
+                                <li><a class="normal" href="&#x2F;installation-and-setup"><span>安装 Rust 及 IDE 的选择</span></a></li>
+        
+                                <li><a class="normal" href="&#x2F;tools-and-plugins"><span>实用工具与插件</span></a></li>
+        
+                                <li><a class="normal" href="https:&#x2F;&#x2F;t.me&#x2F;rust_zh"><span>加入 Telegram 群组</span></a></li>
+        
+                                <li><a class="normal" href="&#x2F;comunities"><span>其他社群和资源</span></a></li>
+        
+                            </ol>
+                        </section>
+                    </section>
+                    <section class="part">
+                        <h3 class="head">模块一.子模块二</h3>
+                        <section class="content">
+                            <ol class="simple-inline-list">
+        
+                                <li><a class="normal" href="&#x2F;installation-and-setup"><span>安装 Rust 及 IDE 的选择</span></a></li>
+        
+                                <li><a class="normal" href="&#x2F;tools-and-plugins"><span>实用工具与插件</span></a></li>
+        
+                                <li><a class="normal" href="https:&#x2F;&#x2F;t.me&#x2F;rust_zh"><span>加入 Telegram 群组</span></a></li>
+        
+                                <li><a class="normal" href="&#x2F;comunities"><span>其他社群和资源</span></a></li>
+        
+                            </ol>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="part">
+                <h2 class="head">模块一</h2>
+                <section class="content">
+                    <section class="part">
+                        <h3 class="head">模块一.子模块一</h3>
+                        <section class="content">
+                            <ol class="simple-inline-list">
+        
+                                <li><a class="normal" href="&#x2F;installation-and-setup"><span>安装 Rust 及 IDE 的选择</span></a></li>
+        
+                                <li><a class="normal" href="&#x2F;tools-and-plugins"><span>实用工具与插件</span></a></li>
+        
+                                <li><a class="normal" href="https:&#x2F;&#x2F;t.me&#x2F;rust_zh"><span>加入 Telegram 群组</span></a></li>
+        
+                                <li><a class="normal" href="&#x2F;comunities"><span>其他社群和资源</span></a></li>
+        
+                            </ol>
+                        </section>
+                    </section>
+                    <section class="part">
+                        <h3 class="head">模块一.子模块二</h3>
+                        <section class="content">
+                            <ol class="simple-inline-list">
+        
+                                <li><a class="normal" href="&#x2F;installation-and-setup"><span>安装 Rust 及 IDE 的选择</span></a></li>
+        
+                                <li><a class="normal" href="&#x2F;tools-and-plugins"><span>实用工具与插件</span></a></li>
+        
+                                <li><a class="normal" href="https:&#x2F;&#x2F;t.me&#x2F;rust_zh"><span>加入 Telegram 群组</span></a></li>
+        
+                                <li><a class="normal" href="&#x2F;comunities"><span>其他社群和资源</span></a></li>
+        
+                            </ol>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="part">
+                <h2 class="head">模块一</h2>
+                <section class="content">
+                    <section class="part">
+                        <h3 class="head">模块一.子模块一</h3>
+                        <section class="content">
+                            <ol class="simple-inline-list">
+        
+                                <li><a class="normal" href="&#x2F;installation-and-setup"><span>安装 Rust 及 IDE 的选择</span></a></li>
+        
+                                <li><a class="normal" href="&#x2F;tools-and-plugins"><span>实用工具与插件</span></a></li>
+        
+                                <li><a class="normal" href="https:&#x2F;&#x2F;t.me&#x2F;rust_zh"><span>加入 Telegram 群组</span></a></li>
+        
+                                <li><a class="normal" href="&#x2F;comunities"><span>其他社群和资源</span></a></li>
+        
+                            </ol>
+                        </section>
+                    </section>
+                    <section class="part">
+                        <h3 class="head">模块一.子模块二</h3>
+                        <section class="content">
+                            <ol class="simple-inline-list">
+        
+                                <li><a class="normal" href="&#x2F;installation-and-setup"><span>安装 Rust 及 IDE 的选择</span></a></li>
+        
+                                <li><a class="normal" href="&#x2F;tools-and-plugins"><span>实用工具与插件</span></a></li>
+        
+                                <li><a class="normal" href="https:&#x2F;&#x2F;t.me&#x2F;rust_zh"><span>加入 Telegram 群组</span></a></li>
+        
+                                <li><a class="normal" href="&#x2F;comunities"><span>其他社群和资源</span></a></li>
+        
+                            </ol>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="part">
+                <h2 class="head">模块一</h2>
+                <section class="content">
+                    <section class="part">
+                        <h3 class="head">模块一.子模块一</h3>
+                        <section class="content">
+                            <ol class="simple-inline-list">
+        
+                                <li><a class="normal" href="&#x2F;installation-and-setup"><span>安装 Rust 及 IDE 的选择</span></a></li>
+        
+                                <li><a class="normal" href="&#x2F;tools-and-plugins"><span>实用工具与插件</span></a></li>
+        
+                                <li><a class="normal" href="https:&#x2F;&#x2F;t.me&#x2F;rust_zh"><span>加入 Telegram 群组</span></a></li>
+        
+                                <li><a class="normal" href="&#x2F;comunities"><span>其他社群和资源</span></a></li>
+        
+                            </ol>
+                        </section>
+                    </section>
+                    <section class="part">
+                        <h3 class="head">模块一.子模块二</h3>
+                        <section class="content">
+                            <ol class="simple-inline-list">
+        
+                                <li><a class="normal" href="&#x2F;installation-and-setup"><span>安装 Rust 及 IDE 的选择</span></a></li>
+        
+                                <li><a class="normal" href="&#x2F;tools-and-plugins"><span>实用工具与插件</span></a></li>
+        
+                                <li><a class="normal" href="https:&#x2F;&#x2F;t.me&#x2F;rust_zh"><span>加入 Telegram 群组</span></a></li>
+        
+                                <li><a class="normal" href="&#x2F;comunities"><span>其他社群和资源</span></a></li>
+        
+                            </ol>
+                        </section>
+                    </section>
+                </section>
+            </section>
+        </section>
 
     </section>
-</section>
 
 </main>
 <footer>
@@ -78,8 +349,38 @@
     gtag('js', new Date());
 
     gtag('config', 'UA-68997851-3');
+
 </script>
 
 </body>
 <script src="/statics/prism.js" type="text/javascript"></script>
+<script>
+
+    function websocket_connect() {
+        let webSocket = new WebSocket("ws://localhost:8000/notifier");
+        webSocket.onopen = function () {
+            webSocket.send("Connecting...");
+            console.log("ws connection...");
+        };
+        webSocket.onmessage = function (event) {
+            let data = event.data;
+            console.log("ws get event: ", data);
+            if (data === "refresh") {
+                window.location.reload();
+            }
+        };
+        webSocket.onclose = function (e) {
+            console.log("ws disconnected.", e);
+            console.log("trying to reconnect servere 5 second later");
+            setTimeout(websocket_connect, 5000);
+        };
+    }
+
+    if ("WebSocket" in window) {
+        websocket_connect();
+
+    } else {
+        console.log("your browser does not support websocket");
+    }
+</script>
 </html>
