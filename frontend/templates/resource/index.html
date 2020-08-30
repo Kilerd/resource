@@ -50,7 +50,7 @@
                             {% endif%}
                         </div>
                         <div class="description han-init-context">
-                            {{item.description}}
+                            {{item.description | safe}}
                         </div>
                         <div class="meta">
                             {% for version in item.version %}
