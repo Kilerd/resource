@@ -19,9 +19,27 @@
     }
     item_id = id;
   }
+
+  function getDateFormat(date) {
+    let d = new Date(date)
+    return `${d.getFullYear()}-${("0"+(d.getMonth()+1)).slice(-2)}-${("0" + d.getDate()).slice(-2)}`
+  }
 </script>
 
 <style>
+@keyframes loader-rotate {
+		0% {
+			transform: rotate(0);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+	.loader {
+		border-right-color: transparent;
+		animation: loader-rotate 1s linear infinite;
+	}
+
 h1 {
   font-size: 1.75rem;
   display: inline-block;
@@ -40,6 +58,9 @@ h1:after {
   border-radius: 2px;
   content: " ";
 }
+.right {
+  min-width: 85px;
+}
 </style>
 
 <svelte:head>
@@ -52,11 +73,15 @@ h1:after {
       <h1 class="head">Reddit Trending</h1>
 
       {#await promise}
-        <p>loading</p>
-      {:then data}
+      <div class="flex flex-row justify-center items-center">
+      <div class="w-12 h-12 border-2 border-red-600 rounded-full loader"></div>
+      </div>
+        
+        {:then data}
         {#each data.data as item (item.id)}
+          
           <section
-            class="item my-2 py-3 px-4  bg-gray-100 {item_id === item.id && isShow? "rounded border-black border-2":"border border-gray-100"}">
+            class="item my-2 py-3 px-4  bg-gray-100 border {item_id === item.id && isShow? "rounded border-black":"border-gray-100"}">
             <div
               class="title flex flex-row justify-between items-center {item.selftext !== null ? 'cursor-pointer' : ''}"
               on:click={() => onClick(item.id)}>
@@ -83,9 +108,15 @@ h1:after {
                     font-normal">{item.score}</span>
                 {item.title}
               </div>
-              <div class="right text-gray-500 text-sm">2020-01-02</div>
+              <div class="right text-gray-500 text-sm">{getDateFormat(item.create_time)}</div>
             </div>
-            {#if item_id === item.id && isShow && item.selftext !== null}
+            {#if item_id === item.id && isShow}
+            <div class="flex flex-row justify-end">
+            <a href="https://www.reddit.com{item.permalink}" class="btn-primary transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-teal-700 hover:bg-teal-900 text-white font-normal py-2 px-4 mr-1 rounded">Reddit</a>
+            {#if !item.url.startsWith("https://www.reddit.com")}
+            <a  href="{item.url}" class="btn-outline-primary transition duration-300 ease-in-out focus:outline-none focus:shadow-outline border border-teal-700 hover:bg-teal-700 text-teal-700 hover:text-white font-normal py-2 px-4 rounded">原地址</a>
+            {/if}
+            </div>
               <div class="content yue px-4 pt-4 black">
                 {@html marked(item.selftext || '')}
               </div>
