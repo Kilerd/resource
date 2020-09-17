@@ -12,3 +12,10 @@ domain_root = ""
 default_template = "page.html"
 
 [extra]
+
+[hook]
+before_build = [
+    {dir = "pages/rust_trending_page", command="yarn"},
+    {dir = "pages/rust_trending_page", command="yarn build"},
+    "mv pages/rust_trending_page/public/build templates/resource/statics/trending",
+]
