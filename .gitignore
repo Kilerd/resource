@@ -4,3 +4,9 @@ target/
 .env
 server/target/
 frontend/public
+scripts/*/__pypackages__
+scripts/*/__pycache__
+scripts/rust_rfc_status/rfc
+frontend/templates/resource/statics/trending/*
+**/.DS_Store
+**/*.pyc

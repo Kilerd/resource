@@ -1,0 +1,99 @@
+[[package]]
+id = 9
+name = "typed-ast"
+version = "1.4.1"
+source = "pypi+https://pypi.org/pypi/typed-ast/1.4.1/json"
+dependencies = []
+
+[[package]]
+id = 5
+name = "chardet"
+version = "3.0.4"
+source = "pypi+https://pypi.org/pypi/chardet/3.0.4/json"
+dependencies = []
+
+[[package]]
+id = 13
+name = "click"
+version = "7.1.2"
+source = "pypi+https://pypi.org/pypi/click/7.1.2/json"
+dependencies = []
+
+[[package]]
+id = 14
+name = "pprint"
+version = "0.1.0"
+source = "pypi+https://pypi.org/pypi/pprint/0.1.0/json"
+dependencies = []
+
+[[package]]
+id = 6
+name = "black"
+version = "19.10.0b0"
+source = "pypi+https://pypi.org/pypi/black/19.10.0b0/json"
+dependencies = ["pathspec 0.8.0 pypi+https://pypi.org/pypi/pathspec/0.8.0/json", "toml 0.10.1 pypi+https://pypi.org/pypi/toml/0.10.1/json", "attrs 19.3.0 pypi+https://pypi.org/pypi/attrs/19.3.0/json", "regex 2020.6.8 pypi+https://pypi.org/pypi/regex/2020.6.8/json", "click 7.1.2 pypi+https://pypi.org/pypi/click/7.1.2/json", "typed-ast 1.4.1 pypi+https://pypi.org/pypi/typed-ast/1.4.1/json", "appdirs 1.4.4 pypi+https://pypi.org/pypi/appdirs/1.4.4/json"]
+
+[[package]]
+id = 1
+name = "requests"
+version = "2.24.0"
+source = "pypi+https://pypi.org/pypi/requests/2.24.0/json"
+dependencies = ["certifi 2020.6.20 pypi+https://pypi.org/pypi/certifi/2020.6.20/json", "urllib3 1.25.9 pypi+https://pypi.org/pypi/urllib3/1.25.9/json", "idna 2.10.0 pypi+https://pypi.org/pypi/idna/2.10.0/json", "chardet 3.0.4 pypi+https://pypi.org/pypi/chardet/3.0.4/json"]
+
+[[package]]
+id = 4
+name = "idna"
+version = "2.10.0"
+source = "pypi+https://pypi.org/pypi/idna/2.10.0/json"
+dependencies = []
+
+[[package]]
+id = 10
+name = "toml"
+version = "0.10.1"
+source = "pypi+https://pypi.org/pypi/toml/0.10.1/json"
+dependencies = []
+
+[[package]]
+id = 8
+name = "regex"
+version = "2020.6.8"
+source = "pypi+https://pypi.org/pypi/regex/2020.6.8/json"
+dependencies = []
+
+[[package]]
+id = 11
+name = "appdirs"
+version = "1.4.4"
+source = "pypi+https://pypi.org/pypi/appdirs/1.4.4/json"
+dependencies = []
+
+[[package]]
+id = 12
+name = "attrs"
+version = "19.3.0"
+source = "pypi+https://pypi.org/pypi/attrs/19.3.0/json"
+dependencies = []
+
+[[package]]
+id = 2
+name = "certifi"
+version = "2020.6.20"
+source = "pypi+https://pypi.org/pypi/certifi/2020.6.20/json"
+dependencies = []
+
+[[package]]
+id = 7
+name = "pathspec"
+version = "0.8.0"
+source = "pypi+https://pypi.org/pypi/pathspec/0.8.0/json"
+dependencies = []
+
+[[package]]
+id = 3
+name = "urllib3"
+version = "1.25.9"
+source = "pypi+https://pypi.org/pypi/urllib3/1.25.9/json"
+dependencies = []
+
+[metadata]

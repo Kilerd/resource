@@ -1,0 +1,38 @@
+# See PEP 518: https://www.python.org/dev/peps/pep-0518/ for info on this file's structure.
+
+[tool.pyflow]
+name = ""
+py_version = "3.7"
+version = "0.1.0"
+
+
+[tool.pyflow.scripts]
+
+
+[tool.pyflow.dependencies]
+requests = "^2.24.0"
+
+
+[tool.pyflow.dev-dependencies]
+black = "^19.10.0b0"
+pprint = "^0.1.0"
+
+
+[tool.pdm]
+name = "rust_rfc_status"
+version = "0.0.1"
+description = ""
+author = "Kilerd <blove694@gmail.com>"
+license = "MIT"
+homepage = ""
+python_requires = ">=3.7"
+
+[tool.pdm.dependencies]
+requests = "<3.0.0,>=2.24.0"
+
+[tool.pdm.dev-dependencies]
+
+
+[build-system]
+requires = ["pdm"]
+build-backend = "pdm.builders.api"

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block body %}
+{% for rfc_idx, rfc in page.data.rfc %}
+{% if page.data.rfc_translate is containing(rfc_idx) %}
+<div class="book">
+    <p onclick='displayOrNot("{{rfc_idx}}")'><span>{{ rfc_idx }} {{rfc.title | upper}}</span> {{ page.data.rfc_translate | get(key=rfc_idx) | get(key="title") }}</p>
+
+    <div id="{{rfc_idx}}_detail" style="display: none;">
+        {{ page.data.rfc_translate | get(key=rfc_idx) | get(key="description") | markdown | safe }}
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+
+{% endblock body %}
+
+{% block footer %}
+<script>
+    function displayOrNot(id) {
+        var newDisplayValue = document.getElementById(id+"_detail").style.display === "block" ? "none" : "block";
+        document.getElementById(id+"_detail").style.display = newDisplayValue;
+    }
+
+</script>
+{% endblock footer %}
