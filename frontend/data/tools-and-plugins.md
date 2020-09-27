@@ -3,7 +3,8 @@
  - datetime = 2020-08-20T23:16:54.791307+08:00
  - template = page.html
  - draw = false
-
+ - index_group = 新手入门
+ 
 
 - Rust 搜索插件([官网](https://rust-search-extension.now.sh/), [Install to Chrome](https://chrome.google.com/webstore/detail/rust-search-extension/ennpfpdlaclocpomkiablnmbppdnlhoh), [Install to FireFox](https://addons.mozilla.org/firefox/addon/rust-search-extension/)) 在浏览器中快速方便进行 Rust 相关内容搜索：
   - 标准库文档

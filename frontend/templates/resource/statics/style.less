@@ -107,22 +107,12 @@ section.index {
         }
     }
 
-    ol.simple-inline-list {
+    nav.simple-inline-list {
         list-style-type: none;
         counter-reset: item;
         padding: 0;
 
-        li {
-            display: inline;
-
-            a:before {
-
-                font-size: .75rem;
-                color: #aaa;
-                padding-right: 0.25rem;
-                content: "0x"counters(item, ".");
-                counter-increment: item
-            }
+        a {
 
             &:not(:first-child) {
                 &:before {
@@ -135,8 +125,43 @@ section.index {
     }
 
     nav.block-list {
+        display: flex;
+        flex-direction: row;
 
-        a {}
+        align-content: flex-start;
+        justify-content: left;
+
+
+        a {
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            margin: .5rem;
+            padding: .5rem .75rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: @main-black;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            span {
+                margin: 0;
+                color: #737373;
+                font-size: 0.875rem;
+                font-weight: normal;
+            }
+
+            &:hover {
+
+                color: @darken-black;
+
+                background-color: #eee;
+            }
+        }
+
+
+
     }
 
     section.book-list {

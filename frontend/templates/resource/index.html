@@ -3,36 +3,37 @@
 {% block body %}
 <section class="container">
     <section class="index">
+
+        {% for group_name, group_items in  pages | group_by(attribute="data.index_group") %}
         <section class="part">
-            <h2 class="head">新手入门</h2>
+            <h2 class="head">{{ group_name }}</h2>
             <section class="content">
-                <ol class="simple-inline-list">
-                    {% for item in page.data.toturial %}
-                    <li><a class="normal" href="{{ item.link }}"><span>{{ item.title }}</span></a></li>
+                <nav class="simple-inline-list">
+                    {% for item in group_items | reverse %}
+                    <a class="normal" href="{{ item.url }}" title="{{ item.title }}"><span>{{ item.title }}</span></a>
                     {% endfor %}
-                </ol>
+
+                </nav>
             </section>
         </section>
+        {% endfor%}
 
         <section class="part">
-            <h2 class="head">日常开发中会经常使用的网站</h2>
+            <h2 class="head">社群</h2>
             <section class="content">
                 <nav class="block-list">
-                    <a class="normal" href="https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;std&#x2F;"
-                        title="标准库文档"><span>Standard Library API Reference</span></a>
+                    
+                    {% for item in page.data.comunities %}
 
-                    <a class="normal" href="https:&#x2F;&#x2F;docs.rs&#x2F;"
-                        title="查看第三方库的文档索引"><span>Docs.rs</span></a>
-
-                    <a class="normal" href="https:&#x2F;&#x2F;crates.io&#x2F;"
-                        title="Rust 第三方库仓库"><span>Crates.io</span></a>
-
-                    <a class="normal" href="https:&#x2F;&#x2F;lib.rs&#x2F;"
-                        title="一个提供了不同领域下优质 crate 的索引。当你需要查看某个领域比较流行的 crate 时，可以阅读。"><span>Lib.rs</span></a>
-
-                    <a class="normal" href="https:&#x2F;&#x2F;upsuper.github.io&#x2F;rust-cheatsheet&#x2F;"
-                        title="一份由 @Upsuper 大佬实现的关于 Option、Result、Iterator 和 [u8] 的相关函数速查表，相当实用。"><span>Rust cheat
-                            sheet</span></a>
+                        <a href="{{ item.url }}" title="{{ item.title }}">
+                        {{ item.title }}
+                        {% if item.description %}
+                        <span>{{ item.description }}</span>
+                        {% endif %}
+                    </a>
+                        
+                    
+                    {% endfor %}
 
                 </nav>
             </section>
@@ -63,6 +64,8 @@
                 </section>
             </section>
         </section>
+
+
 
     </section>
 

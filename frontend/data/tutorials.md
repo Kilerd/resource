@@ -3,6 +3,7 @@
  - datetime = 2020-08-20T23:16:59.646761+08:00
  - template = page.html
  - draw = false
+ - index_group = 新手入门
 
 如果你有相关的教程和文章希望推荐给他人，可以往[这里](https://github.com/Kilerd/resource/blob/master/page/tutorials.md)提出PR。
 # Rustlings

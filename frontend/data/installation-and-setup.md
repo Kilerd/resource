@@ -3,6 +3,7 @@
  - datetime = 2020-08-20T23:15:47.187706+08:00
  - template = page.html
  - draw = false
+ - index_group = 新手入门
 
 
 # 安装 Rust

@@ -98,52 +98,20 @@
         ]
       }
     ],
-    "link": {
-      "title": "日常开发中会经常使用的网站",
-      "items": [
-        {
-          "description": "标准库文档",
-          "link": "https://doc.rust-lang.org/std/",
-          "name": "Standard Library API Reference"
-        },
-        {
-          "description": "查看第三方库的文档索引",
-          "link": "https://docs.rs/",
-          "name": "Docs.rs"
-        },
-        {
-          "description": "Rust 第三方库仓库",
-          "link": "https://crates.io/",
-          "name": "Crates.io"
-        },
-        {
-          "description": "一个提供了不同领域下优质 crate 的索引。当你需要查看某个领域比较流行的 crate 时，可以阅读。",
-          "link": "https://lib.rs/",
-          "name": "Lib.rs"
-        },
-        {
-          "description": "一份由 @Upsuper 大佬实现的关于 Option、Result、Iterator 和 [u8] 的相关函数速查表，相当实用。",
-          "link": "https://upsuper.github.io/rust-cheatsheet/",
-          "name": "Rust cheat sheet"
-        }
-      ]
-    },
-    "toturial": [
+    "comunities": [
       {
-        "link": "/installation-and-setup",
-        "title": "安装 Rust 及 IDE 的选择"
+        "url": "https://t.me/rust_zh",
+        "title": "Rust 众",
+        "description": "Rust（编程语言）中文讨论 Telegram 群"
       },
       {
-        "link": "/tools-and-plugins",
-        "title": "实用工具与插件"
+        "url": "https://rustcc.cn/",
+        "title": "Rust 语言中文论坛"
       },
       {
-        "link": "https://t.me/rust_zh",
-        "title": "加入 Telegram 群组"
-      },
-      {
-        "link": "/comunities",
-        "title": "其他社群和资源"
+        "url": "https://t.me/rust_daily_news",
+        "title": "Rust 视界",
+        "description":"Rust 热点、开源项目、动态"
       }
     ]
   }
