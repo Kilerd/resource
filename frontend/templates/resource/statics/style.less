@@ -210,8 +210,6 @@ section.index {
                     text-align: center;
                     padding: 0.5rem;
                     color: #2a3439;
-                    border-color: #e5e5e5;
-                    border: 1px solid #e5e5e5;
                     background-color: #e5e5e5;
                     border-radius: 4px;
 
@@ -227,7 +225,6 @@ section.index {
                     &:hover {
                         font-weight: 700;
                         color: #2a3439;
-                        border-color: #2a3439;
                         background-color: #ffc832;
                     }
                 }
@@ -1085,55 +1082,58 @@ pre[class*="language-"] {
 @icon-reddit: "\eac6";
 
 @font-face {
-  font-family: '@{icomoon-font-family}';
-  src:  url('@{icomoon-font-path}/@{icomoon-font-family}.eot?aoiigy');
-  src:  url('@{icomoon-font-path}/@{icomoon-font-family}.eot?aoiigy#iefix') format('embedded-opentype'),
+    font-family: '@{icomoon-font-family}';
+    src: url('@{icomoon-font-path}/@{icomoon-font-family}.eot?aoiigy');
+    src: url('@{icomoon-font-path}/@{icomoon-font-family}.eot?aoiigy#iefix') format('embedded-opentype'),
     url('@{icomoon-font-path}/@{icomoon-font-family}.ttf?aoiigy') format('truetype'),
     url('@{icomoon-font-path}/@{icomoon-font-family}.woff?aoiigy') format('woff'),
     url('@{icomoon-font-path}/@{icomoon-font-family}.svg?aoiigy#@{icomoon-font-family}') format('svg');
-  font-weight: normal;
-  font-style: normal;
-  font-display: block;
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
 }
 
 i {
-  /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: '@{icomoon-font-family}' !important;
-  speak: never;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: '@{icomoon-font-family}' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
 
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .icon-info {
-  &:before {
-    content: @icon-info; 
-  }
-}
-.icon-telegram {
-  &:before {
-    content: @icon-telegram; 
-  }
-}
-.icon-rss2 {
-  &:before {
-    content: @icon-rss2; 
-  }
-}
-.icon-github {
-  &:before {
-    content: @icon-github; 
-  }
-}
-.icon-reddit {
-  &:before {
-    content: @icon-reddit; 
-  }
+    &:before {
+        content: @icon-info;
+    }
 }
 
+.icon-telegram {
+    &:before {
+        content: @icon-telegram;
+    }
+}
+
+.icon-rss2 {
+    &:before {
+        content: @icon-rss2;
+    }
+}
+
+.icon-github {
+    &:before {
+        content: @icon-github;
+    }
+}
+
+.icon-reddit {
+    &:before {
+        content: @icon-reddit;
+    }
+}
