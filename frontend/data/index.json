@@ -102,7 +102,7 @@
       {
         "url": "https://t.me/rust_zh",
         "title": "Rust 众",
-        "description": "Rust（编程语言）中文讨论 Telegram 群"
+        "description": "Rust中文讨论 Telegram 群"
       },
       {
         "url": "https://rustcc.cn/",
@@ -112,6 +112,11 @@
         "url": "https://t.me/rust_daily_news",
         "title": "Rust 视界",
         "description":"Rust 热点、开源项目、动态"
+      },
+      {
+        "url": "https://this-week-in-rust.org/",
+        "title": "This Week in Rust",
+        "description":"每周更新的 Rust 资讯"
       }
     ]
   }

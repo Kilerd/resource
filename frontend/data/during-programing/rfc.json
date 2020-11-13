@@ -1,10 +1,12 @@
 {
-  "title": "rfc",
+  "title": "通俗易懂 RFC",
   "url": "rfc",
   "template": "rfc.html",
   "draw": false,
   "datetime": "2020-09-04T13:09:04.620951+08:00",
   "data": {
+    "index_group": "开发中",
+    "inline_description": "带你读懂每个RFC",
     "rfc": {
       "0001": {
         "sequence": "0001",

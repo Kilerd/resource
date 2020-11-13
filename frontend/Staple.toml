@@ -21,10 +21,9 @@ exclusive = [
 
 [hook]
 before_build = [
-    {dir = "pages/rust_trending_page", command="yarn"},
-    {dir = "pages/rust_trending_page", command="yarn build"},
+    { dir = "pages/rust_trending_page", command = "yarn" },
+    { dir = "pages/rust_trending_page", command = "yarn build" },
     "rm -rf templates/resource/statics/trending",
     "mv pages/rust_trending_page/public/build templates/resource/statics/trending",
-
-    {dir = "templates/resource/statics", command="lessc style.less style.css"}
+    { dir = "templates/resource/statics", command = "lessc style.less style.css" }
 ]

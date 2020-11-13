@@ -3,4 +3,5 @@
  - datetime = 2020-09-29T18:14:46.365125+08:00
  - template = page.html
  - draw = false
-
+ - index_group = 新手入门
+ - inline_description = 那些很棒的 Cargo 插件

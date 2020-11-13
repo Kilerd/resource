@@ -13,13 +13,24 @@ a.normal {
   text-decoration: none;
   color: #333;
 }
-a.normal span {
+a.normal div {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+a.normal div span {
+  font-size: 1.1rem;
+  color: #000;
   border-bottom: 1px dotted #333;
 }
-a.normal:hover {
-  color: #000;
+a.normal div p.desc {
+  margin: 0;
+  color: #737373;
+  font-size: 0.875rem;
+  font-weight: normal;
 }
-a.normal:hover span {
+a.normal:hover div span {
+  color: #000;
   border-bottom: 1px solid #c76b35;
 }
 section.header {
@@ -92,9 +103,9 @@ section.index nav.block-list {
   flex-direction: row;
   align-content: flex-start;
   justify-content: left;
+  align-items: baseline;
 }
 section.index nav.block-list a {
-  background-color: #f5f5f5;
   border-radius: 5px;
   margin: 0.5rem;
   padding: 0.5rem 0.75rem;
@@ -115,6 +126,11 @@ section.index nav.block-list a span {
 section.index nav.block-list a:hover {
   color: #000;
   background-color: #eee;
+}
+section.index nav.block-list a:not(:first-child):before {
+  content: "/";
+  padding: 0 0.5rem;
+  color: #333;
 }
 section.index section.book-list {
   display: flex;
@@ -175,6 +191,24 @@ section.article > h1 {
   padding: 0;
 }
 section.article > h1:after {
+  position: relative;
+  top: -10px;
+  background-color: #ffc832;
+  display: inline-block;
+  height: 6px;
+  width: 100%;
+  max-width: 90vw;
+  line-height: 1;
+  border-radius: 2px;
+  content: " ";
+}
+h1.with-bar {
+  font-size: 1.75rem;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+h1.with-bar:after {
   position: relative;
   top: -10px;
   background-color: #ffc832;

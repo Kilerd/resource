@@ -1,18 +1,155 @@
 {% extends "base.html" %}
 
+{% block header %}
+<style>
+section.rfc-item {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-width: 1px;
+    --border-opacity: 1;
+    border-color: #f7fafc;
+    border-color: rgba(247, 250, 252, var(--border-opacity));
+    --bg-opacity: 1;
+    background-color: #f7fafc;
+    background-color: rgba(247, 250, 252, var(--bg-opacity));
+    box-sizing: border-box;
+        border-style: solid;
+}
+
+svg.up-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+div.title {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    display: flex;
+    cursor: pointer;
+}
+
+div.title-content {
+    --text-opacity: 1;
+    color: #2d3748;
+    color: rgba(45, 55, 72, var(--text-opacity));
+    font-size: 1.125rem;
+    font-weight: 500;
+    align-items: center;
+    flex-direction: row;
+    display: flex;
+}
+
+div.right-content {
+    min-width: 85px;
+    --text-opacity: 1;
+    color: #a0aec0;
+    color: rgba(160, 174, 192, var(--text-opacity));
+    font-size: 0.875rem;
+}
+
+span.index {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    margin-right: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    border-radius: 0.25rem;
+    --bg-opacity: 1;
+    background-color: #cbd5e0;
+    background-color: rgba(203, 213, 224, var(--bg-opacity));
+}
+
+div.rfc-item-content {
+    padding: 1rem 1rem;
+}
+
+a.button-primary {
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+    --text-opacity: 1;
+    color: #fff;
+    color: rgba(255, 255, 255, var(--text-opacity));
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-right: 0.25rem;
+    font-weight: 400;
+    border-radius: 0.25rem;
+    --bg-opacity: 1;
+    background-color: #2c7a7b;
+    background-color: rgba(44, 122, 123, var(--bg-opacity));
+}
+a.button-secondary {
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+    --text-opacity: 1;
+    color: #2c7a7b;
+    color: rgba(44, 122, 123, var(--bg-opacity));
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-right: 0.25rem;
+    font-weight: 400;
+    border-radius: 0.25rem;
+    --bg-opacity: 1;
+    border: 1px solid rgba(44, 122, 123, var(--bg-opacity));
+    background-color: #2c7a7b;
+    background-color: rgba(255, 255, 255, var(--text-opacity));
+}
+div.button-group {
+justify-content: flex-end;
+    flex-direction: row;
+    display: flex;
+}
+
+</style>
+{% endblock header %}
+
 {% block body %}
-{% for rfc_idx, rfc in page.data.rfc %}
-{% if page.data.rfc_translate is containing(rfc_idx) %}
-<div class="book">
-    <p onclick='displayOrNot("{{rfc_idx}}")'><span>{{ rfc_idx }} {{rfc.title | upper}}</span> {{ page.data.rfc_translate | get(key=rfc_idx) | get(key="title") }}</p>
 
-    <div id="{{rfc_idx}}_detail" style="display: none;">
-        {{ page.data.rfc_translate | get(key=rfc_idx) | get(key="description") }}
-    </div>
-</div>
-{% endif %}
-{% endfor %}
+<section class="container">
 
+    <h1 class="with-bar">{{page.title}}</h1>
+    {% for rfc_idx, rfc in page.data.rfc %}
+    {% if page.data.rfc_translate is containing(rfc_idx) %}
+
+    <section class="rfc-item">
+        <div class="title" onclick='displayOrNot("{{rfc_idx}}")'>
+            <div class="title-content">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="up-icon">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+                <span class="index">{{ rfc_idx }}</span>
+                {{rfc.title | upper}} {{ page.data.rfc_translate | get(key=rfc_idx) | get(key="title") }}
+            </div>
+            <div class="right-content">2020-11-12</div>
+        </div>
+        <div id="{{rfc_idx}}_detail" class="rfc-item-content" style="display: none;">
+            <div class="yue">
+                {{ page.data.rfc_translate | get(key=rfc_idx) | get(key="description") | markdown | safe }}
+            </div>
+            <div class="button-group">
+                <a href="https://www.reddit.com/r/rust/comments/jrukxs/writing_linux_bpf_code_in_rust/"
+                   class="button-primary">Reddit</a>
+                <a href="https://blog.redsift.com/labs/writing-bpf-code-in-rust/" class="button-secondary">原地址</a>
+            </div>
+        </div>
+
+    </section>
+    {% endif %}
+    {% endfor %}
+</section>
 {% endblock body %}
 
 {% block footer %}

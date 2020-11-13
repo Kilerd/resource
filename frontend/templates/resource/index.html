@@ -10,9 +10,16 @@
             <section class="content">
                 <nav class="simple-inline-list">
                     {% for item in group_items | reverse %}
-                    <a class="normal" href="{{ item.url }}" title="{{ item.title }}"><span>{{ item.title }}</span></a>
-                    {% endfor %}
+                    <a class="normal" href="{{ item.url }}" title="{{ item.title }}">
+                        <div>
+                            <span>{{ item.title }}</span>
+                            {% if item.data.inline_description %}
+                            <p class="desc">{{item.data.inline_description}}</p>
+                            {% endif %}
+                        </div>
 
+                    </a>
+                    {% endfor %}
                 </nav>
             </section>
         </section>
@@ -21,20 +28,18 @@
         <section class="part">
             <h2 class="head">社群</h2>
             <section class="content">
-                <nav class="block-list">
-                    
+                <nav class="simple-inline-list">
                     {% for item in page.data.comunities %}
+                    <a class="normal" href="{{ item.url }}" title="{{ item.title }}">
+                        <div>
+                            <span>{{ item.title }}</span>
+                            {% if item.description %}
+                            <p class="desc">{{ item.description }}</p>
+                            {% endif %}
+                        </div>
 
-                        <a href="{{ item.url }}" title="{{ item.title }}">
-                        {{ item.title }}
-                        {% if item.description %}
-                        <span>{{ item.description }}</span>
-                        {% endif %}
                     </a>
-                        
-                    
                     {% endfor %}
-
                 </nav>
             </section>
         </section>
