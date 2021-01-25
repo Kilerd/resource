@@ -1666,7 +1666,7 @@ dependencies = [
  "serde_json",
  "surf",
  "telegram_typing_bot",
- "time 0.2.17",
+ "time 0.2.25",
  "tokio",
 ]
 
@@ -1996,9 +1996,9 @@ dependencies = [
 
 [[package]]
 name = "time"
-version = "0.2.17"
+version = "0.2.25"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ca7ec98a72285d12e0febb26f0847b12d54be24577618719df654c66cadab55d"
+checksum = "1195b046942c221454c2539395f85413b33383a067449d78aab2b7b052a142f7"
 dependencies = [
  "const_fn",
  "libc",
