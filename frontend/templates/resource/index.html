@@ -1,37 +1,18 @@
 {% extends "base.html" %}
+{% import "macros.html" as macros %}
 {% block title %}首页{% endblock title %}
 {% block body %}
 <section class="container">
     <section class="index">
-
-        {% for group_name, group_items in  pages | group_by(attribute="data.index_group") %}
-        <section class="part">
-            <h2 class="head">{{ group_name }}</h2>
-            <section class="content">
-                <nav class="simple-inline-list">
-                    {% for item in group_items | reverse %}
-                    <a class="normal" href="{{ item.url }}" title="{{ item.title }}">
-                        <div>
-                            <span>{{ item.title }}</span>
-                            {% if item.data.inline_description %}
-                            <p class="desc">{{item.data.inline_description}}</p>
-                            {% endif %}
-                        </div>
-
-                    </a>
-                    {% endfor %}
-                </nav>
-            </section>
-        </section>
-        {% endfor%}
-
+        {{ macros::index_group(group_name="新手入门") }}
+        {{ macros::index_group(group_name="开发中") }}
         <section class="part">
             <h2 class="head">社群</h2>
             <section class="content">
                 <nav class="simple-inline-list">
                     {% for item in page.data.comunities %}
                     <a class="normal" href="{{ item.url }}" title="{{ item.title }}">
-                        <div>
+                        <div class="content">
                             <span>{{ item.title }}</span>
                             {% if item.description %}
                             <p class="desc">{{ item.description }}</p>
@@ -69,7 +50,8 @@
                 </section>
             </section>
         </section>
-
+        {{ macros::index_group(group_name="Path to Production") }}
+        {{ macros::index_group(group_name="Be a Pro") }}
 
 
     </section>

@@ -12,26 +12,38 @@ body {
 a.normal {
   text-decoration: none;
   color: #333;
-}
-a.normal div {
   display: inline-flex;
+  flex: 0 0 25%;
+}
+a.normal div.content {
+  padding: 0.5rem 1rem;
+  background-color: #fcfcfc;
+  border-radius: 3px;
+  min-height: 5rem;
+  justify-content: center;
   flex-direction: column;
-  align-items: baseline;
+  align-items: center;
+  width: 100%;
+  margin: 0 1rem 1rem 0;
+  display: inline-flex;
+  border: 1px solid #e5e5e5;
 }
-a.normal div span {
+a.normal div.content span {
   font-size: 1.1rem;
-  color: #000;
-  border-bottom: 1px dotted #333;
+  color: #333;
+  text-transform: uppercase;
 }
-a.normal div p.desc {
+a.normal div.content p.desc {
   margin: 0;
-  color: #737373;
+  color: #808080;
   font-size: 0.875rem;
   font-weight: normal;
 }
-a.normal:hover div span {
+a.normal:hover div.content span {
   color: #000;
-  border-bottom: 1px solid #c76b35;
+}
+a.normal:hover div.content p.desc {
+  color: #333;
 }
 section.header {
   margin: 1.5rem 0;
@@ -54,13 +66,12 @@ section.header nav.right-nav a {
   color: rgba(0, 0, 0, 0.64);
   font-size: 1.5rem;
   text-decoration: none;
-  border-bottom: 2px solid transparent;
   transition: border-color 0.2s ease;
   margin: 0 0.25rem;
 }
 section.header nav.right-nav a:hover {
   color: rgba(0, 0, 0, 0.98);
-  border-color: rgb(var(--rgb-primary));
+  text-decoration: none;
 }
 section.container {
   max-width: 71rem;
@@ -89,14 +100,8 @@ section.index section.part h2.head:after {
   content: " ";
 }
 section.index nav.simple-inline-list {
-  list-style-type: none;
-  counter-reset: item;
-  padding: 0;
-}
-section.index nav.simple-inline-list a:not(:first-child):before {
-  content: "/";
-  padding: 0 0.5rem;
-  color: #333;
+  display: flex;
+  flex-flow: row wrap;
 }
 section.index nav.block-list {
   display: flex;

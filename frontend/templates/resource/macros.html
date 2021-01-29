@@ -1,0 +1,19 @@
+{% macro index_group(group_name) %}
+<section class="part">
+    <h2 class="head">{{ group_name }}</h2>
+    <section class="content">
+        <nav class="simple-inline-list">
+            {% for item in  pages | filter(attribute="data.index_group", value=group_name) | reverse %}
+            <a class="normal" href="{{ item.url }}" title="{{ item.title }}" class="link-box">
+                    <div class="content">
+                        <span>{{ item.title }}</span>
+                        {% if item.data.inline_description %}
+                        <p class="desc">{{item.data.inline_description}}</p>
+                        {% endif %}
+                    </div>
+            </a>
+            {% endfor %}
+        </nav>
+    </section>
+</section>
+{% endmacro input %}
