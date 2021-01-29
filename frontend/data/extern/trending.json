@@ -4,6 +4,8 @@
   "template": "trending.html",
   "draw": false,
   "datetime": "2020-09-02T21:41:28.319099+08:00",
-  "data": {},
+  "data": {
+    "index_group": "开发中"
+  },
   "content": ""
 }
