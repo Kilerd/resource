@@ -25,6 +25,7 @@ a.normal {
   color: @main-black;
   display: inline-flex;
   flex: 0 0 25%;
+
   div.content {
     padding: .5rem 1rem;
     background-color: #fcfcfc;
@@ -37,6 +38,7 @@ a.normal {
     margin: 0 1rem 1rem 0;
     display: inline-flex;
     border: 1px solid @border-color;
+
     span {
       font-size: 1.1rem;
       color: @main-black;
@@ -51,12 +53,14 @@ a.normal {
       font-weight: normal;
     }
   }
+
   &:hover {
     div.content {
       span {
         color: @darken-black;
         //border-bottom: 1px solid @darken-rust;
       }
+
       p.desc {
         color: @main-black;
       }
@@ -136,9 +140,40 @@ section.index {
     }
   }
 
-  nav.simple-inline-list {
+  ul.simple-inline-list {
     display: flex;
     flex-flow: row wrap;
+    margin: 0;
+    padding: 0;
+
+    li {
+      flex: 0 0 50%;
+      display: flex;
+
+      a {
+        text-decoration: none;
+
+        div.content {
+          display: flex;
+          color: #333;
+
+          p.desc {
+            margin: 0;
+            color: #808080;
+            &::before {
+              content: "/";
+              margin: 0 3px;
+            }
+          }
+        }
+
+        &:hover {
+          div.content {
+            color: #c76b35;
+          }
+        }
+      }
+    }
   }
 
   nav.block-list {
@@ -259,7 +294,7 @@ section.index {
 }
 
 section.article {
-  & > h1 {
+  &>h1 {
     font-size: 1.75rem;
     display: inline-block;
     margin: 0;
@@ -1029,13 +1064,13 @@ pre[class*="language-"] {
   overflow: auto;
 }
 
-:not(pre) > code[class*="language-"],
+:not(pre)>code[class*="language-"],
 pre[class*="language-"] {
   background: #f7f7f7;
 }
 
 /* Inline code */
-:not(pre) > code[class*="language-"] {
+:not(pre)>code[class*="language-"] {
   padding: .1em;
   border-radius: .3em;
   white-space: normal;

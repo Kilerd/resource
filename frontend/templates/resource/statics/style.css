@@ -99,9 +99,33 @@ section.index section.part h2.head:after {
   border-radius: 2px;
   content: " ";
 }
-section.index nav.simple-inline-list {
+section.index ul.simple-inline-list {
   display: flex;
   flex-flow: row wrap;
+  margin: 0;
+  padding: 0;
+}
+section.index ul.simple-inline-list li {
+  flex: 0 0 50%;
+  display: flex;
+}
+section.index ul.simple-inline-list li a {
+  text-decoration: none;
+}
+section.index ul.simple-inline-list li a div.content {
+  display: flex;
+  color: #333;
+}
+section.index ul.simple-inline-list li a div.content p.desc {
+  margin: 0;
+  color: #808080;
+}
+section.index ul.simple-inline-list li a div.content p.desc::before {
+  content: "/";
+  margin: 0 3px;
+}
+section.index ul.simple-inline-list li a:hover div.content {
+  color: #c76b35;
 }
 section.index nav.block-list {
   display: flex;
