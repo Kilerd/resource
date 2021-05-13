@@ -9,19 +9,18 @@
         <section class="part">
             <h2 class="head">社群</h2>
             <section class="content">
-                <nav class="simple-inline-list">
+                <ol class="simple-inline-list">
                     {% for item in page.data.comunities %}
-                    <a class="normal" href="{{ item.url }}" title="{{ item.title }}">
-                        <div class="content">
+                    <li>
+                        <a class="normal" href="{{ item.url }}" title="{{ item.title }}">
                             <span>{{ item.title }}</span>
                             {% if item.description %}
                             <p class="desc">{{ item.description }}</p>
                             {% endif %}
-                        </div>
-
-                    </a>
+                        </a>
+                    </li>
                     {% endfor %}
-                </nav>
+                </ol>
             </section>
         </section>
 

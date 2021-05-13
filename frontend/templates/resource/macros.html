@@ -2,20 +2,15 @@
 <section class="part">
     <h2 class="head">{{ group_name }}</h2>
     <section class="content">
-        <ul class="simple-inline-list">
-            {% for item in  pages | filter(attribute="data.index_group", value=group_name) | reverse %}
+        <ol class="simple-inline-list">
+            {% for item in pages | filter(attribute="data.index_group", value=group_name) | reverse %}
             <li>
-                <a href="{{ item.url }}" title="{{ item.title }}" class="link-box">
-                    <div class="content">
-                        <span>{{ item.title }}</span>
-                        {% if item.data.inline_description %}
-                        <p class="desc">{{item.data.inline_description}}</p>
-                        {% endif %}
-                    </div>
+                <a href="{{ item.url }}" title="{{ item.title }}" class="normal">
+                    <span>{{ item.title }}</span>
                 </a>
             </li>
             {% endfor %}
-        </ul>
+        </ol>
     </section>
 </section>
 {% endmacro input %}

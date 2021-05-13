@@ -13,37 +13,21 @@ a.normal {
   text-decoration: none;
   color: #333;
   display: inline-flex;
-  flex: 0 0 25%;
+  align-items: end;
 }
-a.normal div.content {
-  padding: 0.5rem 1rem;
-  background-color: #fcfcfc;
-  border-radius: 3px;
-  min-height: 5rem;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  margin: 0 1rem 1rem 0;
-  display: inline-flex;
-  border: 1px solid #e5e5e5;
+a.normal span {
+  border-bottom: 1px dotted #333;
 }
-a.normal div.content span {
-  font-size: 1.1rem;
-  color: #333;
-  text-transform: uppercase;
-}
-a.normal div.content p.desc {
-  margin: 0;
+a.normal p.desc {
   color: #808080;
-  font-size: 0.875rem;
-  font-weight: normal;
+  font-size: 0.8em;
+  margin: 0 0 0 5px;
 }
-a.normal:hover div.content span {
+a.normal:hover {
   color: #000;
 }
-a.normal:hover div.content p.desc {
-  color: #333;
+a.normal:hover span {
+  border-bottom: 1px solid #c76b35;
 }
 section.header {
   margin: 1.5rem 0;
@@ -99,33 +83,26 @@ section.index section.part h2.head:after {
   border-radius: 2px;
   content: " ";
 }
-section.index ul.simple-inline-list {
-  display: flex;
-  flex-flow: row wrap;
-  margin: 0;
+section.index ol.simple-inline-list {
+  list-style-type: none;
+  counter-reset: item;
   padding: 0;
 }
-section.index ul.simple-inline-list li {
-  flex: 0 0 50%;
-  display: flex;
+section.index ol.simple-inline-list li {
+  display: inline;
+  margin: 7px 0;
 }
-section.index ul.simple-inline-list li a {
-  text-decoration: none;
+section.index ol.simple-inline-list li a:before {
+  font-size: 0.75rem;
+  color: #aaa;
+  padding-right: 0.25rem;
+  content: "0x" counters(item, ".");
+  counter-increment: item;
 }
-section.index ul.simple-inline-list li a div.content {
-  display: flex;
-  color: #333;
-}
-section.index ul.simple-inline-list li a div.content p.desc {
-  margin: 0;
-  color: #808080;
-}
-section.index ul.simple-inline-list li a div.content p.desc::before {
+section.index ol.simple-inline-list li:not(:first-child):before {
   content: "/";
-  margin: 0 3px;
-}
-section.index ul.simple-inline-list li a:hover div.content {
-  color: #c76b35;
+  padding: 0 0.5rem;
+  color: #333;
 }
 section.index nav.block-list {
   display: flex;

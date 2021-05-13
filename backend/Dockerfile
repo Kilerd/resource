@@ -1,15 +1,16 @@
-FROM frostming/pdm:stable as builder
+FROM frostming/pdm:latest as builder
 
 WORKDIR /app
 
 WORKDIR /app/resource
-COPY pdm.lock pyproject.toml app ./
-RUN pdm install
-RUN pdm export --prod -f requirements >> requirements.txt
+COPY pdm.lock pyproject.toml ./
+#RUN pdm install
+RUN pdm export -f requirements >> requirements.txt
+RUN ls
 
 FROM python:3.9-slim
 
-COPY --from=builder /app/resource/app /application/app
+COPY  app /application/app
 COPY --from=builder /app/resource/requirements.txt /application/requirements.txt
 
 EXPOSE 8000
