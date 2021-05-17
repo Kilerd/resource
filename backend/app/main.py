@@ -43,7 +43,13 @@ async def fetch_reddit_data() -> None:
                 continue
             print(f"insert reddit item id:{item['id']} ")
             permalink = f"https://www.reddit.com{item['permalink']}"
-            title = f"\\[[Reddit]({permalink})] *{item['title']}*"
+
+            if item['url'] != permalink and item['url'] != item['permalink']:
+                hidden_url = f"[ ]({item['url']})"
+            else:
+                hidden_url = ""
+
+            title = f"{hidden_url}\\[[Reddit]({permalink})] *{item['title']}*"
             content = ""
             for line in item.get("selftext", "").splitlines():
                 if len(content) > 350:
@@ -58,7 +64,7 @@ async def fetch_reddit_data() -> None:
             content = content.replace("&amp;", "&")
             try:
                 msg = await telegram_bot.send_message(TELEGRAM_RESOURCE_CHANNEL, f"{title}{content}",
-                                                      disable_web_page_preview=True)
+                                                      disable_web_page_preview=False)
 
                 item['msg_id'] = msg.message_id
                 result = await collection.insert_one(item)
