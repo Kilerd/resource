@@ -75,6 +75,10 @@ async def read_item():
     collection = db['reddit']
     await collection.delete_many({})
     return {}
+@app.get("/trending/go")
+async def read_item():
+    await fetch_reddit_data()
+    return {}
 
 
 @app.get("/trending")
