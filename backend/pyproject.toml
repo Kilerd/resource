@@ -1,0 +1,29 @@
+[project]
+name = ""
+version = ""
+description = ""
+authors = [
+    { name = "Kilerd", email = "blove694@gmail.com" },
+]
+dependencies = [
+    "fastapi~=0.65",
+    "uvicorn~=0.13",
+    "fastapi-utils~=0.2",
+    "httpx~=0.18",
+    "motor~=2.4",
+    "aiogram~=2.13",
+    "envir~=0.0",
+]
+requires-python = ">=3.9"
+dynamic = ["classifiers"]
+license = { text = "MIT" }
+
+[project.urls]
+homepage = ""
+
+[build-system]
+requires = ["pdm-pep517"]
+build-backend = "pdm.pep517.api"
+
+[tool]
+[tool.pdm]
