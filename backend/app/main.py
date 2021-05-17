@@ -57,11 +57,13 @@ async def fetch_reddit_data() -> None:
             try:
                 msg = await telegram_bot.send_message(TELEGRAM_RESOURCE_CHANNEL, f"{title}{content}",
                                                   disable_web_page_preview=True)
+                print(msg)
+
                 item['msg_id'] = msg.message_id
+                result = await collection.insert_one(item)
             except:
                 print(f"cannot send to telegram. title: {title}")
-            finally:
-                result = await collection.insert_one(item)
+
 
 @app.get("/")
 def read_root():
