@@ -54,12 +54,14 @@ async def fetch_reddit_data() -> None:
 
             if item['url'] != permalink and item['url'] != item['permalink']:
                 content = f"{content}\n\n{item['url']}"
-
-            msg = await telegram_bot.send_message(TELEGRAM_RESOURCE_CHANNEL, f"{title}{content}",
+            try:
+                msg = await telegram_bot.send_message(TELEGRAM_RESOURCE_CHANNEL, f"{title}{content}",
                                                   disable_web_page_preview=True)
-            item['msg_id'] = msg.message_id
-            result = await collection.insert_one(item)
-
+                item['msg_id'] = msg.message_id
+            except:
+                print(f"cannot send to telegram. title: {title}")
+            finally:
+                result = await collection.insert_one(item)
 
 @app.get("/")
 def read_root():
