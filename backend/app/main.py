@@ -13,7 +13,7 @@ MONGO_URL = envir.load("MONGO_URL")
 
 app = FastAPI()
 motor_client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_URL)
-telegram_bot = Bot(token=TELEGRAM_BOT_SECRET_KEY, parse_mode=types.ParseMode.MARKDOWN)
+telegram_bot = Bot(token=TELEGRAM_BOT_SECRET_KEY, parse_mode=types.ParseMode.MARKDOWN_V2)
 
 
 @app.on_event("startup")
