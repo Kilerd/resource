@@ -13,7 +13,7 @@ MONGO_URL = envir.load("MONGO_URL")
 
 app = FastAPI()
 motor_client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_URL)
-telegram_bot = Bot(token=TELEGRAM_BOT_SECRET_KEY, parse_mode=types.ParseMode.MARKDOWN_V2)
+telegram_bot = Bot(token=TELEGRAM_BOT_SECRET_KEY, parse_mode=types.ParseMode.MARKDOWN)
 
 
 @app.on_event("startup")
@@ -39,11 +39,11 @@ async def fetch_reddit_data() -> None:
 
         for item in post_items:
             n = await collection.count_documents({'id': {'$eq': item['id']}})
-            # if n > 0:
-            #     break
+            if n > 0:
+                continue
             print(f"insert reddit item id:{item['id']} ")
             permalink = f"https://www.reddit.com{item['permalink']}"
-            title = f"\\[[Reddit]({permalink})\\] *{item['title']}*"
+            title = f"\\[[Reddit]({permalink})] *{item['title']}*"
             content = ""
             for line in item.get("selftext", "").splitlines():
                 if len(content) > 350:
@@ -54,6 +54,8 @@ async def fetch_reddit_data() -> None:
 
             if item['url'] != permalink and item['url'] != item['permalink']:
                 content = f"{content}\n\n{item['url']}"
+
+            content = content.replace("&amp;", "&")
             try:
                 msg = await telegram_bot.send_message(TELEGRAM_RESOURCE_CHANNEL, f"{title}{content}",
                                                       disable_web_page_preview=True)
@@ -61,7 +63,7 @@ async def fetch_reddit_data() -> None:
                 item['msg_id'] = msg.message_id
                 result = await collection.insert_one(item)
             except Exception as ex:
-                print(f"cannot send to telegram. title: {title}, e: {ex}")
+                print(f"cannot send to telegram. title: {title}, content: {content},  e: {ex}")
 
 
 @app.get("/")
@@ -75,6 +77,8 @@ async def read_item():
     collection = db['reddit']
     await collection.delete_many({})
     return {}
+
+
 @app.get("/trending/go")
 async def read_item():
     await fetch_reddit_data()
