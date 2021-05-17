@@ -21,4 +21,4 @@ ENV MONGO_URL ""
 
 WORKDIR /application
 RUN pip install -r requirements.txt
-CMD ["uvicorn", "app.main:app"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0"]
