@@ -43,7 +43,7 @@ async def fetch_reddit_data() -> None:
             #     break
             print(f"insert reddit item id:{item['id']} ")
             permalink = f"https://www.reddit.com{item['permalink']}"
-            title = f"\\[[Reddit]({permalink})] *{item['title']}*"
+            title = f"\\[[Reddit]({permalink})\\] *{item['title']}*"
             content = ""
             for line in item.get("selftext", "").splitlines():
                 if len(content) > 350:
