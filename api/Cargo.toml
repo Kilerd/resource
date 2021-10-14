@@ -24,7 +24,7 @@ futures = "0.3.5"
 log = "0.4.11"
 pretty_env_logger = "0.4.0"
 time = "0.2.17"
-rand = "0.7.3"
+rand = "0.8.4"
 actix-cors = "0.2.0"
 telegram_typing_bot = { git = "https://github.com/Kilerd/telegram_typing_bot" }
 futures-util = "0.3.5"
