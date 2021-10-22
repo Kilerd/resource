@@ -48,11 +48,11 @@
         "title": "宏小本",
         "version": [
           {
-            "link": "https://danielkeep.github.io/tlborm/book/index.html",
+            "link": "https://veykril.github.io/tlborm/",
             "name": "英文版"
           },
           {
-            "link": "http://blog.luxko.site/tlborm-chinese/book/index.html",
+            "link": "https://zjp-cn.github.io/tlborm/",
             "name": "中文版"
           }
         ]
