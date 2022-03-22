@@ -21,7 +21,7 @@ http = "0.2.1"
 actix-web = "2.0.0"
 futures = "0.3.5"
 # log
-log = "0.4.11"
+log = "0.4.16"
 pretty_env_logger = "0.4.0"
 time = "0.2.17"
 rand = "0.7.3"
